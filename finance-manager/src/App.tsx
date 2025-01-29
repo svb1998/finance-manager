@@ -1,35 +1,70 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import { useDispatch, useSelector } from "react-redux";
+import { addTransaction, removeTransaction } from "./redux/states/transaction";
+import { Transaction } from "./models";
 
 function App() {
-  const [count, setCount] = useState(0)
+    const transactions: Transaction[] = useSelector(
+        (state) => state.transaction
+    );
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    const dispatch = useDispatch();
+
+    const defaultTransaction: Transaction = {
+        id: 1,
+        amount: 100,
+        category: "Hobbies",
+        date: new Date().toISOString(),
+        description: "Escalada",
+        type: "expense",
+        note: "Correcto",
+    };
+    const defaultTransaction2: Transaction = {
+        id: 2,
+        amount: 1000,
+        category: "Hobbies",
+        date: new Date().toISOString(),
+        description: "Parque acuático",
+        type: "expense",
+        note: "Correcto",
+    };
+
+    return (
+        <>
+            <div></div>
+            <h1>Vite + React</h1>
+            <div className="card">
+                <button
+                    onClick={() => dispatch(addTransaction(defaultTransaction))}
+                >
+                    Añadir transacción
+                </button>
+                <button
+                    onClick={() =>
+                        dispatch(addTransaction(defaultTransaction2))
+                    }
+                >
+                    Añadir transacción 2
+                </button>
+                <button onClick={() => dispatch(removeTransaction(1))}>
+                    Eliminar transacción
+                </button>
+                <button onClick={() => dispatch(removeTransaction(2))}>
+                    Eliminar transacción 2
+                </button>
+                {transactions.map((transaction) => (
+                    <div>
+                        {transaction.id}
+                        {transaction.amount}
+                        {transaction.description}
+                    </div>
+                ))}
+            </div>
+        </>
+    );
 }
 
-export default App
+export default App;
