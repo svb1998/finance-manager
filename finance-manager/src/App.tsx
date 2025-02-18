@@ -5,6 +5,8 @@ import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addTransaction, removeTransaction } from "./redux/states/transaction";
 import { Transaction } from "./models";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import PlatformLayout from "./layouts/PlatformLayout/PlatformLayout";
 
 function App() {
     const transactions: Transaction[] = useSelector(
@@ -34,8 +36,11 @@ function App() {
 
     return (
         <>
-            <div></div>
-            <h1>Vite + React</h1>
+            <PlatformLayout>
+                <Dashboard />
+            </PlatformLayout>
+
+            {/* <h1>Vite + React</h1>
             <div className="card">
                 <button
                     onClick={() => dispatch(addTransaction(defaultTransaction))}
@@ -62,7 +67,7 @@ function App() {
                         {transaction.description}
                     </div>
                 ))}
-            </div>
+            </div> */}
         </>
     );
 }

@@ -1,0 +1,31 @@
+.platform-layout {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: minmax(64px, 200px) auto;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "navbar navbar"
+        "sidebar content";
+
+    overflow: hidden;
+    background-color: black;
+    color: white;
+}
+
+#navbar-layout {
+    grid-area: navbar;
+}
+
+#sidebar-layout {
+    grid-area: sidebar;
+}
+
+#content-layout {
+    grid-area: content;
+    height: 100%;
+    overflow-y: auto;
+}
+
+#footer-layout {
+    grid-area: footer;
+}

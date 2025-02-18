@@ -1,0 +1,9 @@
+.main-button {
+    padding-inline: 12px;
+    padding-block: 8px;
+    border-radius: 8px;
+    font-weight: 600;
+    color: black;
+    background-color: #4aff9b;
+    cursor: pointer;
+}
