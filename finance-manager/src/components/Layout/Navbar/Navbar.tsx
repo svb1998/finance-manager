@@ -39,7 +39,11 @@ export default function Navbar(props: Props) {
         >
             <MainButton onClick={openModal}>Añadir transacción</MainButton>
             {isModalOpen && (
-                <Modal onClose={closeModal} onOverlayClose>
+                <Modal
+                    onClose={closeModal}
+                    onOverlayClose
+                    title="Añadir transacción"
+                >
                     <TransactionAdd />
                 </Modal>
             )}

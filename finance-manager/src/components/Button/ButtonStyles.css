@@ -1,0 +1,19 @@
+.button {
+    padding-inline: 12px;
+    padding-block: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+}
+
+.main-button {
+    font-weight: 600;
+    color: black;
+    background-color: #4aff9b;
+}
+
+.destructive-button {
+    font-weight: 600;
+    color: white;
+    background-color: #e1002d;
+}

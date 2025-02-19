@@ -1,0 +1,12 @@
+.main-input-container {
+}
+
+.main-input {
+    height: 36px;
+    width: 100%;
+
+    border-radius: 8px;
+    border-width: 0px;
+    padding: 6px 8px;
+    outline: none;
+}

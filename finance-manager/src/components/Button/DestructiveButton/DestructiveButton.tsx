@@ -6,9 +6,9 @@ interface Props {
     onClick: MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
-export default function MainButton({ children, onClick }: Props) {
+export default function DestructiveButton({ children, onClick }: Props) {
     return (
-        <button className="button main-button" onClick={onClick}>
+        <button className="button destructive-button" onClick={onClick}>
             {children}
         </button>
     );

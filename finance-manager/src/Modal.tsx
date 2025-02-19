@@ -3,12 +3,14 @@ import "./Modal.css";
 import { createPortal } from "react-dom";
 interface Props {
     children: ReactNode;
+    title?: string;
     onClose: () => void;
     onOverlayClose: boolean;
 }
 
 export default function Modal({
     children,
+    title,
     onClose,
     onOverlayClose = false,
 }: Props) {
@@ -29,6 +31,7 @@ export default function Modal({
                 <button onClick={onClose} className="modal-close-btn">
                     X
                 </button>
+                <h2 className="modal-title">{title}</h2>
                 {children}
             </div>
         </div>,

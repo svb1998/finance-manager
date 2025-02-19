@@ -16,7 +16,8 @@
 .modal-container {
     position: relative;
     background-color: black;
-    padding: 20px;
+    padding: 48px;
+    padding-block: 54px;
 
     border-radius: 20px;
     max-width: 90%;
@@ -26,17 +27,24 @@
 
 .modal-close-btn {
     position: absolute;
-    right: 4px;
-    top: 4px;
-    background-color: aquamarine;
-    font-weight: 700;
+    right: 8px;
+    top: 8px;
+    background-color: #4aff9b;
+    font-weight: 500;
     border-radius: 100%;
     padding: 8px;
+    padding-inline: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 10px;
+    font-size: 12px;
     border: none;
     cursor: pointer;
+}
+
+.modal-title {
+    color: white;
+    margin-bottom: 12px;
+    font-size: 28px;
 }
