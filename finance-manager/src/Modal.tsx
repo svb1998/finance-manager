@@ -28,9 +28,9 @@ export default function Modal({
             onClick={onOverlayClose ? handleOnOverlayClose : () => {}}
         >
             <div className="modal-container">
-                <button onClick={onClose} className="modal-close-btn">
+                {/* <button onClick={onClose} className="modal-close-btn">
                     X
-                </button>
+                </button> */}
                 <h2 className="modal-title">{title}</h2>
                 {children}
             </div>

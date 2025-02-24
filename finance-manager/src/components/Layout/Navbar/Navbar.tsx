@@ -44,7 +44,7 @@ export default function Navbar(props: Props) {
                     onOverlayClose
                     title="Añadir transacción"
                 >
-                    <TransactionAdd />
+                    <TransactionAdd onCloseModal={closeModal} />
                 </Modal>
             )}
         </nav>
