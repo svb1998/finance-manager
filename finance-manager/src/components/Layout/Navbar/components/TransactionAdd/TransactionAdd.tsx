@@ -9,10 +9,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import BasicFieldController from "../../../../FieldControllers/BasicFieldController/BasicFieldController";
 import { transactionAddSchema } from "./schemas/TransactionAdd.schema";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import shortUUID from "short-uuid";
 import { addTransaction } from "../../../../../redux/states/transaction";
 import { Transaction } from "../../../../../models";
+import { Category } from "../../../../../models/category.model";
 
 const { Option } = Select;
 
@@ -23,50 +24,24 @@ interface Props {
 export default function TransactionAdd({ onCloseModal }: Props) {
     const dispatch = useDispatch();
 
-    const { control, handleSubmit } = useForm({
+    const categories: Category[] = useSelector((state) => state.category);
+
+    console.log(categories);
+
+    const {
+        control,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
         mode: "onChange",
-        // resolver: yupResolver(transactionAddSchema),
+        resolver: yupResolver(transactionAddSchema),
     });
-
-    interface Category {
-        id: number;
-        value: string;
-        label: string;
-        backgroundColor: string;
-    }
-
-    const categories: Category[] = [
-        {
-            id: 0,
-            value: "salud",
-            label: "Salud",
-            backgroundColor: "#772121",
-        },
-        {
-            id: 1,
-            value: "ocio",
-            label: "Ocio",
-            backgroundColor: "#125822",
-        },
-        {
-            id: 2,
-            value: "hogar",
-            label: "Hogar",
-            backgroundColor: "#122158",
-        },
-        {
-            id: 3,
-            value: "transporte",
-            label: "Transporte",
-            backgroundColor: "#378988",
-        },
-    ];
 
     const onSubmit = (formData: Transaction) => {
         console.log(formData);
 
         formData.id = shortUUID.generate();
-        //Acabar de perfilar
+        formData.date = new Date().toISOString();
         dispatch(addTransaction(formData));
 
         onCloseModal();
@@ -85,6 +60,9 @@ export default function TransactionAdd({ onCloseModal }: Props) {
                                 {...field}
                                 className="select-container"
                                 placeholder="Seleccionar tipo de transacción"
+                                aria-errormessage={
+                                    errors.transactionType?.message
+                                }
                             >
                                 <Option value="income">
                                     <div className="option-container">
@@ -108,6 +86,8 @@ export default function TransactionAdd({ onCloseModal }: Props) {
                                 type="number"
                                 name="amount"
                                 placeholder="Cantidad... (€)"
+                                error={errors.amount !== undefined}
+                                errorMessage={errors.amount?.message}
                             />
                         )}
                     </BasicFieldController>

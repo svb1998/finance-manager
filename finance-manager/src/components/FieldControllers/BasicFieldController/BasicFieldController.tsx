@@ -20,7 +20,7 @@ export default function BasicFieldController({
             name={name}
             control={control}
             defaultValue={defaultValue}
-            render={({ field }) => children(field)}
+            render={({ field, fieldState }) => children(field)}
         />
     );
 }

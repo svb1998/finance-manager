@@ -10,3 +10,12 @@
     padding: 6px 8px;
     outline: none;
 }
+
+.main-input-error {
+    color: red;
+    outline: 2px solid red;
+}
+
+.main-input-error-message {
+    color: red;
+}

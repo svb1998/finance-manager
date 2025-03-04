@@ -7,6 +7,8 @@ interface Props {
     name?: string;
     type: string;
     placeholder?: string;
+    error?: boolean;
+    errorMessage?: string;
 }
 
 const MainInput = React.forwardRef<HTMLInputElement, Props>(
@@ -17,6 +19,8 @@ const MainInput = React.forwardRef<HTMLInputElement, Props>(
             name,
             type = "text",
             placeholder = "",
+            error = false,
+            errorMessage = "",
             ...props
         }: Props,
         ref: ForwardedRef<HTMLInputElement>
@@ -27,11 +31,16 @@ const MainInput = React.forwardRef<HTMLInputElement, Props>(
                 <input
                     {...props}
                     ref={ref} // Ahora el ref se pasa correctamente
-                    className="main-input"
+                    className={`main-input  ${error && "main-input-error"} `}
                     type={type}
                     name={name}
                     placeholder={placeholder}
                 />
+                {error && (
+                    <div className="main-input-error-message">
+                        {errorMessage}
+                    </div>
+                )}
                 {afterChildren}
             </div>
         );
