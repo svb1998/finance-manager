@@ -55,6 +55,7 @@ div > section {
     max-height: 100%;
     min-height: 0;
     background: #000;
+    padding: 1.2em;
 }
 
 .incomes-details-container {
@@ -64,6 +65,27 @@ div > section {
 
 .expenses-details-container {
     grid-area: expenses-details;
+}
+
+.incomes-details-title,
+.expenses-details-title {
+    font-size: 1.15em;
+    font-weight: 700;
+    margin-bottom: 0.75em;
+}
+
+.details-line {
+    display: flex;
+    width: 98%;
+    height: 0.1em;
+    background-color: greenyellow;
+    margin-top: 0.1em;
+}
+
+.incomes-details-title {
+}
+
+.expenses-details-title {
 }
 
 .footer-container {

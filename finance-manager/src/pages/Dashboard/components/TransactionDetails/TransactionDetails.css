@@ -1,5 +1,52 @@
 .tx-details-table {
+    border-collapse: collapse;
     width: 100%;
+
+    th {
+        text-align: left;
+        font-size: 1em;
+        padding: 0.35em 0.5em 0.35em 0em;
+    }
+
+    tbody {
+        tr {
+            color: #f2fff5;
+
+            &:hover {
+                background-color: greenyellow;
+                color: black;
+                cursor: pointer;
+            }
+
+            td {
+                padding: 0.35em 0.1em 0.35em 0.1em;
+                height: 100%;
+                vertical-align: bottom;
+                font-size: 0.95em;
+            }
+        }
+    }
+}
+
+.tx-table-cell {
+    position: relative;
+    height: 100%;
+    min-height: 1.5em;
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    border: none;
+}
+
+.delete-icon {
+    z-index: 2;
+
+    fill: transparent;
+    &:hover {
+        cursor: pointer;
+        background-color: greenyellow;
+        color: red;
+    }
 }
 
 .resizer {

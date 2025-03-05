@@ -1,3 +1,5 @@
+import { Temporal } from "@js-temporal/polyfill";
+import "./TransactionDetails.css";
 import {
     createColumnHelper,
     flexRender,
@@ -6,49 +8,99 @@ import {
 } from "@tanstack/react-table";
 import { Transaction } from "models";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import "./TransactionDetails.css";
+import { useDispatch, useSelector } from "react-redux";
+import { capitalizeString } from "utilities";
+import { CircleX } from "lucide-react";
+import { removeTransaction } from "../../../../redux/states/transaction";
 
 const columnHelper = createColumnHelper<Transaction>();
-
-const columns = [
-    columnHelper.accessor("date", {
-        header: () => <span>Fecha</span>,
-        cell: (info) => <span>{info.getValue()}</span>,
-        footer: (info) => info.column.id,
-    }),
-    columnHelper.accessor("category", {
-        header: () => <span>Categoría</span>,
-        cell: (info) => info.getValue(),
-        footer: (info) => info.column.id,
-    }),
-    columnHelper.accessor("amount", {
-        header: () => <span>Cantidad</span>,
-        cell: (info) => <span>{info.getValue()}</span>,
-        footer: (info) => info.column.id,
-    }),
-    columnHelper.accessor("description", {
-        header: () => <span>Descripción</span>,
-        cell: (info) => info.getValue(),
-        footer: (info) => info.column.id,
-    }),
-    columnHelper.accessor("notes", {
-        header: () => <span>Notas</span>,
-        cell: (info) => <span>{info.getValue()}</span>,
-        footer: (info) => info.column.id,
-    }),
-];
 
 interface Props {
     type: string;
 }
 
 export default function TransactionDetails({ type }: Props) {
+    const dispatch = useDispatch();
+
     const transactions: Transaction[] = useSelector(
         (store) => store.transaction
     );
 
     const [data, setData] = useState<Transaction[]>([]);
+
+    const columns = [
+        columnHelper.accessor("date", {
+            header: () => <span>Fecha</span>,
+            cell: (info) => {
+                let formattedDate = "";
+
+                const date = info.getValue();
+
+                if (date) {
+                    formattedDate = Temporal.Instant.from(date)
+                        .toZonedDateTimeISO("UTC")
+                        .toLocaleString("es-ES", {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric",
+                        });
+                }
+
+                return <span>{formattedDate}</span>;
+            },
+            footer: (info) => info.column.id,
+        }),
+        columnHelper.accessor("category", {
+            header: () => <span>Categoría</span>,
+            cell: (info) => {
+                let category = info.cell.row.original.category;
+                category = capitalizeString(category);
+                return <span className="tx-table-cell">{category}</span>;
+            },
+            footer: (info) => info.column.id,
+        }),
+        columnHelper.accessor("amount", {
+            header: () => <span>Cantidad</span>,
+            cell: (info) => (
+                <span className="tx-table-cell">{info.getValue()}€</span>
+            ),
+            footer: (info) => info.column.id,
+        }),
+        columnHelper.accessor("description", {
+            header: () => <span>Descripción</span>,
+            cell: (info) => (
+                <span className="tx-table-cell">{info.getValue()}</span>
+            ),
+            footer: (info) => info.column.id,
+        }),
+        columnHelper.accessor("notes", {
+            header: () => <span>Notas</span>,
+            cell: (info) => (
+                <span className="tx-table-cell">{info.getValue()}</span>
+            ),
+            footer: (info) => info.column.id,
+        }),
+        columnHelper.display({
+            id: "delete",
+            header: () => <span></span>,
+            cell: (info) => {
+                const row = info.cell.row.original;
+
+                return (
+                    <span
+                        className="tx-table-cell delete-icon"
+                        onClick={() => {
+                            console.log("delete", row);
+                            deleteTransaction(row);
+                        }}
+                    >
+                        <CircleX color="currentColor" size={"1.2em"} />
+                    </span>
+                );
+            },
+            footer: (info) => info.column.id,
+        }),
+    ];
 
     const getTransactionsByType = (type: string) => {
         const filteredTransactions = transactions.filter(
@@ -72,6 +124,12 @@ export default function TransactionDetails({ type }: Props) {
         debugHeaders: true,
         debugColumns: true,
     });
+
+    const deleteTransaction = (row: Transaction) => {
+        if (row.id) {
+            dispatch(removeTransaction(row.id));
+        }
+    };
 
     return (
         <div>

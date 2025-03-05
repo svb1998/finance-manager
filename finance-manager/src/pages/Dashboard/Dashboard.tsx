@@ -51,13 +51,19 @@ export default function Dashboard() {
             </LittleCard>
 
             <section className="incomes-details-container">
-                <span>Detalles Ingresos</span>
+                <div className="incomes-details-title">
+                    Detalles Ingresos
+                    <div className="details-line"></div>
+                </div>
                 <div>
                     <TransactionDetails type="income" />
                 </div>
             </section>
             <section className="expenses-details-container">
-                <span>Detalles Gastos</span>
+                <div className="expenses-details-title">
+                    Detalles Gastos
+                    <div className="details-line"></div>
+                </div>
                 <div>
                     <TransactionDetails type="expense" />
                 </div>
