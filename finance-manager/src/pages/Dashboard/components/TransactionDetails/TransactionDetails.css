@@ -21,8 +21,8 @@
             td {
                 padding: 0.35em 0.1em 0.35em 0.1em;
                 height: 100%;
-                vertical-align: bottom;
-                font-size: 0.95em;
+                vertical-align: middle;
+                font-size: 0.93em;
             }
         }
     }
@@ -36,6 +36,23 @@
     align-items: center;
     vertical-align: middle;
     border: none;
+}
+
+.category-chip {
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: 16px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: fit-content;
+    padding-inline: 0.75em;
+    background-color: #8fd4ff;
+    /* color: hsl(236, 100%, 28%);
+    border: 1px solid hsl(236, 100%, 28%); */
+    border: 1px solid black;
+    color: black;
 }
 
 .delete-icon {

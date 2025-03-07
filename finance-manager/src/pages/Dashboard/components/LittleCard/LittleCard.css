@@ -1,12 +1,15 @@
 .little-card-container {
-    background-color: rgb(76, 157, 126);
-    border: 1px solid rgb(156, 181, 147);
-    border-radius: 8px;
-    padding: 8px;
+    /* background-color: rgb(76, 157, 126); */
+    background: radial-gradient(circle, #001b16, #030a07);
+    /* border: 1px solid #325400; */
+    box-shadow: 0 0 4px #0e2701;
+    border-radius: 14px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
 }
 
 .little-card-title {
     font-weight: bold;
+    font-size: 1.2rem;
 }

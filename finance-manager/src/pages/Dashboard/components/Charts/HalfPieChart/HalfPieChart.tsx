@@ -9,7 +9,20 @@ interface Props {
     colors?: string[];
 }
 
-const CustomTooltip = ({ active, payload }) => {
+interface CustomTooltipProps {
+    active?: boolean;
+    payload?: any[];
+}
+
+interface GroupedTransaction {
+    id: string;
+    name: string;
+    label: string;
+    amount: number;
+    color: string | undefined;
+}
+
+const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {
     if (active && payload && payload.length) {
         const label = payload[0].name;
         const amount = payload[0].value;
@@ -36,6 +49,9 @@ export default function HalfPieChart({ type = "income" }: Props) {
     const [filteredTransactions, setFilteredTransactions] = useState<
         Transaction[]
     >([]);
+    const [groupedTransactions, setGroupedTransactions] = useState<
+        GroupedTransaction[]
+    >([]);
 
     const getTotalAmount = () => {
         let total = 0;
@@ -52,12 +68,43 @@ export default function HalfPieChart({ type = "income" }: Props) {
             (item) => item.transactionType === type
         );
         setFilteredTransactions(filteredTransactions);
+        console.log(filteredTransactions);
+    };
+
+    const classifyTransactions = () => {
+        const grouped = filteredTransactions.reduce((acc, transaction) => {
+            const category = categories.find(
+                (cat) => cat.value === transaction.category
+            );
+            if (!category) return acc;
+
+            const existing = acc.find((item) => item.name === category.value);
+
+            if (existing) {
+                existing.amount += transaction.amount;
+            } else {
+                acc.push({
+                    id: category.id,
+                    name: category.value,
+                    label: category.label,
+                    amount: transaction.amount,
+                    color: category.backgroundColor,
+                });
+            }
+            return acc;
+        }, [] as GroupedTransaction[]);
+
+        setGroupedTransactions(grouped);
     };
 
     useEffect(() => {
         getTotalAmount();
         getFilteredTransactions();
     }, [transactions]);
+
+    useEffect(() => {
+        classifyTransactions();
+    }, [filteredTransactions]);
 
     return (
         <div>
@@ -75,7 +122,7 @@ export default function HalfPieChart({ type = "income" }: Props) {
                 >
                     <PieChart style={{ outline: "none" }}>
                         <Pie
-                            data={filteredTransactions}
+                            data={groupedTransactions}
                             cx="50%"
                             cy="50%"
                             startAngle={180}
@@ -84,16 +131,20 @@ export default function HalfPieChart({ type = "income" }: Props) {
                             innerRadius="70%"
                             outerRadius="96%"
                             fill="#8884d8"
+                            nameKey="name"
                             dataKey="amount"
                             style={{ outline: "none" }}
+                            stroke="none"
                         >
-                            {categories.map((category, index) => (
-                                <Cell
-                                    name={category.label}
-                                    key={`cell-${category.id}`}
-                                    fill={category.backgroundColor}
-                                />
-                            ))}
+                            {groupedTransactions.map((tx, index) => {
+                                return (
+                                    <Cell
+                                        name={tx.label}
+                                        key={`cell-${tx.id}`}
+                                        fill={tx.color}
+                                    />
+                                );
+                            })}
                         </Pie>
                         <Tooltip
                             wrapperStyle={{

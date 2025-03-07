@@ -53,7 +53,7 @@ export default function Dashboard() {
             <section className="incomes-details-container">
                 <div className="incomes-details-title">
                     Detalles Ingresos
-                    <div className="details-line"></div>
+                    <div className="details-line details-line-income"></div>
                 </div>
                 <div>
                     <TransactionDetails type="income" />
@@ -62,7 +62,7 @@ export default function Dashboard() {
             <section className="expenses-details-container">
                 <div className="expenses-details-title">
                     Detalles Gastos
-                    <div className="details-line"></div>
+                    <div className="details-line details-line-expense"></div>
                 </div>
                 <div>
                     <TransactionDetails type="expense" />

@@ -6,7 +6,7 @@ import {
     getCoreRowModel,
     useReactTable,
 } from "@tanstack/react-table";
-import { Transaction } from "models";
+import { Category, Transaction } from "models";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { capitalizeString } from "utilities";
@@ -25,6 +25,8 @@ export default function TransactionDetails({ type }: Props) {
     const transactions: Transaction[] = useSelector(
         (store) => store.transaction
     );
+
+    const categories: Category[] = useSelector((state) => state.category);
 
     const [data, setData] = useState<Transaction[]>([]);
 
@@ -53,9 +55,20 @@ export default function TransactionDetails({ type }: Props) {
         columnHelper.accessor("category", {
             header: () => <span>Categoría</span>,
             cell: (info) => {
-                let category = info.cell.row.original.category;
-                category = capitalizeString(category);
-                return <span className="tx-table-cell">{category}</span>;
+                const category = info.cell.row.original.category;
+                const capitalizedCategory = capitalizeString(category);
+                return (
+                    <span
+                        style={{
+                            backgroundColor: categories.find(
+                                (cat) => cat.value === category
+                            )?.backgroundColor,
+                        }}
+                        className="tx-table-cell category-chip"
+                    >
+                        {capitalizedCategory}
+                    </span>
+                );
             },
             footer: (info) => info.column.id,
         }),
@@ -120,9 +133,9 @@ export default function TransactionDetails({ type }: Props) {
         getCoreRowModel: getCoreRowModel(),
         enableColumnResizing: true,
         columnResizeMode: "onChange",
-        debugTable: true,
-        debugHeaders: true,
-        debugColumns: true,
+        // debugTable: true,
+        // debugHeaders: true,
+        // debugColumns: true,
     });
 
     const deleteTransaction = (row: Transaction) => {

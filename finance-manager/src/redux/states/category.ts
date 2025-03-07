@@ -4,16 +4,16 @@ import { Category } from "../../models/category.model";
 const sliceName = "category";
 
 const initialState: Category[] = [
-    { id: "0", value: "salud", label: "Salud", backgroundColor: "#2b6397" },
-    { id: "1", value: "ocio", label: "Ocio", backgroundColor: "#82ffa1" },
-    { id: "2", value: "hogar", label: "Hogar", backgroundColor: "#ffbf65" },
+    { id: "0", value: "salud", label: "Salud", backgroundColor: "#ADFF2F" },
+    { id: "1", value: "ocio", label: "Ocio", backgroundColor: "#92D927" },
+    { id: "2", value: "hogar", label: "Hogar", backgroundColor: "#78B320" },
     {
-        id: "4",
+        id: "3",
         value: "transporte",
         label: "Transporte",
-        backgroundColor: "#ff6565",
+        backgroundColor: "#5E8C19",
     },
-    { id: "5", value: "otros", label: "Otros", backgroundColor: "#c4c4c4" },
+    { id: "4", value: "otros", label: "Otros", backgroundColor: "#456612" },
 ];
 
 // if (localStorage.getItem(sliceName)) {
