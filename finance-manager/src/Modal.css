@@ -17,10 +17,12 @@
 .modal-container {
     position: relative;
     background-color: black;
-    padding: 48px;
-    padding-block: 54px;
+    padding: 36px;
+    padding-block: 36px;
 
     border-radius: 20px;
+    min-width: 350px;
+
     max-width: 90%;
     max-height: 90%;
     overflow-y: auto;

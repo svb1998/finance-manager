@@ -25,11 +25,13 @@ export const transactionSlice = createSlice({
             state.push(action.payload);
         },
         removeTransaction: (state, action) => {
-            console.log(state);
-            console.log(action.payload);
-            return state.filter(
+            const resultTransactions = state.filter(
                 (transaction) => transaction.id !== action.payload
             );
+
+            localStorage.setItem(sliceName, JSON.stringify(resultTransactions));
+
+            return resultTransactions;
         },
     },
 });

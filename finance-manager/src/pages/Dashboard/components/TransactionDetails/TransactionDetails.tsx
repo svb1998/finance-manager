@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { capitalizeString } from "utilities";
 import { CircleX } from "lucide-react";
 import { removeTransaction } from "../../../../redux/states/transaction";
+import Dialog from "../../../../components/Layout/Dialog/Dialog";
 
 const columnHelper = createColumnHelper<Transaction>();
 
@@ -29,6 +30,24 @@ export default function TransactionDetails({ type }: Props) {
     const categories: Category[] = useSelector((state) => state.category);
 
     const [data, setData] = useState<Transaction[]>([]);
+
+    const [rowDialogOpen, setRowDialogOpen] = useState<Transaction | null>(
+        null
+    );
+
+    /**
+     * Function that opens the Dialog
+     */
+    const openDialog = (row: Transaction) => {
+        setRowDialogOpen(row);
+    };
+
+    /**
+     * Function that closes the Dialog
+     */
+    const closeDialog = () => {
+        setRowDialogOpen(null);
+    };
 
     const columns = [
         columnHelper.accessor("date", {
@@ -99,16 +118,33 @@ export default function TransactionDetails({ type }: Props) {
             cell: (info) => {
                 const row = info.cell.row.original;
 
+                const isDialogOpen = rowDialogOpen?.id === row.id;
+
                 return (
-                    <span
-                        className="tx-table-cell delete-icon"
-                        onClick={() => {
-                            console.log("delete", row);
-                            deleteTransaction(row);
-                        }}
-                    >
-                        <CircleX color="currentColor" size={"1.2em"} />
-                    </span>
+                    <>
+                        <span
+                            className="tx-table-cell delete-icon"
+                            onClick={() => {
+                                openDialog(row);
+                            }}
+                        >
+                            <CircleX color="currentColor" size={"1.2em"} />
+                        </span>
+                        {isDialogOpen && (
+                            <Dialog
+                                onOverlayClose
+                                onClose={closeDialog}
+                                title="¿Desea eliminar la transacción?"
+                                subtitle="¡Cuidado! Esta acción no se puede deshacer."
+                                message=""
+                                cancelButton="Cancelar"
+                                actionButton="Eliminar"
+                                mainAction={() => {
+                                    deleteTransaction(row);
+                                }}
+                            />
+                        )}
+                    </>
                 );
             },
             footer: (info) => info.column.id,

@@ -3,7 +3,7 @@ import MainInput from "../../../../Input/MainInput/MainInput";
 import { Select } from "antd";
 import FieldLayout from "../../../FieldLayout/FieldLayout";
 import MainButton from "../../../../Button/MainButton/MainButton";
-import DestructiveButton from "../../../../Button/DestructiveButton/DestructiveButton";
+import OutlineButton from "../../../../Button/OutlineButton/OutlineButton";
 import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -152,9 +152,9 @@ export default function TransactionAdd({ onCloseModal }: Props) {
                 </FieldLayout>
 
                 <div className="add-transaction-buttons-container">
-                    <DestructiveButton type="button" onClick={onCloseModal}>
+                    <OutlineButton type="button" onClick={onCloseModal}>
                         Cancelar
-                    </DestructiveButton>
+                    </OutlineButton>
                     <MainButton
                         type="submit"
                         // onClick={() => {

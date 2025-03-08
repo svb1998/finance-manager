@@ -4,16 +4,38 @@
     border-radius: 8px;
     cursor: pointer;
     border: none;
+    transition: all 0.2s ease-in-out;
 }
 
 .main-button {
     font-weight: 600;
     color: black;
-    background-color: greenyellow;
+    background-color: hsl(84, 100%, 59%);
+
+    &:hover {
+        background-color: hsl(84, 100%, 67%);
+    }
 }
 
 .destructive-button {
     font-weight: 600;
     color: white;
-    background-color: #e1002d;
+    background-color: hsl(348, 100%, 44%);
+
+    &:hover {
+        background-color: hsl(348, 100%, 52%);
+    }
+}
+
+.outline-button {
+    font-weight: 600;
+    color: greenyellow;
+    background-color: transparent;
+    border: 2px solid greenyellow;
+
+    &:hover {
+        background-color: hsl(84, 100%, 67%);
+        border: 2px solid hsl(84, 100%, 67%);
+        color: black;
+    }
 }
