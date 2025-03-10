@@ -1,4 +1,4 @@
-.add-transaction-container {
+.form-transaction-container {
 }
 
 .select-container {
@@ -22,7 +22,7 @@
     display: flex;
 }
 
-.add-transaction-buttons-container {
+.form-transaction-buttons-container {
     display: flex;
     justify-content: end;
     gap: 8px;

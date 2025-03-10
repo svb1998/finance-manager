@@ -4,7 +4,7 @@ import "./Navbar.css";
 import MainButton from "../../Button/MainButton/MainButton";
 import { useState } from "react";
 import Modal from "../../../Modal";
-import TransactionAdd from "./components/TransactionAdd/TransactionAdd";
+import AddTransaction from "../Transactions/AddTransaction/AddTransaction";
 
 interface Props {
     className?: string;
@@ -44,7 +44,7 @@ export default function Navbar(props: Props) {
                     onOverlayClose
                     title="Añadir transacción"
                 >
-                    <TransactionAdd onCloseModal={closeModal} />
+                    <AddTransaction onCloseModal={closeModal} />
                 </Modal>
             )}
         </nav>

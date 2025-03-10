@@ -1,59 +1,56 @@
-import "./TransactionAdd.css";
-import MainInput from "../../../../Input/MainInput/MainInput";
+import "../Transaction.css";
+import MainInput from "../../../Input/MainInput/MainInput";
 import { Select } from "antd";
-import FieldLayout from "../../../FieldLayout/FieldLayout";
-import MainButton from "../../../../Button/MainButton/MainButton";
-import OutlineButton from "../../../../Button/OutlineButton/OutlineButton";
+import FieldLayout from "../../FieldLayout/FieldLayout";
+import MainButton from "../../../Button/MainButton/MainButton";
+import OutlineButton from "../../../Button/OutlineButton/OutlineButton";
 import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import BasicFieldController from "../../../../FieldControllers/BasicFieldController/BasicFieldController";
-import { transactionAddSchema } from "./schemas/TransactionAdd.schema";
+import BasicFieldController from "../../../FieldControllers/BasicFieldController/BasicFieldController";
+import { transactionAddSchema } from "../../Navbar/components/TransactionAdd/schemas/TransactionAdd.schema";
 import { useDispatch, useSelector } from "react-redux";
-import shortUUID from "short-uuid";
-import { addTransaction } from "../../../../../redux/states/transaction";
-import { Transaction } from "../../../../../models";
-import { Category } from "../../../../../models/category.model";
+import { editTransaction } from "../../../../redux/states/transaction";
+import { Transaction } from "../../../../models";
+import { Category } from "../../../../models/category.model";
 
 const { Option } = Select;
 
 interface Props {
     onCloseModal: () => void;
+    transaction: Transaction;
 }
 
-export default function TransactionAdd({ onCloseModal }: Props) {
+export default function EditTransaction({ onCloseModal, transaction }: Props) {
     const dispatch = useDispatch();
 
     const categories: Category[] = useSelector((state) => state.category);
-
-    console.log(categories);
 
     const {
         control,
         handleSubmit,
         formState: { errors },
     } = useForm({
+        defaultValues: transaction,
         mode: "onChange",
         resolver: yupResolver(transactionAddSchema),
     });
 
     const onSubmit = (formData: Transaction) => {
-        console.log(formData);
-
-        formData.id = shortUUID.generate();
         formData.date = new Date().toISOString();
-        dispatch(addTransaction(formData));
+        dispatch(editTransaction(formData));
 
         onCloseModal();
     };
 
     return (
-        <div className="add-transaction-container">
+        <div className="form-transaction-container">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <FieldLayout>
                     <BasicFieldController
                         name="transactionType"
                         control={control}
+                        defaultValue={transaction.transactionType}
                     >
                         {(field) => (
                             <Select
@@ -79,7 +76,11 @@ export default function TransactionAdd({ onCloseModal }: Props) {
                     </BasicFieldController>
                 </FieldLayout>
                 <FieldLayout>
-                    <BasicFieldController name="amount" control={control}>
+                    <BasicFieldController
+                        name="amount"
+                        control={control}
+                        defaultValue={transaction.amount}
+                    >
                         {(field) => (
                             <MainInput
                                 {...field}
@@ -94,7 +95,11 @@ export default function TransactionAdd({ onCloseModal }: Props) {
                 </FieldLayout>
                 <FieldLayout>
                     {" "}
-                    <BasicFieldController name="description" control={control}>
+                    <BasicFieldController
+                        name="description"
+                        control={control}
+                        defaultValue={transaction.description}
+                    >
                         {(field) => (
                             <MainInput
                                 {...field}
@@ -107,12 +112,17 @@ export default function TransactionAdd({ onCloseModal }: Props) {
                 </FieldLayout>
                 <FieldLayout>
                     {" "}
-                    <BasicFieldController name="category" control={control}>
+                    <BasicFieldController
+                        name="category"
+                        control={control}
+                        defaultValue={transaction.category}
+                    >
                         {(field) => (
                             <Select
                                 {...field}
                                 className="select-container"
                                 id="transaction-category"
+                                defaultValue={transaction.category}
                                 placeholder="Selecciona una categoría..."
                             >
                                 {categories.map((category) => (
@@ -139,7 +149,11 @@ export default function TransactionAdd({ onCloseModal }: Props) {
                     </BasicFieldController>
                 </FieldLayout>
                 <FieldLayout>
-                    <BasicFieldController name="notes" control={control}>
+                    <BasicFieldController
+                        name="notes"
+                        control={control}
+                        defaultValue={transaction.notes}
+                    >
                         {(field) => (
                             <MainInput
                                 {...field}
@@ -151,7 +165,7 @@ export default function TransactionAdd({ onCloseModal }: Props) {
                     </BasicFieldController>
                 </FieldLayout>
 
-                <div className="add-transaction-buttons-container">
+                <div className="form-transaction-buttons-container">
                     <OutlineButton type="button" onClick={onCloseModal}>
                         Cancelar
                     </OutlineButton>

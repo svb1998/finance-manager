@@ -11,6 +11,7 @@
     tbody {
         tr {
             color: #f2fff5;
+            transition: all 0.15s ease-in-out;
 
             &:hover {
                 background-color: greenyellow;
@@ -36,6 +37,7 @@
     align-items: center;
     vertical-align: middle;
     border: none;
+    z-index: 1;
 }
 
 .category-chip {
@@ -56,6 +58,7 @@
 }
 
 .delete-icon {
+    position: relative;
     z-index: 2;
 
     fill: transparent;

@@ -6,13 +6,17 @@ import {
     getCoreRowModel,
     useReactTable,
 } from "@tanstack/react-table";
-import { Category, Transaction } from "models";
-import { useEffect, useState } from "react";
+import { Category, Transaction } from "../../../../models";
+import { ReactNode, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { capitalizeString } from "utilities";
+import { capitalizeString } from "../../../../utilities/capitalizeString.utility";
 import { CircleX } from "lucide-react";
 import { removeTransaction } from "../../../../redux/states/transaction";
 import Dialog from "../../../../components/Layout/Dialog/Dialog";
+import Modal from "../../../../Modal";
+import OutlineButton from "../../../../components/Button/OutlineButton/OutlineButton";
+import MainButton from "../../../../components/Button/MainButton/MainButton";
+import EditTransaction from "../../../../components/Layout/Transactions/EditTransaction/EditTransaction";
 
 const columnHelper = createColumnHelper<Transaction>();
 
@@ -31,22 +35,35 @@ export default function TransactionDetails({ type }: Props) {
 
     const [data, setData] = useState<Transaction[]>([]);
 
-    const [rowDialogOpen, setRowDialogOpen] = useState<Transaction | null>(
-        null
-    );
+    /**DELETE ROW DIALOG */
+
+    const [rowToDelete, setRowToDelete] = useState<Transaction | null>(null);
 
     /**
-     * Function that opens the Dialog
+     * Function that opens the Dialog to confirm delete
      */
-    const openDialog = (row: Transaction) => {
-        setRowDialogOpen(row);
+    const openDeleteRowDialog = (row: Transaction, e: React.MouseEvent) => {
+        e.stopPropagation();
+        setRowToDelete(row);
     };
 
     /**
-     * Function that closes the Dialog
+     * Function that closes the Dialog to confirm delete
      */
-    const closeDialog = () => {
-        setRowDialogOpen(null);
+    const closeDeleteRowDialog = () => {
+        setRowToDelete(null);
+    };
+
+    /**EDIT ROW MODAL */
+
+    const [rowToEdit, setRowToEdit] = useState<Transaction | null>(null);
+
+    const openEditRowModal = (row: Transaction) => {
+        setRowToEdit(row);
+    };
+
+    const closeEditRowModal = () => {
+        setRowToEdit(null);
     };
 
     const columns = [
@@ -118,32 +135,16 @@ export default function TransactionDetails({ type }: Props) {
             cell: (info) => {
                 const row = info.cell.row.original;
 
-                const isDialogOpen = rowDialogOpen?.id === row.id;
-
                 return (
                     <>
                         <span
                             className="tx-table-cell delete-icon"
-                            onClick={() => {
-                                openDialog(row);
+                            onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+                                openDeleteRowDialog(row, e);
                             }}
                         >
                             <CircleX color="currentColor" size={"1.2em"} />
                         </span>
-                        {isDialogOpen && (
-                            <Dialog
-                                onOverlayClose
-                                onClose={closeDialog}
-                                title="¿Desea eliminar la transacción?"
-                                subtitle="¡Cuidado! Esta acción no se puede deshacer."
-                                message=""
-                                cancelButton="Cancelar"
-                                actionButton="Eliminar"
-                                mainAction={() => {
-                                    deleteTransaction(row);
-                                }}
-                            />
-                        )}
                     </>
                 );
             },
@@ -178,10 +179,40 @@ export default function TransactionDetails({ type }: Props) {
         if (row.id) {
             dispatch(removeTransaction(row.id));
         }
+
+        closeDeleteRowDialog();
     };
 
     return (
         <div>
+            {rowToEdit && (
+                <Modal
+                    onClose={closeEditRowModal}
+                    onOverlayClose
+                    title="Editar transacción"
+                >
+                    <div style={{ color: "white" }}>
+                        <EditTransaction
+                            onCloseModal={closeEditRowModal}
+                            transaction={rowToEdit}
+                        />
+                    </div>
+                </Modal>
+            )}
+            {rowToDelete && (
+                <Dialog
+                    onOverlayClose
+                    onClose={closeDeleteRowDialog}
+                    title="¿Desea eliminar la transacción?"
+                    subtitle="¡Cuidado! Esta acción no se puede deshacer."
+                    message=""
+                    cancelButton="Cancelar"
+                    actionButton="Eliminar"
+                    mainAction={() => {
+                        deleteTransaction(rowToDelete);
+                    }}
+                />
+            )}
             <table className="tx-details-table">
                 <thead>
                     {table.getHeaderGroups().map((headerGroup) => (
@@ -219,7 +250,18 @@ export default function TransactionDetails({ type }: Props) {
                 </thead>
                 <tbody>
                     {table.getRowModel().rows.map((row) => (
-                        <tr key={row.id}>
+                        <tr
+                            key={row.id}
+                            onClick={(e: React.MouseEvent) => {
+                                const target = e.target as HTMLElement;
+                                if (target.closest(".delete-icon")) {
+                                    return;
+                                }
+
+                                const selectedRow = row.original;
+                                openEditRowModal(selectedRow);
+                            }}
+                        >
                             {row.getVisibleCells().map((cell) => (
                                 <td
                                     key={cell.id}
