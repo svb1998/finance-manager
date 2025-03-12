@@ -4,7 +4,7 @@
     gap: 16px;
     grid-template-columns: repeat(6, 1fr);
 
-    grid-template-rows: 1fr 1fr 2fr 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 2fr 2fr 1fr;
     grid-template-areas:
         "user user incomes-graph incomes-graph expenses-graph expenses-graph"
         "user user incomes-graph incomes-graph expenses-graph expenses-graph"
@@ -15,10 +15,10 @@
 
     padding-inline: 16px;
     padding-block: 8px;
-    overflow-y: hidden;
+ 
 }
 
-div > section {
+div > section:not(.footer-container) {
     background: radial-gradient(circle, #001b16, #030a07);
     box-shadow: 0 0 6px #0e2701;
 
@@ -107,4 +107,36 @@ div > section {
 
 .footer-container {
     grid-area: footer;
+    padding: 16px;
+    
+}
+
+
+@media (max-width: 768px) {
+    .dashboard-page{
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: 
+           "user"
+           "incomes-graph"
+           "expenses-graph"
+           "incomes-details"
+           "expenses-details"
+           "footer"
+           ;
+           
+    }
+
+    .incomes-details-container, .expenses-details-container{
+        height: 500px;
+    }
+
+    
+    .footer-container{
+        background-color: transparent;
+        position: sticky;
+        bottom: 0;
+        z-index: 5;
+    }
+   
 }

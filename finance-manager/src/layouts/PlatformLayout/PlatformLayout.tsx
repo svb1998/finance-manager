@@ -8,12 +8,12 @@ interface Props {
     children: ReactNode;
 }
 
-export default function PLatformLayout(children: Props) {
+export default function PLatformLayout({children}: Props) {
     return (
         <div className="platform-layout">
             <Navbar id="navbar-layout" />
             <Sidebar id="sidebar-layout" />
-            <main id="content-layout">{children.children}</main>
+            <main id="content-layout">{children}</main>
             {/* <Footer id="footer-layout" /> */}
         </div>
     );

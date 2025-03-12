@@ -29,3 +29,25 @@
 #footer-layout {
     grid-area: footer;
 }
+
+@media (max-width: 768px) {
+    .platform-layout{
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;;
+        grid-template-areas: 
+            "navbar"
+            "content"
+        ;
+    }
+
+    #sidebar-layout{
+        position: absolute;
+        left: 0;
+        top:0;
+        height: 100vh;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+    }
+
+}
+

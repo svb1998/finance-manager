@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const transactionAddSchema = yup.object({
+export const transactionFormSchema = yup.object({
     transactionType: yup
         .string()
         .oneOf(["income", "expense"])

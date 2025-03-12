@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import BasicFieldController from "../../../FieldControllers/BasicFieldController/BasicFieldController";
-import { transactionAddSchema } from "../../Navbar/components/TransactionAdd/schemas/TransactionAdd.schema";
+import { transactionFormSchema } from "../schemas/TransactionForm.schema";
 import { useDispatch, useSelector } from "react-redux";
 import shortUUID from "short-uuid";
 import { addTransaction } from "../../../../redux/states/transaction";
@@ -34,7 +34,7 @@ export default function AddTransaction({ onCloseModal }: Props) {
         formState: { errors },
     } = useForm({
         mode: "onChange",
-        resolver: yupResolver(transactionAddSchema),
+        resolver: yupResolver(transactionFormSchema),
     });
 
     const onSubmit = (formData: Transaction) => {

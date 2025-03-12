@@ -6,7 +6,7 @@ interface Props {
 export default function Footer(props: Props) {
     return (
         <footer className={`${props.className} `} id={`${props.id}`}>
-            Footer
+            Footersss
         </footer>
     );
 }

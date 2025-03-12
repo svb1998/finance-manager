@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { Transaction } from "../../models";
 import { useEffect, useState } from "react";
 import TransactionDetails from "./components/TransactionDetails/TransactionDetails";
+import DashboardActions from "./components/DashboardActions/DashboardActions";
 
 export default function Dashboard() {
     const transactions: Transaction[] = useSelector(
@@ -69,7 +70,9 @@ export default function Dashboard() {
                 </div>
             </section>
 
-            <section className="footer-container">Footer</section>
+            <section className="footer-container">
+                <DashboardActions />
+            </section>
         </div>
     );
 }
