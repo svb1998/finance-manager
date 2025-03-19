@@ -1,6 +1,11 @@
+/* .tx-table-container {
+    overflow-x: scroll;
+} */
+
 .tx-details-table {
     border-collapse: collapse;
     width: 100%;
+    /* overflow-x: scroll; */
 
     th {
         text-align: left;
@@ -64,7 +69,7 @@
     fill: transparent;
     &:hover {
         cursor: pointer;
-        background-color: greenyellow;
+        
         color: red;
     }
 }

@@ -1,3 +1,13 @@
+.chart-container{
+    position: relative;
+    width: 100%;
+    height: 250px;
+}
+
+.chart-text{
+    
+}
+
 .custom-tooltip {
     border-radius: 0.5em;
     background-color: black;
@@ -25,4 +35,12 @@
     width: 4px;
     left: 0;
     top: 0;
+}
+
+
+
+@media (max-width: 1024px) {
+    .chart-container{
+        height: 220px;
+    }
 }

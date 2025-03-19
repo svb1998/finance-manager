@@ -1,7 +1,8 @@
 .platform-layout {
     display: grid;
     height: 100vh;
-    grid-template-columns: minmax(64px, 200px) auto;
+
+    grid-template-columns: auto auto;
     grid-template-rows: auto auto;
     grid-template-areas:
         "navbar navbar"
@@ -10,6 +11,7 @@
     overflow: hidden;
     background-color: black;
     color: white;
+
 }
 
 #navbar-layout {
@@ -18,12 +20,22 @@
 
 #sidebar-layout {
     grid-area: sidebar;
+
+    
+
+
 }
+
+
+
+
 
 #content-layout {
     grid-area: content;
     height: 100%;
     overflow-y: auto;
+    width: 100%;
+    
 }
 
 #footer-layout {

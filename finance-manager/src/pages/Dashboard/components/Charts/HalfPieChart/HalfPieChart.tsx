@@ -3,6 +3,7 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { Transaction, Category } from "models";
 import { useSelector } from "react-redux";
 import "./HalfPieChart.css";
+import { Textfit } from "react-textfit";
 
 interface Props {
     type: "income" | "expense";
@@ -109,11 +110,7 @@ export default function HalfPieChart({ type = "income" }: Props) {
     return (
         <div>
             <div
-                style={{
-                    position: "relative",
-                    width: "100%",
-                    height: "280px",
-                }}
+                className="chart-container"
             >
                 <ResponsiveContainer
                     width="100%"
@@ -166,7 +163,10 @@ export default function HalfPieChart({ type = "income" }: Props) {
                         zIndex: 1,
                     }}
                 >
+                    <Textfit className="chart-text" min={24} mode="single">
                     {totalAmount}€
+                </Textfit>
+                   
                 </div>
             </div>
         </div>

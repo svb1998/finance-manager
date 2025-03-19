@@ -34,7 +34,7 @@ export default function Dashboard() {
     return (
         <div className="dashboard-page">
             <LittleCard className="user-container" title="Balance">
-                <Textfit className="balance-container" mode="single">
+                <Textfit className="balance-container" max={72} mode="single">
                     {balance}€
                 </Textfit>
             </LittleCard>

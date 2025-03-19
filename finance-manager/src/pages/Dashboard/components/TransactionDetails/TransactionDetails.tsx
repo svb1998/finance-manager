@@ -184,7 +184,7 @@ export default function TransactionDetails({ type }: Props) {
     };
 
     return (
-        <div>
+        <div className="tx-table-container">
             {rowToEdit && (
                 <Modal
                     onClose={closeEditRowModal}

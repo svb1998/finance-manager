@@ -4,7 +4,7 @@
     gap: 16px;
     grid-template-columns: repeat(6, 1fr);
 
-    grid-template-rows: 1fr 1fr 2fr 2fr 1fr;
+    grid-template-rows: 1fr 1fr 2fr 2fr 2fr 1fr;
     grid-template-areas:
         "user user incomes-graph incomes-graph expenses-graph expenses-graph"
         "user user incomes-graph incomes-graph expenses-graph expenses-graph"
@@ -13,9 +13,10 @@
         "incomes-details incomes-details incomes-details expenses-details expenses-details expenses-details"
         "footer footer footer footer footer footer";
 
-    padding-inline: 16px;
+    padding-right: 16px;
     padding-block: 8px;
- 
+
+    
 }
 
 div > section:not(.footer-container) {
@@ -37,7 +38,7 @@ div > section:not(.footer-container) {
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 3.5em;
+    font-size: 3.0em;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -54,6 +55,7 @@ div > section:not(.footer-container) {
 .incomes-details-container,
 .expenses-details-container {
     overflow-y: auto;
+
     max-height: 100%;
     min-height: 0;
     background: #000;
@@ -81,6 +83,9 @@ div > section:not(.footer-container) {
     font-size: 1.15em;
     font-weight: 700;
     margin-bottom: 0.75em;
+    position: sticky;
+    top: 0;
+    left: 0;
 }
 
 .details-line {
@@ -111,6 +116,43 @@ div > section:not(.footer-container) {
     
 }
 
+@media (max-width: 1024px) {
+    .dashboard-page{
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 2fr 2fr 1fr;
+        grid-template-areas: 
+        "user user"
+        "incomes-graph expenses-graph"
+        "incomes-details incomes-details"
+        "expenses-details expenses-details"
+        "footer footer"
+        ;
+    }
+
+    .balance-container{
+        height: 120px;
+    }
+
+    .user-incomes-graph-container, .user-expenses-graph-container{
+        height: 200px
+    } 
+
+    .incomes-details-container, .expenses-details-container{
+        height: 500px;
+    }
+
+    .footer-container{
+        background-color: transparent;
+        position: fixed;
+        bottom: 10px;
+        margin: 0 auto;
+            left: 0;
+        right: 0;
+        z-index: 5;
+    }
+}
+
+
 
 @media (max-width: 768px) {
     .dashboard-page{
@@ -127,16 +169,9 @@ div > section:not(.footer-container) {
            
     }
 
-    .incomes-details-container, .expenses-details-container{
-        height: 500px;
-    }
+   
 
     
-    .footer-container{
-        background-color: transparent;
-        position: sticky;
-        bottom: 0;
-        z-index: 5;
-    }
+   
    
 }
