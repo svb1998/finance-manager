@@ -1,0 +1,46 @@
+.sidebar-item{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-block: 0.75rem;
+    cursor: pointer;
+    color: #c5ded4;
+    transition: color 0.25s ease-in-out;
+
+    &:hover{
+        color: #bfe6a4;
+    }
+}
+
+.sidebar-item-title{
+    color: currentColor;
+
+    
+}
+
+
+.sidebar-item-title-active{
+    color: greenyellow;
+    font-weight: 600;
+    transition: color 0.25s ease-in-out;
+    
+}
+
+.sidebar-icon {
+    transition: filter 0.15s ease-in-out;
+    stroke-width: 1.5;
+    stroke: currentColor;
+
+
+     &:hover{
+        filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
+
+     }
+}
+
+
+
+.sidebar-icon-active {
+    stroke: greenyellow;
+    stroke-width: 2.2;    
+}

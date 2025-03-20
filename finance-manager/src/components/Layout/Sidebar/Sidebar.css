@@ -1,5 +1,7 @@
 .sidebar-container{
     transition: all 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -35,11 +37,8 @@
 
 }
 
-.glow-icon {
-    transition: filter 0.15s ease-in-out;
+.items-group{
+    flex: 1;
 }
 
-.glow-icon:hover {
-    filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
-}
 
