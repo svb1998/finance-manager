@@ -15,6 +15,8 @@ import { addTransaction } from "../../../../redux/states/transaction";
 import { Transaction } from "../../../../models";
 import { Category } from "../../../../models/category.model";
 
+import { motion } from "motion/react";
+
 const { Option } = Select;
 
 interface Props {

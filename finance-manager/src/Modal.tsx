@@ -1,6 +1,8 @@
 import React, { ReactNode } from "react";
 import "./Modal.css";
 import { createPortal } from "react-dom";
+import { AnimatePresence, motion } from "motion/react";
+
 interface Props {
     children: ReactNode;
     title?: string;
@@ -35,11 +37,31 @@ export default function Modal({
         e.target === e.currentTarget ? onClose() : {};
 
     return createPortal(
-        <div
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0 }}
             className="modal-overlay"
             onClick={onOverlayClose ? handleOnOverlayClose : () => {}}
         >
-            <div
+            <motion.div
+                initial={{
+                    scale: 0,
+
+                    opacity: 0,
+                }}
+                animate={{
+                    scale: 1,
+
+                    opacity: 1,
+                }}
+                transition={{ duration: 0.2 }}
+                exit={{
+                    scale: 0,
+
+                    opacity: 0,
+                }}
                 className="modal-container"
                 style={{
                     width: width,
@@ -55,8 +77,8 @@ export default function Modal({
                 </button> */}
                 {title && <h2 className="modal-title">{title}</h2>}
                 {children}
-            </div>
-        </div>,
+            </motion.div>
+        </motion.div>,
         document.getElementById("modal-root") as HTMLElement
     );
 }

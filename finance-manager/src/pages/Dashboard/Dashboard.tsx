@@ -7,8 +7,14 @@ import { Transaction } from "../../models";
 import { useEffect, useState } from "react";
 import TransactionDetails from "./components/TransactionDetails/TransactionDetails";
 import DashboardActions from "./components/DashboardActions/DashboardActions";
+import useSetActivePage from "../../hooks/useSetActivePage";
+import { useLocation } from "react-router";
 
 export default function Dashboard() {
+
+    const location = useLocation();
+    useSetActivePage(location.pathname);
+
     const transactions: Transaction[] = useSelector(
         (state) => state.transaction
     );

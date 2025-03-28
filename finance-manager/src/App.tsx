@@ -7,6 +7,8 @@ import { addTransaction, removeTransaction } from "./redux/states/transaction";
 import { Transaction } from "./models";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import PlatformLayout from "./layouts/PlatformLayout/PlatformLayout";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
+import Settings from "./pages/Settings/Settings";
 
 function App() {
     const transactions: Transaction[] = useSelector(
@@ -35,40 +37,19 @@ function App() {
     };
 
     return (
-        <>
-            <PlatformLayout>
-                <Dashboard />
-            </PlatformLayout>
-
-            {/* <h1>Vite + React</h1>
-            <div className="card">
-                <button
-                    onClick={() => dispatch(addTransaction(defaultTransaction))}
-                >
-                    Añadir transacción
-                </button>
-                <button
-                    onClick={() =>
-                        dispatch(addTransaction(defaultTransaction2))
-                    }
-                >
-                    Añadir transacción 2
-                </button>
-                <button onClick={() => dispatch(removeTransaction(1))}>
-                    Eliminar transacción
-                </button>
-                <button onClick={() => dispatch(removeTransaction(2))}>
-                    Eliminar transacción 2
-                </button>
-                {transactions.map((transaction) => (
-                    <div>
-                        {transaction.id}
-                        {transaction.amount}
-                        {transaction.description}
-                    </div>
-                ))}
-            </div> */}
-        </>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<PlatformLayout />}>
+                    <Route index path="dashboard" element={<Dashboard />} />
+                    <Route path="groups" element={<Settings />} />
+                    <Route path="settings" element={<Settings />} />
+                    <Route
+                        path="*"
+                        element={<Navigate replace to="/dashboard" />}
+                    />
+                </Route>
+            </Routes>
+        </BrowserRouter>
     );
 }
 

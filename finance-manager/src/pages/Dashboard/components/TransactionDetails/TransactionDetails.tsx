@@ -17,6 +17,7 @@ import Modal from "../../../../Modal";
 import OutlineButton from "../../../../components/Button/OutlineButton/OutlineButton";
 import MainButton from "../../../../components/Button/MainButton/MainButton";
 import EditTransaction from "../../../../components/Layout/Transactions/EditTransaction/EditTransaction";
+import { AnimatePresence } from "motion/react";
 
 const columnHelper = createColumnHelper<Transaction>();
 
@@ -185,34 +186,36 @@ export default function TransactionDetails({ type }: Props) {
 
     return (
         <div className="tx-table-container">
-            {rowToEdit && (
-                <Modal
-                    onClose={closeEditRowModal}
-                    onOverlayClose
-                    title="Editar transacción"
-                >
-                    <div style={{ color: "white" }}>
-                        <EditTransaction
-                            onCloseModal={closeEditRowModal}
-                            transaction={rowToEdit}
-                        />
-                    </div>
-                </Modal>
-            )}
-            {rowToDelete && (
-                <Dialog
-                    onOverlayClose
-                    onClose={closeDeleteRowDialog}
-                    title="¿Desea eliminar la transacción?"
-                    subtitle="¡Cuidado! Esta acción no se puede deshacer."
-                    message=""
-                    cancelButton="Cancelar"
-                    actionButton="Eliminar"
-                    mainAction={() => {
-                        deleteTransaction(rowToDelete);
-                    }}
-                />
-            )}
+            <AnimatePresence>
+                {rowToEdit && (
+                    <Modal
+                        onClose={closeEditRowModal}
+                        onOverlayClose
+                        title="Editar transacción"
+                    >
+                        <div style={{ color: "white" }}>
+                            <EditTransaction
+                                onCloseModal={closeEditRowModal}
+                                transaction={rowToEdit}
+                            />
+                        </div>
+                    </Modal>
+                )}
+                {rowToDelete && (
+                    <Dialog
+                        onOverlayClose
+                        onClose={closeDeleteRowDialog}
+                        title="¿Desea eliminar la transacción?"
+                        subtitle="¡Cuidado! Esta acción no se puede deshacer."
+                        message=""
+                        cancelButton="Cancelar"
+                        actionButton="Eliminar"
+                        mainAction={() => {
+                            deleteTransaction(rowToDelete);
+                        }}
+                    />
+                )}
+            </AnimatePresence>
             <table className="tx-details-table">
                 <thead>
                     {table.getHeaderGroups().map((headerGroup) => (
