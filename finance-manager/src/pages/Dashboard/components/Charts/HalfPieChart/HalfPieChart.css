@@ -1,0 +1,46 @@
+.chart-container{
+    position: relative;
+    width: 100%;
+    height: 250px;
+}
+
+.chart-text{
+    
+}
+
+.custom-tooltip {
+    border-radius: 0.5em;
+    background-color: black;
+    color: white;
+    padding: 0.25em 0.5em 0.25em 0.75em;
+    z-index: 2;
+    position: relative;
+    overflow: hidden;
+}
+
+.custom-tooltip-label {
+    color: greenyellow;
+    font-weight: 700;
+    font-size: 0.9em;
+}
+
+.custom-tooltip-amount {
+    font-size: 0.8em;
+}
+
+.vertical-line-ui {
+    background-color: greenyellow;
+    position: absolute;
+    height: 100%;
+    width: 4px;
+    left: 0;
+    top: 0;
+}
+
+
+
+@media (max-width: 1024px) {
+    .chart-container{
+        height: 220px;
+    }
+}

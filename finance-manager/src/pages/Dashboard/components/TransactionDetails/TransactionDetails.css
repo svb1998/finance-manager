@@ -1,0 +1,102 @@
+/* .tx-table-container {
+    overflow-x: scroll;
+} */
+
+.tx-details-table {
+    border-collapse: collapse;
+    width: 100%;
+    /* overflow-x: scroll; */
+
+    th {
+        text-align: left;
+        font-size: 1em;
+        padding: 0.35em 0.5em 0.35em 0em;
+    }
+
+    tbody {
+        tr {
+            color: #f2fff5;
+            transition: all 0.15s ease-in-out;
+
+            &:hover {
+                background-color: greenyellow;
+                color: black;
+                cursor: pointer;
+            }
+
+            td {
+                padding: 0.35em 0.1em 0.35em 0.1em;
+                height: 100%;
+                vertical-align: middle;
+                font-size: 0.93em;
+            }
+        }
+    }
+}
+
+.tx-table-cell {
+    position: relative;
+    height: 100%;
+    min-height: 1.5em;
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    border: none;
+    z-index: 1;
+}
+
+.category-chip {
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: 16px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: fit-content;
+    padding-inline: 0.75em;
+    background-color: #8fd4ff;
+    /* color: hsl(236, 100%, 28%);
+    border: 1px solid hsl(236, 100%, 28%); */
+    border: 1px solid black;
+    color: black;
+}
+
+.delete-icon {
+    position: relative;
+    z-index: 2;
+
+    fill: transparent;
+    &:hover {
+        cursor: pointer;
+        
+        color: red;
+    }
+}
+
+.resizer {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    background: rgba(0, 0, 0, 0.5);
+    cursor: col-resize;
+    user-select: none;
+    touch-action: none;
+}
+
+.resizer.isResizing {
+    background: blue;
+    opacity: 1;
+}
+
+@media (hover: hover) {
+    .resizer {
+        opacity: 0;
+    }
+
+    *:hover > .resizer {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,43 @@
+.platform-layout {
+    display: grid;
+    height: 100vh;
+
+    grid-template-columns: auto 1fr;
+    grid-template-rows: minmax(auto, 50px) auto;
+    grid-template-areas:
+        "navbar navbar"
+        "sidebar content";
+
+    overflow: hidden;
+    background-color: black;
+    color: white;
+}
+
+#navbar-layout {
+    grid-area: navbar;
+}
+
+#sidebar-layout {
+    grid-area: sidebar;
+}
+
+#content-layout {
+    grid-area: content;
+    height: 100%;
+    overflow-y: auto;
+    width: 100%;
+}
+
+#footer-layout {
+    grid-area: footer;
+}
+
+@media (max-width: 768px) {
+    .platform-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "navbar"
+            "content";
+    }
+}
