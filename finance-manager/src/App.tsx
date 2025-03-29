@@ -39,7 +39,8 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<PlatformLayout />}>
+                //TODO: Use when Login is implemented
+                {/* <Route path="/" element={<PlatformLayout />}>
                     <Route index path="dashboard" element={<Dashboard />} />
                     <Route path="groups" element={<Settings />} />
                     <Route path="settings" element={<Settings />} />
@@ -47,7 +48,22 @@ function App() {
                         path="*"
                         element={<Navigate replace to="/dashboard" />}
                     />
+                </Route> */}
+            </Routes>
+
+            <Routes>
+                <Route path="/" element={<Navigate to="/dashboard" />} />
+
+                <Route path="/dashboard" element={<PlatformLayout />}>
+                    <Route index element={<Dashboard />} />
+                    <Route path="groups" element={<Settings />} />
+                    <Route path="settings" element={<Settings />} />
                 </Route>
+
+                <Route
+                    path="*"
+                    element={<Navigate replace to="/dashboard" />}
+                />
             </Routes>
         </BrowserRouter>
     );

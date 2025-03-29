@@ -69,7 +69,7 @@ export default function HalfPieChart({ type = "income" }: Props) {
             (item) => item.transactionType === type
         );
         setFilteredTransactions(filteredTransactions);
-        console.log(filteredTransactions);
+        // console.log(filteredTransactions);
     };
 
     const classifyTransactions = () => {
@@ -109,9 +109,7 @@ export default function HalfPieChart({ type = "income" }: Props) {
 
     return (
         <div>
-            <div
-                className="chart-container"
-            >
+            <div className="chart-container">
                 <ResponsiveContainer
                     width="100%"
                     height="100%"
@@ -164,9 +162,8 @@ export default function HalfPieChart({ type = "income" }: Props) {
                     }}
                 >
                     <Textfit className="chart-text" min={24} mode="single">
-                    {totalAmount}€
-                </Textfit>
-                   
+                        {totalAmount}€
+                    </Textfit>
                 </div>
             </div>
         </div>

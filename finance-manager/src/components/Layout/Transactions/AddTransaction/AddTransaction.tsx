@@ -28,7 +28,7 @@ export default function AddTransaction({ onCloseModal }: Props) {
 
     const categories: Category[] = useSelector((state) => state.category);
 
-    console.log(categories);
+    // console.log(categories);
 
     const {
         control,
@@ -40,7 +40,7 @@ export default function AddTransaction({ onCloseModal }: Props) {
     });
 
     const onSubmit = (formData: Transaction) => {
-        console.log(formData);
+        // console.log(formData);
 
         formData.id = shortUUID.generate();
         formData.date = new Date().toISOString();
