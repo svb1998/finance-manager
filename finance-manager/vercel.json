@@ -1,9 +1,9 @@
 {
-    "version": 2,
+    "version": 3,
     "builds": [
         {
             "src": "package.json",
-            "use": "@vercel/node"
+            "use": "@vercel/static-build"
         }
     ],
     "routes": [
