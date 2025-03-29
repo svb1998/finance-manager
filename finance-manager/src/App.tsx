@@ -54,8 +54,8 @@ function App() {
             <Routes>
                 <Route path="/" element={<Navigate to="/dashboard" />} />
 
-                <Route path="/dashboard" element={<PlatformLayout />}>
-                    <Route index element={<Dashboard />} />
+                <Route path="/" element={<PlatformLayout />}>
+                    <Route index path="dashboard" element={<Dashboard />} />
                     <Route path="groups" element={<Settings />} />
                     <Route path="settings" element={<Settings />} />
                 </Route>
