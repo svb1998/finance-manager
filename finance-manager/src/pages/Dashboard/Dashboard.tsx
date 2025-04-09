@@ -8,12 +8,11 @@ import { useEffect, useState } from "react";
 import TransactionDetails from "./components/TransactionDetails/TransactionDetails";
 import DashboardActions from "./components/DashboardActions/DashboardActions";
 import useSetActivePage from "../../hooks/useSetActivePage";
-import { useLocation } from "react-router";
+
+import { ErrorBoundary } from "../../utilities/ErrorBoundaries";
 
 export default function Dashboard() {
-
-    const location = useLocation();
-    useSetActivePage(location.pathname);
+    useSetActivePage();
 
     const transactions: Transaction[] = useSelector(
         (state) => state.transaction
@@ -39,11 +38,21 @@ export default function Dashboard() {
 
     return (
         <div className="dashboard-page">
-            <LittleCard className="user-container" title="Balance">
-                <Textfit className="balance-container" max={72} mode="single">
-                    {balance}€
-                </Textfit>
-            </LittleCard>
+            <ErrorBoundary
+                fallback={
+                    <div style={{ color: "red" }}>Something went wrong</div>
+                }
+            >
+                <LittleCard className="user-container" title="Balance">
+                    <Textfit
+                        className="balance-container"
+                        max={72}
+                        mode="single"
+                    >
+                        {balance}€
+                    </Textfit>
+                </LittleCard>
+            </ErrorBoundary>
             <LittleCard
                 className="user-incomes-graph-container"
                 title="Ingresos"

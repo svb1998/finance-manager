@@ -14,9 +14,13 @@ export default function LittleCard(props: Props) {
             id={props.id}
             className={`${props.className} little-card-container`}
         >
-            {props.title && (
-                <div className="little-card-title">{props.title}</div>
-            )}
+            <div className="little-card-title">{props.title}</div>
+
+            {/* {props.title && (
+                <div className="little-card-title">
+                    {props.title.toUpperCase()}
+                </div>
+            )} */}
             {props.children}
         </div>
     );

@@ -36,6 +36,7 @@ export default function DashboardActions() {
                         onClose={closeModal}
                         onOverlayClose
                         title="Añadir transacción"
+                        dataTestId="add-transaction-modal"
                     >
                         <AddTransaction onCloseModal={closeModal} />
                     </Modal>

@@ -3,8 +3,7 @@ import { useLocation } from "react-router";
 import useSetActivePage from "../../hooks/useSetActivePage";
 
 export default function Settings() {
-    const location = useLocation();
-    useSetActivePage(location.pathname);
+    useSetActivePage();
 
     return <div className="settings-container">Soon...</div>;
 }

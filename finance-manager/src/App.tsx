@@ -1,46 +1,61 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
-import { useDispatch, useSelector } from "react-redux";
-import { addTransaction, removeTransaction } from "./redux/states/transaction";
-import { Transaction } from "./models";
-import Dashboard from "./pages/Dashboard/Dashboard";
-import PlatformLayout from "./layouts/PlatformLayout/PlatformLayout";
+import Logo from "/FM-logo.svg";
+
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
-import Settings from "./pages/Settings/Settings";
+import { lazy, Suspense } from "react";
+import { motion } from "motion/react";
+
+const PlatformLayout = lazy(
+    () => import("./layouts/PlatformLayout/PlatformLayout")
+);
+const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
+const Settings = lazy(() => import("./pages/Settings/Settings"));
+const Groups = lazy(() => import("./pages/Groups/Groups"));
 
 function App() {
-    const transactions: Transaction[] = useSelector(
-        (state) => state.transaction
+    const Fallback = () => (
+        <motion.div
+            initial={{
+                background:
+                    "radial-gradient(circle ,rgb(0, 0, 0) 1%,rgb(0, 0, 0))",
+            }}
+            animate={{
+                background:
+                    "radial-gradient(circle ,rgb(0, 31, 25) 1%,rgb(0, 0, 0))",
+            }}
+            transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "linear",
+                repeatType: "reverse",
+            }}
+            className="fallback-container"
+        >
+            <motion.div
+                initial={{ scale: 1 }}
+                animate={{
+                    scale: [1, 1.1, 1, 1, 1.1, 1],
+                }}
+                transition={{
+                    scale: {
+                        duration: 1.8,
+                        repeat: Infinity,
+                        repeatType: "loop",
+                        ease: "easeInOut",
+                    },
+                }}
+            >
+                <img className="fallback-logo" src={Logo} alt="" />
+            </motion.div>
+        </motion.div>
     );
-
-    const dispatch = useDispatch();
-
-    const defaultTransaction: Transaction = {
-        id: 1,
-        amount: 100,
-        category: "Hobbies",
-        date: new Date().toISOString(),
-        description: "Escalada",
-        type: "expense",
-        note: "Correcto",
-    };
-    const defaultTransaction2: Transaction = {
-        id: 2,
-        amount: 1000,
-        category: "Hobbies",
-        date: new Date().toISOString(),
-        description: "Parque acuático",
-        type: "expense",
-        note: "Correcto",
-    };
 
     return (
         <BrowserRouter>
-            <Routes>
-                //TODO: Use when Login is implemented
-                {/* <Route path="/" element={<PlatformLayout />}>
+            <Suspense fallback={<Fallback />}>
+                <Routes>
+                    //TODO: Use when Login is implemented
+                    {/* <Route path="/" element={<PlatformLayout />}>
                     <Route index path="dashboard" element={<Dashboard />} />
                     <Route path="groups" element={<Settings />} />
                     <Route path="settings" element={<Settings />} />
@@ -49,22 +64,23 @@ function App() {
                         element={<Navigate replace to="/dashboard" />}
                     />
                 </Route> */}
-            </Routes>
+                </Routes>
 
-            <Routes>
-                <Route path="/" element={<Navigate to="/dashboard" />} />
+                <Routes>
+                    <Route path="/" element={<Navigate to="/dashboard" />} />
 
-                <Route path="/" element={<PlatformLayout />}>
-                    <Route index path="dashboard" element={<Dashboard />} />
-                    <Route path="groups" element={<Settings />} />
-                    <Route path="settings" element={<Settings />} />
-                </Route>
+                    <Route path="/" element={<PlatformLayout />}>
+                        <Route index path="dashboard" element={<Dashboard />} />
+                        <Route path="groups" element={<Groups />} />
+                        <Route path="settings" element={<Settings />} />
+                    </Route>
 
-                <Route
-                    path="*"
-                    element={<Navigate replace to="/dashboard" />}
-                />
-            </Routes>
+                    <Route
+                        path="*"
+                        element={<Navigate replace to="/dashboard" />}
+                    />
+                </Routes>
+            </Suspense>
         </BrowserRouter>
     );
 }

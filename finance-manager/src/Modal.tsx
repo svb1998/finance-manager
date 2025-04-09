@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 interface Props {
     children: ReactNode;
     title?: string;
+    dataTestId: string;
     onClose: () => void;
     onOverlayClose?: boolean;
     width?: string;
@@ -19,6 +20,7 @@ interface Props {
 export default function Modal({
     children,
     title,
+    dataTestId = "",
     onClose,
     onOverlayClose = false,
     width = "auto",
@@ -40,7 +42,7 @@ export default function Modal({
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.25 }}
             exit={{ opacity: 0 }}
             className="modal-overlay"
             onClick={onOverlayClose ? handleOnOverlayClose : () => {}}
@@ -48,21 +50,20 @@ export default function Modal({
             <motion.div
                 initial={{
                     scale: 0,
-
                     opacity: 0,
                 }}
                 animate={{
                     scale: 1,
-
                     opacity: 1,
                 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.25 }}
                 exit={{
                     scale: 0,
 
-                    opacity: 0,
+                    // opacity: 0,
                 }}
                 className="modal-container"
+                data-testid={dataTestId}
                 style={{
                     width: width,
                     height: height,
