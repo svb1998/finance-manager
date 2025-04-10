@@ -10,31 +10,12 @@ import DashboardActions from "./components/DashboardActions/DashboardActions";
 import useSetActivePage from "../../hooks/useSetActivePage";
 
 import { ErrorBoundary } from "../../utilities/ErrorBoundaries";
+import useBalance from "../../hooks/useBalance";
 
 export default function Dashboard() {
     useSetActivePage();
 
-    const transactions: Transaction[] = useSelector(
-        (state) => state.transaction
-    );
-
-    const [balance, setBalance] = useState(0);
-
-    const getBalance = () => {
-        setBalance(
-            transactions.reduce(
-                (prev, curr) =>
-                    curr.transactionType === "income"
-                        ? prev + curr.amount
-                        : prev - curr.amount,
-                0
-            )
-        );
-    };
-
-    useEffect(() => {
-        getBalance();
-    }, [transactions]);
+    const balance = useBalance();
 
     return (
         <div className="dashboard-page">

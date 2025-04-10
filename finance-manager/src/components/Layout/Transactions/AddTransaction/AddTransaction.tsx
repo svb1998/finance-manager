@@ -1,21 +1,19 @@
-import "../Transaction.css";
-import MainInput from "../../../Input/MainInput/MainInput";
 import { Select } from "antd";
-import FieldLayout from "../../FieldLayout/FieldLayout";
+import { useForm } from "react-hook-form";
 import MainButton from "../../../Button/MainButton/MainButton";
 import OutlineButton from "../../../Button/OutlineButton/OutlineButton";
-import { useForm } from "react-hook-form";
+import MainInput from "../../../Input/MainInput/MainInput";
+import FieldLayout from "../../FieldLayout/FieldLayout";
+import "../Transaction.css";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import BasicFieldController from "../../../FieldControllers/BasicFieldController/BasicFieldController";
-import { transactionFormSchema } from "../schemas/TransactionForm.schema";
 import { useDispatch, useSelector } from "react-redux";
 import shortUUID from "short-uuid";
-import { addTransaction } from "../../../../redux/states/transaction";
 import { Transaction } from "../../../../models";
 import { Category } from "../../../../models/category.model";
-
-import { motion } from "motion/react";
+import { addTransaction } from "../../../../redux/states/transaction";
+import BasicFieldController from "../../../FieldControllers/BasicFieldController/BasicFieldController";
+import { transactionFormSchema } from "../schemas/TransactionForm.schema";
 
 const { Option } = Select;
 
@@ -27,8 +25,6 @@ export default function AddTransaction({ onCloseModal }: Props) {
     const dispatch = useDispatch();
 
     const categories: Category[] = useSelector((state) => state.category);
-
-    // console.log(categories);
 
     const {
         control,
