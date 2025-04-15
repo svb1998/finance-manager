@@ -1,7 +1,7 @@
 import React, { ForwardedRef, ReactNode } from "react";
 import "./MainInput.css";
 
-interface Props {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
     beforeChildren?: ReactNode;
     afterChildren?: ReactNode;
     name?: string;

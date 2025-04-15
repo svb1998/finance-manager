@@ -5,6 +5,11 @@
     cursor: pointer;
     border: none;
     transition: all 0.2s ease-in-out;
+    outline: none;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .main-button {
@@ -15,27 +20,58 @@
     &:hover {
         background-color: hsl(84, 100%, 67%);
     }
-}
 
-.destructive-button {
-    font-weight: 600;
-    color: white;
-    background-color: hsl(348, 100%, 44%);
+    &:focus {
+        background-color: hsl(84, 100%, 67%);
+    }
 
-    &:hover {
-        background-color: hsl(348, 100%, 52%);
+    &:active {
+        background-color: hsl(84, 100%, 53%);
     }
 }
 
-.outline-button {
+.secondary-button {
     font-weight: 600;
-    color: greenyellow;
+    color: black;
     background-color: transparent;
-    border: 2px solid greenyellow;
 
     &:hover {
-        background-color: hsl(84, 100%, 67%);
-        border: 2px solid hsl(84, 100%, 67%);
-        color: black;
+        background-color: hsl(200, 100%, 52%);
+    }
+
+    &:focus {
+        background-color: hsl(200, 100%, 52%);
+    }
+
+    &:active {
+        background-color: hsl(200, 100%, 52%);
+    }
+}
+
+    .destructive-button {
+        font-weight: 600;
+        color: white;
+        background-color: hsl(348, 100%, 44%);
+
+        &:hover {
+            background-color: hsl(348, 100%, 52%);
+        }
+
+        &:focus {
+            background-color: hsl(348, 100%, 52%);
+        }
+    }
+
+    .outline-button {
+        font-weight: 600;
+        color: greenyellow;
+        background-color: transparent;
+        border: 2px solid greenyellow;
+
+        &:hover {
+            background-color: hsl(84, 100%, 67%);
+            border: 2px solid hsl(84, 100%, 67%);
+            color: black;
+        }
     }
 }

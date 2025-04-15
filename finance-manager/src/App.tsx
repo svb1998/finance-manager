@@ -1,5 +1,5 @@
 import "./App.css";
-import Logo from "/FM-logo.svg";
+import Logo from "./assets/logo.svg";
 
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import { lazy, Suspense } from "react";
@@ -11,6 +11,7 @@ const PlatformLayout = lazy(
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
 const Settings = lazy(() => import("./pages/Settings/Settings"));
 const Groups = lazy(() => import("./pages/Groups/Groups"));
+const Login = lazy(() => import("./pages/Login/Login"));
 
 function App() {
     const Fallback = () => (
@@ -67,6 +68,7 @@ function App() {
                 </Routes>
 
                 <Routes>
+                    <Route path="/login" element={<Login />} />
                     <Route path="/" element={<Navigate to="/dashboard" />} />
 
                     <Route path="/" element={<PlatformLayout />}>
