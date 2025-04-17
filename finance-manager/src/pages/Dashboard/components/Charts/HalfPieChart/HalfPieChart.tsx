@@ -97,7 +97,7 @@ export default function HalfPieChart({ type = "income" }: Props) {
                         zIndex: 1,
                     }}
                 >
-                    <Textfit className="chart-text" min={24} mode="single">
+                    <Textfit min={28} mode="single">
                         {totalAmount}€
                     </Textfit>
                 </div>

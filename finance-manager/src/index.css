@@ -17,15 +17,7 @@ body {
 
     margin: 0;
     padding: 0;
-
-   
-    
 }
-
-
-
-    
-
 
 * {
     box-sizing: border-box;
@@ -36,40 +28,31 @@ body {
     font-family: "DM Sans", system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
-
 ::-webkit-scrollbar {
-    width: 10px; 
-  }
-  
-  
-  ::-webkit-scrollbar-track {
-    background: transparent;
-    border: 2px solid greenyellow; 
-    border-radius: 5px;
-  
-  }
-  
+    width: 10px;
+}
 
-  ::-webkit-scrollbar-thumb {
-    background: rgb(139, 195, 74); 
+::-webkit-scrollbar-track {
+    background: transparent;
+    border: 2px solid greenyellow;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(139, 195, 74);
     border-radius: 5px;
     border: 2px solid greenyellow;
-  }
-  
+}
 
-  ::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background: greenyellow;
-  }
-  
-  
-  * {
+}
+
+* {
     scrollbar-width: thin;
     scrollbar-color: rgb(43, 81, 1) transparent;
+}
 
-   
-  }
-  
-
-  *::-moz-scrollbar-thumb:hover {
+*::-moz-scrollbar-thumb:hover {
     background: greenyellow;
-  }
+}
