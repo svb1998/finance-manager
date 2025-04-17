@@ -1,10 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
-import "./Sidebar.css";
+import { Bolt, LayoutDashboard, LogOut, Users } from "lucide-react";
 import { useEffect, useState } from "react";
-import { ArrowLeftRight, Bolt, LayoutDashboard, Users } from "lucide-react";
-import { setActivePage } from "../../../redux/states";
-import Item from "./components/Item/Item";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { setActivePage, toggleSidebar } from "../../../redux/states";
+import { removeLocalStorage } from "../../../utilities/localStorage.utility";
+import Dialog from "../Dialog/Dialog";
+import Item from "./components/Item/Item";
+import "./Sidebar.css";
+import { motion } from "motion/react";
 
 interface Props {
     className?: string;
@@ -31,39 +34,90 @@ export default function Sidebar({ className = "", id }: Props) {
         sidebarStatus.isOpen ? "sidebar-expanded" : "sidebar-collapsed"
     );
 
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+
     useEffect(() => {
         setsidebarClassname(
             sidebarStatus.isOpen ? "sidebar-expanded" : "sidebar-collapsed"
         );
     }, [sidebarStatus]);
 
+    const navigateFromSidebar = (route: string) => {
+        const currentWidth = window.innerWidth;
+
+        navigate(route);
+        if (currentWidth <= 768) {
+            dispatch(toggleSidebar());
+        }
+    };
+
     return (
-        <aside
-            className={`${className}  sidebar-container ${sidebarClassname}`}
-            id={`${id}`}
-        >
-            <ul className="sidebar-list items-group">
-                <Item
-                    pageTitle="Dashboard"
-                    isActive={activePage == listIndex.dashboard}
-                    onClick={() => navigate(listIndex.dashboard)}
-                    icon={LayoutDashboard}
-                />
-                <Item
-                    pageTitle="Grupos"
-                    isActive={activePage == listIndex.groups}
-                    onClick={() => navigate(listIndex.groups)}
-                    icon={Users}
-                />
-            </ul>
-            <ul className="sidebar-list ">
-                <Item
-                    pageTitle="Configuración"
-                    isActive={activePage == listIndex.settings}
-                    onClick={() => navigate(listIndex.settings)}
-                    icon={Bolt}
-                />
-            </ul>
-        </aside>
+        <>
+            <aside
+                className={`${className}  sidebar-container ${sidebarClassname}`}
+                id={`${id}`}
+            >
+                {sidebarStatus.isOpen && (
+                    <motion.div
+                        transition={{
+                            delay: 0.15,
+                        }}
+                        animate={{
+                            opacity: [0, 1],
+                        }}
+                        className="sidebar-overlay"
+                        onClick={() => dispatch(toggleSidebar())}
+                    ></motion.div>
+                )}
+                <ul className="sidebar-list items-group">
+                    <Item
+                        pageTitle="Dashboard"
+                        isActive={activePage == listIndex.dashboard}
+                        onClick={() => navigateFromSidebar(listIndex.dashboard)}
+                        icon={LayoutDashboard}
+                    />
+                    <Item
+                        pageTitle="Grupos"
+                        isActive={activePage == listIndex.groups}
+                        onClick={() => navigateFromSidebar(listIndex.groups)}
+                        icon={Users}
+                    />
+                </ul>
+                <ul className="sidebar-list ">
+                    <Item
+                        pageTitle="Configuración"
+                        isActive={activePage == listIndex.settings}
+                        onClick={() => navigateFromSidebar(listIndex.settings)}
+                        icon={Bolt}
+                    />
+                    <Item
+                        pageTitle="Salir"
+                        isActive={false}
+                        onClick={() => {
+                            setIsDialogOpen(true);
+                        }}
+                        icon={LogOut}
+                    />
+                </ul>
+                {isDialogOpen && (
+                    <Dialog
+                        onOverlayClose
+                        onClose={() => {
+                            setIsDialogOpen(false);
+                        }}
+                        title="Cerrar sesión"
+                        subtitle="¿Estás seguro que quieres cerrar sesión?"
+                        message=""
+                        cancelButton="Cancelar"
+                        actionButton="Salir"
+                        mainAction={() => {
+                            removeLocalStorage("fm_tk");
+                            navigate("/login");
+                            dispatch(setActivePage("/"));
+                        }}
+                    />
+                )}
+            </aside>
+        </>
     );
 }

@@ -1,4 +1,4 @@
-.sidebar-item{
+.sidebar-item {
     position: relative;
     display: flex;
     align-items: center;
@@ -7,23 +7,23 @@
     cursor: pointer;
     color: #c5ded4;
     transition: color 0.25s ease-in-out;
+    font-size: 0.9rem;
+    /* width: 100%; */
 
-    &:hover{
+    &:hover {
         color: #bfe6a4;
     }
 }
 
-.sidebar-item-title{
+.sidebar-item-title {
     color: currentColor;
     position: relative;
-    
 }
 
-.sidebar-item-title-active{
+.sidebar-item-title-active {
     color: greenyellow;
     font-weight: 600;
     transition: color 0.25s ease-in-out;
-    
 }
 
 .sidebar-icon {
@@ -31,18 +31,14 @@
     stroke-width: 1.5;
     stroke: currentColor;
 
-
-     &:hover{
+    &:hover {
         filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
-
-     }
+    }
 }
-
-
 
 .sidebar-icon-active {
     stroke: greenyellow;
-    stroke-width: 2.2;    
+    stroke-width: 2.2;
 }
 
 .sidebar-item-title,
