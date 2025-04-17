@@ -1,9 +1,12 @@
 import "./App.css";
-import Logo from "/FM-logo.svg";
+import Logo from "./assets/logo.svg";
 
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
+
 import { lazy, Suspense } from "react";
 import { motion } from "motion/react";
+
+import ProtectedRoutes from "./routes/ProtectedRoutes";
 
 const PlatformLayout = lazy(
     () => import("./layouts/PlatformLayout/PlatformLayout")
@@ -11,6 +14,7 @@ const PlatformLayout = lazy(
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
 const Settings = lazy(() => import("./pages/Settings/Settings"));
 const Groups = lazy(() => import("./pages/Groups/Groups"));
+const Login = lazy(() => import("./pages/Login/Login"));
 
 function App() {
     const Fallback = () => (
@@ -54,25 +58,19 @@ function App() {
         <BrowserRouter>
             <Suspense fallback={<Fallback />}>
                 <Routes>
-                    //TODO: Use when Login is implemented
-                    {/* <Route path="/" element={<PlatformLayout />}>
-                    <Route index path="dashboard" element={<Dashboard />} />
-                    <Route path="groups" element={<Settings />} />
-                    <Route path="settings" element={<Settings />} />
-                    <Route
-                        path="*"
-                        element={<Navigate replace to="/dashboard" />}
-                    />
-                </Route> */}
-                </Routes>
-
-                <Routes>
+                    <Route path="/login" element={<Login />} />
                     <Route path="/" element={<Navigate to="/dashboard" />} />
 
-                    <Route path="/" element={<PlatformLayout />}>
-                        <Route index path="dashboard" element={<Dashboard />} />
-                        <Route path="groups" element={<Groups />} />
-                        <Route path="settings" element={<Settings />} />
+                    <Route element={<ProtectedRoutes />}>
+                        <Route element={<PlatformLayout />}>
+                            <Route
+                                index
+                                path="dashboard"
+                                element={<Dashboard />}
+                            />
+                            <Route path="groups" element={<Groups />} />
+                            <Route path="settings" element={<Settings />} />
+                        </Route>
                     </Route>
 
                     <Route
