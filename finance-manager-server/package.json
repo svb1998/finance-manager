@@ -5,7 +5,8 @@
         "name": "Steven V."
     },
     "scripts": {
-        "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
+        "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+        "build": "tsc"
     },
     "dependencies": {
         "@supabase/supabase-js": "^2.49.4",
