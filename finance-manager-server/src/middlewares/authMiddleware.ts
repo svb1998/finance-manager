@@ -15,7 +15,8 @@ export const authenticateToken = (
     const token = authHeader && authHeader.split(" ")[1]; // formato "Bearer <token>"
 
     if (!token) {
-        res.status(401).json({ error: "Token no proporcionado" });
+        res.status(401).json({ error: "UNAUTHORIZED" });
+        return;
     }
 
     try {
@@ -23,6 +24,6 @@ export const authenticateToken = (
         req.user = decoded; // añadimos el usuario al request
         next();
     } catch (error) {
-        res.status(403).json({ error: "Token inválido o expirado" });
+        res.status(403).json({ error: "FORBIDDEN" });
     }
 };

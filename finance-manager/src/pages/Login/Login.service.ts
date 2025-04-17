@@ -1,4 +1,5 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
+import axiosPublic from "../../interceptors/PublicAxios.interceptor";
 
 interface LoginData {
     email: string;
@@ -7,13 +8,10 @@ interface LoginData {
 
 export const login = async (formData: LoginData) => {
     try {
-        const response = await axios.post(
-            `${import.meta.env.VITE_API_URL}/api/auth/login`,
-            {
-                email: formData.email,
-                password: formData.password,
-            }
-        );
+        const response = await axiosPublic.post(`/auth/login`, {
+            email: formData.email,
+            password: formData.password,
+        });
         return response.data;
     } catch (error) {
         const axiosError = error as AxiosError;

@@ -4,14 +4,12 @@ import { supabase } from "../config/supabaseClient";
 import jwt from "jsonwebtoken";
 
 // Función para registrar un nuevo usuario
-export const registerUser = async (
-    req: Request,
-    res: Response
-): Promise<void> => {
+export const registerUser = async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
         res.status(400).json({ error: "Email y contraseña requeridos" });
+        return;
     }
 
     try {
@@ -24,6 +22,7 @@ export const registerUser = async (
 
         if (existingUser) {
             res.status(409).json({ error: "El usuario ya existe" });
+            return;
         }
 
         // Encriptar la contraseña
@@ -41,11 +40,14 @@ export const registerUser = async (
             message: "Usuario creado exitosamente",
             user: data?.[0],
         });
+
+        return;
     } catch (err) {
         res.status(500).json({
             error: "Error al registrar usuario",
             details: err,
         });
+        return;
     }
 };
 
@@ -53,11 +55,12 @@ export const registerUser = async (
 export const loginUser = async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
-    if (!email || !password) {
-        res.status(400).json({ error: "Email y contraseña requeridos" });
-    }
-
     try {
+        if (!email || !password) {
+            res.status(400).json({ error: "Email y contraseña requeridos" });
+            return;
+        }
+
         const { data: user, error } = await supabase
             .from("users")
             .select("*")
@@ -66,12 +69,14 @@ export const loginUser = async (req: Request, res: Response) => {
 
         if (error || !user) {
             res.status(401).json({ error: "Usuario no encontrado" });
+            return;
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
             res.status(401).json({ error: "Contraseña incorrecta" });
+            return;
         }
 
         const token = jwt.sign(
@@ -82,7 +87,7 @@ export const loginUser = async (req: Request, res: Response) => {
             },
             process.env.JWT_SECRET as string,
             {
-                expiresIn: "1h",
+                expiresIn: "1d",
             }
         );
 
@@ -95,10 +100,12 @@ export const loginUser = async (req: Request, res: Response) => {
                 name: user.name,
             },
         });
+        return;
     } catch (err) {
         res.status(500).json({
             error: "Error al iniciar sesión",
             details: err,
         });
+        return;
     }
 };

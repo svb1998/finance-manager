@@ -1,7 +1,10 @@
 {
     "name": "finance-manager",
     "private": true,
-    "version": "0.2.0",
+    "version": "0.2.1",
+    "author": {
+        "name": "Steven V."
+    },
     "type": "module",
     "scripts": {
         "dev": "vite",

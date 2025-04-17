@@ -4,6 +4,8 @@ import "./MainInput.css";
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
     beforeChildren?: ReactNode;
     afterChildren?: ReactNode;
+    startIcon?: ReactNode;
+    endIcon?: ReactNode;
     name?: string;
     type: string;
     placeholder?: string;
@@ -14,6 +16,8 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 const MainInput = React.forwardRef<HTMLInputElement, Props>(
     (
         {
+            startIcon = null,
+            endIcon = null,
             beforeChildren = null,
             afterChildren = null,
             name,
@@ -26,16 +30,33 @@ const MainInput = React.forwardRef<HTMLInputElement, Props>(
         ref: ForwardedRef<HTMLInputElement>
     ) => {
         return (
-            <div className="main-input-container">
+            <div className="">
                 {beforeChildren}
-                <input
-                    {...props}
-                    ref={ref} // Ahora el ref se pasa correctamente
-                    className={`main-input  ${error && "main-input-error"} `}
-                    type={type}
-                    name={name}
-                    placeholder={placeholder}
-                />
+                <div
+                    className="main-input-container"
+                    style={{
+                        position: "relative",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                    }}
+                >
+                    {startIcon}
+                    <input
+                        {...props}
+                        ref={ref} // Ahora el ref se pasa correctamente
+                        className={`main-input  ${
+                            error && "main-input-error"
+                        } `}
+                        type={type}
+                        name={name}
+                        placeholder={placeholder}
+                    ></input>
+                    {endIcon && (
+                        <div className="main-input-end-icon">{endIcon}</div>
+                    )}
+                </div>
+
                 {error && (
                     <div className="main-input-error-message">
                         {errorMessage}
