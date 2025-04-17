@@ -5,6 +5,10 @@ import { getUser } from "../controllers/user.controller";
 
 const router = Router();
 
+router.get("/", (req, res) => {
+    res.send("Finance Manage API");
+});
+
 // Endpoint para registrar un nuevo usuario
 router.post("/auth/register", registerUser);
 
