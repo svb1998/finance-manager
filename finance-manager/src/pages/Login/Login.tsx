@@ -43,85 +43,97 @@ export default function Login() {
     };
 
     return (
-        <div className="login-container">
-            <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: [-10, 5, 0] }}
-                transition={{
-                    y: {
-                        duration: 1,
-                        ease: "easeInOut",
-                    },
-                }}
-            >
-                <img className="login-logo" src={Logo} alt="" />
-            </motion.div>
-            <motion.form
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: [10, -5, 0] }}
-                transition={{
-                    y: {
-                        duration: 1,
-                        ease: "easeInOut",
-                    },
-                }}
-                className="login-form-container"
-                onSubmit={(e) => onSubmit(e, formData)}
-            >
-                <MainInput
-                    type="email"
-                    placeholder="Email"
-                    name="email"
-                    required
-                    onChange={(e) => handleFormField(e)}
-                />
+        <>
+            <div className="login-container">
+                <motion.div
+                    style={{ zIndex: 1 }}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: [-10, 5, 0] }}
+                    transition={{
+                        y: {
+                            duration: 1,
+                            ease: "easeInOut",
+                        },
+                    }}
+                >
+                    <img className="login-logo" src={Logo} alt="" />
+                </motion.div>
 
-                <MainInput
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Contraseña"
-                    name="password"
-                    required
-                    onChange={(e) => handleFormField(e)}
-                    endIcon={
-                        <div
-                            style={{ cursor: "pointer", color: "currentColor" }}
+                <motion.form
+                    style={{ zIndex: 1 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: [10, -5, 0] }}
+                    transition={{
+                        y: {
+                            duration: 1,
+                            ease: "easeInOut",
+                        },
+                    }}
+                    className="login-form-container"
+                    onSubmit={(e) => onSubmit(e, formData)}
+                >
+                    <MainInput
+                        type="email"
+                        placeholder="Email"
+                        name="email"
+                        required
+                        onChange={(e) => handleFormField(e)}
+                    />
+
+                    <MainInput
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Contraseña"
+                        name="password"
+                        required
+                        onChange={(e) => handleFormField(e)}
+                        endIcon={
+                            <div
+                                style={{
+                                    cursor: "pointer",
+                                    color: "currentColor",
+                                }}
+                            >
+                                {showPassword ? (
+                                    <Eye
+                                        onClick={() =>
+                                            handlePasswordVisibility()
+                                        }
+                                        style={{ color: "currentColor" }}
+                                        className="login-eye"
+                                    />
+                                ) : (
+                                    <EyeOff
+                                        onClick={() =>
+                                            handlePasswordVisibility()
+                                        }
+                                        style={{ color: "currentColor" }}
+                                        className="login-eye"
+                                    />
+                                )}
+                            </div>
+                        }
+                    />
+
+                    <MainButton type="submit">Iniciar sesión</MainButton>
+                </motion.form>
+
+                <div className="login-error-wrapper">
+                    {errorMessage && (
+                        <motion.div
+                            key={animationKey}
+                            animate={{ x: [0, 1, -1] }}
+                            transition={{
+                                duration: 0.2,
+                                repeat: 3,
+                                repeatType: "loop",
+                            }}
+                            className="login-error-container"
                         >
-                            {showPassword ? (
-                                <Eye
-                                    onClick={() => handlePasswordVisibility()}
-                                    style={{ color: "currentColor" }}
-                                    className="login-eye"
-                                />
-                            ) : (
-                                <EyeOff
-                                    onClick={() => handlePasswordVisibility()}
-                                    style={{ color: "currentColor" }}
-                                    className="login-eye"
-                                />
-                            )}
-                        </div>
-                    }
-                />
-
-                <MainButton type="submit">Iniciar sesión</MainButton>
-            </motion.form>
-
-            <div className="login-error-wrapper">
-                {errorMessage && (
-                    <motion.div
-                        key={animationKey}
-                        animate={{ x: [0, 1, -1] }}
-                        transition={{
-                            duration: 0.2,
-                            repeat: 3,
-                            repeatType: "loop",
-                        }}
-                        className="login-error-container"
-                    >
-                        <span>{errorMessage}</span>
-                    </motion.div>
-                )}
+                            <span>{errorMessage}</span>
+                        </motion.div>
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     );
 }

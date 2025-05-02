@@ -1,0 +1,114 @@
+.group-card-container {
+    position: relative;
+    background: radial-gradient(circle, #001b16, #030a07);
+
+    box-shadow: 0 0 4px #006352;
+    border-radius: 14px;
+    padding: 16px;
+    padding-inline: 24px;
+
+    display: grid;
+    width: 100%;
+
+    grid-template-columns: 8fr auto auto;
+    grid-template-rows: auto auto auto;
+
+    grid-template-areas:
+        "info additional-info "
+        "bars actions ";
+
+    transition: all 0.12s ease-in-out;
+
+    &:hover {
+        box-shadow: 0 0 6px rgb(47, 255, 203);
+        cursor: pointer;
+    }
+}
+
+.group-card-info {
+    grid-area: info;
+    margin-bottom: 8px;
+}
+
+.group-card-title {
+    font-size: 20px;
+}
+
+.group-card-description {
+    font-size: 14px;
+}
+
+.group-card-bars {
+    grid-area: bars;
+}
+
+.group-card-bar {
+    display: flex;
+    align-items: center;
+    height: 8px;
+    width: 250px;
+    background-color: rgb(53, 53, 53);
+    margin-block: 8px;
+
+    padding: 8px;
+    font-weight: 500;
+    font-size: 10px;
+
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.group-card-incomes-bar {
+    background-color: #00a393;
+}
+
+.group-card-expenses-bar {
+    background-color: #a50042;
+}
+
+.group-card-additional-info {
+    grid-area: additional-info;
+    display: flex;
+    align-items: start;
+    font-size: 16px;
+    color: #9fff6b;
+    margin-left: 12px;
+}
+
+.group-card-additional-info-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+    padding-left: 28px;
+}
+
+.group-card-actions {
+    grid-area: actions;
+
+    display: flex;
+
+    align-items: end;
+    justify-content: center;
+    padding-left: 28px;
+}
+
+.group-card-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background-color: transparent;
+    border-radius: 35%;
+    color: white;
+    transition: all 0.15s ease-in-out;
+
+    &:hover {
+        cursor: pointer;
+        background-color: hsla(355, 66%, 17%, 0.548);
+        color: hsl(355, 100%, 59%);
+    }
+}
