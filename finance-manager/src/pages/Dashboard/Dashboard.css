@@ -14,16 +14,17 @@
         "incomes-details incomes-details incomes-details expenses-details expenses-details expenses-details"
         "footer footer footer footer footer footer";
 
-    padding-right: 16px;
+    padding-right: 24px;
+    padding-left: 16px;
     padding-block: 8px;
 }
 
 div > section:not(.footer-container) {
     background: radial-gradient(circle, #001b16, #030a07);
-    box-shadow: 0 0 6px #0e2701;
 
     border-radius: 16px;
     padding: 16px;
+    box-shadow: 0 0 4px #006352;
 }
 
 .user-container {

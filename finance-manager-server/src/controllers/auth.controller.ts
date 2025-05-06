@@ -15,7 +15,7 @@ export const registerUser = async (req: Request, res: Response) => {
     try {
         // Verificar si el usuario ya existe
         const { data: existingUser } = await supabase
-            .from("users")
+            .from("Users")
             .select("email")
             .eq("email", email)
             .single();
@@ -30,7 +30,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
         // Insertar el nuevo usuario en la base de datos
         const { data, error } = await supabase
-            .from("users")
+            .from("Users")
             .insert({ email, password: hashedPassword })
             .select();
 
@@ -62,7 +62,7 @@ export const loginUser = async (req: Request, res: Response) => {
         }
 
         const { data: user, error } = await supabase
-            .from("users")
+            .from("Users")
             .select("*")
             .eq("email", email)
             .single();
