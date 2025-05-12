@@ -1,15 +1,12 @@
 import axios from "axios";
-import {
-    getLocalStorage,
-    removeLocalStorage,
-} from "../utilities/localStorage.utility";
+import { removeLocalStorage } from "../utilities/localStorage.utility";
 
 const axiosPrivate = axios.create({
     baseURL: import.meta.env.VITE_API_URL + "/api",
 });
 
 axiosPrivate.interceptors.request.use((config) => {
-    const token = getLocalStorage("fm_tk");
+    const token = localStorage.getItem("fm_tk");
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }

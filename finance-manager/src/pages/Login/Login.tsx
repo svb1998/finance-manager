@@ -10,9 +10,12 @@ import { login } from "./Login.service";
 
 import { Eye, EyeOff } from "lucide-react";
 import { motion } from "motion/react";
-import { setLocalStorage } from "../../utilities/localStorage.utility";
+import { useDispatch } from "react-redux";
+import { ProfileData } from "../../models/platform/profileData.model";
+import { setProfile } from "../../redux/states/profile";
 
 export default function Login() {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [formData, setFormData] = useState({});
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -32,8 +35,16 @@ export default function Login() {
         e.preventDefault();
         try {
             const response = await login(data);
-            // console.log(response);
-            setLocalStorage("fm_tk", response.token);
+
+            const profileData: ProfileData = {
+                fm_u: response.profile.profileId,
+                fm_n: response.profile.name,
+            };
+
+            dispatch(setProfile(profileData));
+
+            localStorage.setItem("fm_tk", response.token);
+
             navigate("/dashboard");
         } catch (error) {
             const err = error as Error;

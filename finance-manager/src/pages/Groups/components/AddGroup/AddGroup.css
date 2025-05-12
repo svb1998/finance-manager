@@ -1,0 +1,5 @@
+.form-group-buttons-container {
+    display: flex;
+    justify-content: end;
+    gap: 8px;
+}
