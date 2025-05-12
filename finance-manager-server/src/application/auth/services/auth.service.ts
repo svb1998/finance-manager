@@ -1,5 +1,5 @@
 import { IAuthRepository } from "../../../domain/auth/repositories/IAuthRepository";
-import { RegisterDto } from "../dto/RegisterDto";
+import { RegisterDto } from "../dto/Register.dto";
 
 export class AuthService {
     constructor(public readonly authRepository: IAuthRepository) {}

@@ -2,9 +2,9 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import { supabase } from "../../../config/supabaseClient";
 import jwt from "jsonwebtoken";
-import { AuthService } from "../../../application/auth/services/AuthService";
-import { RegisterDto } from "../../../application/auth/dto/RegisterDto";
-import { LoginDto } from "../../../application/auth/dto/LoginDto";
+import { AuthService } from "../../../application/auth/services/auth.service";
+import { RegisterDto } from "../../../application/auth/dto/Register.dto";
+import { LoginDto } from "../../../application/auth/dto/Login.dto";
 
 export class AuthController {
     constructor(public readonly authService: AuthService) {}

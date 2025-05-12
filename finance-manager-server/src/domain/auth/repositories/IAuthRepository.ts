@@ -1,7 +1,7 @@
-import { LoginDto } from "../../../application/auth/dto/LoginDto";
-import { RegisterDto } from "../../../application/auth/dto/RegisterDto";
-import { ResLoginDto } from "../../../application/auth/dto/ResLoginDto";
-import { ResRegisterDto } from "../../../application/auth/dto/ResRegisterDto";
+import { LoginDto } from "../../../application/auth/dto/Login.dto";
+import { RegisterDto } from "../../../application/auth/dto/Register.dto";
+import { ResLoginDto } from "../../../application/auth/dto/ResLogin.dto";
+import { ResRegisterDto } from "../../../application/auth/dto/ResRegister.dto";
 
 export interface IAuthRepository {
     register(dto: RegisterDto): Promise<ResRegisterDto>;
