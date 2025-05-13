@@ -1,5 +1,5 @@
 interface AddGroupDto {
     name: string;
     description?: string;
-    createdBy: string;
+    created_by: string;
 }

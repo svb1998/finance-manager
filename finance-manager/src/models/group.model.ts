@@ -1,7 +1,7 @@
 export interface Group {
-    id: number;
+    groupId?: string;
     name: string;
     description?: string;
-    createdAt?: Date;
-    createdBy?: string;
+    created_at?: Date;
+    created_by?: string;
 }

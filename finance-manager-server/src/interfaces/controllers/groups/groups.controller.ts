@@ -12,7 +12,7 @@ export class GroupsController {
 
             const newMember: AddMemberToGroupDto = {
                 groupId: group[0].groupId,
-                profileId: group[0].createdBy,
+                profileId: group[0].created_by,
                 role: "admin",
             };
 
@@ -30,7 +30,33 @@ export class GroupsController {
         }
     };
 
-    getGroups = async (req: Request, res: Response) => {};
+    getGroups = async (req: Request, res: Response) => {
+        const profileId = req.params.profileId;
+        try {
+            const groups = await this.groupsService.getGroups(profileId);
+            res.status(200).json(groups);
+            return;
+        } catch (error) {
+            res.status(400).json({
+                error: (error as Error).message,
+                details: error,
+            });
+            return;
+        }
+    };
 
-    addMemberToGroup = async (req: Request, res: Response) => {};
+    addMemberToGroup = async (req: Request, res: Response) => {
+        const request = req.body;
+        try {
+            const result = await this.groupsService.addMemberToGroup(request);
+            res.status(201).json(result);
+            return;
+        } catch (error) {
+            res.status(400).json({
+                error: (error as Error).message,
+                details: error,
+            });
+            return;
+        }
+    };
 }

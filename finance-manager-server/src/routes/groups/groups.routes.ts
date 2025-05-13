@@ -12,16 +12,29 @@ const groupsController = new GroupsController(groupsService);
 
 /**
  * @openapi
- * /groups:
+ * /groups/{profileId}:
  *   get:
- *     summary: Obtener todos los grupos
+ *     summary: Obtener todos los grupos asociados a un perfil
  *     tags:
  *       - Groups
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: profileId
+ *         required: true
+ *         schema:
+ *           type: string
+ *           description: ID del perfil
  *     responses:
  *       200:
  *         description: Lista de grupos
  */
-groupsRouter.get("/", authenticateToken, groupsController.getGroups);
+groupsRouter.get(
+    "/{:profileId}",
+    authenticateToken,
+    groupsController.getGroups
+);
 
 /**
  * @openapi
@@ -30,12 +43,23 @@ groupsRouter.get("/", authenticateToken, groupsController.getGroups);
  *     summary: Crear un nuevo grupo
  *     tags:
  *       - Groups
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 name:
+ *                   type: string
+ *                 description:
+ *                   type: string
+ *                 created_by:
+ *                   type: string
  *     responses:
- *       200:
+ *       201:
  *         description: Grupo creado correctamente
  *       400:
  *         description: Error al crear el grupo
@@ -51,12 +75,23 @@ groupsRouter.post("/create", authenticateToken, groupsController.createGroup);
  *     summary: Agregar un nuevo miembro al grupo
  *     tags:
  *       - Groups
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 groupId:
+ *                   type: string
+ *                 profileId:
+ *                   type: string
+ *                 role:
+ *                   type: string
  *     responses:
- *       200:
+ *       201:
  *         description: Miembro agregado correctamente
  *       400:
  *         description: Error al agregar el miembro

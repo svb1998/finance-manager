@@ -29,12 +29,6 @@ export default function AddGroup({ onCloseModal }: Props) {
     });
 
     const onSubmit = (formData: Group) => {
-        console.log(formData);
-
-        // formData.id = shortUUID.generate();
-        // formData.date = new Date().toISOString();
-        // dispatch(addTransaction(formData));
-
         const profileUUID = profile?.fm_u;
 
         addGroup(formData, profileUUID);
