@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Transaction } from "../models";
 
 /**
- * Custo hook to calculate balance
+ * Custom hook to calculate balance
  * @returns the current balance
  */
 const useBalance = () => {

@@ -8,6 +8,7 @@ import Dialog from "../Dialog/Dialog";
 import Item from "./components/Item/Item";
 import "./Sidebar.css";
 import { motion } from "motion/react";
+import useLogout from "../../../hooks/useLogout";
 
 interface Props {
     className?: string;
@@ -23,7 +24,7 @@ export default function Sidebar({ className = "", id }: Props) {
     };
 
     const navigate = useNavigate();
-
+    const logout = useLogout();
     const dispatch = useDispatch();
 
     const sidebarStatus = useSelector((store) => store.sidebar);
@@ -110,11 +111,7 @@ export default function Sidebar({ className = "", id }: Props) {
                         message=""
                         cancelButton="Cancelar"
                         actionButton="Salir"
-                        mainAction={() => {
-                            removeLocalStorage("fm_tk");
-                            navigate("/login");
-                            dispatch(setActivePage("/"));
-                        }}
+                        mainAction={() => logout()}
                     />
                 )}
             </aside>

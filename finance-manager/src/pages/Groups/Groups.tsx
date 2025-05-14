@@ -44,6 +44,7 @@ export default function Groups() {
     };
 
     const getGroupsLocal = async (currentProfileId: string) => {
+        console.log("CURRENT PROFILE ID", currentProfileId);
         const result = await getGroups(currentProfileId);
         console.log(result);
         return result;
