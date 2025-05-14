@@ -1,3 +1,13 @@
+.form-group-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    min-width: 270px;
+}
+
 .form-group-buttons-container {
     display: flex;
     justify-content: end;

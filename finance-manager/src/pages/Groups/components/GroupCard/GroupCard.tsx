@@ -1,10 +1,4 @@
-import {
-    ChevronDown,
-    CircleUserRound,
-    DoorOpen,
-    ShieldX,
-    UsersRound,
-} from "lucide-react";
+import { CircleUserRound, DoorOpen, Shield } from "lucide-react";
 import "./GroupCard.css";
 
 interface GroupCardProps {
@@ -20,7 +14,6 @@ export default function GroupCard({
 }: GroupCardProps) {
     return (
         <div className="group-card-container">
-            {/* <div className="franja-abs"></div> */}
             <div className="group-card-info">
                 <h1 className="group-card-title">{name}</h1>
                 <p className="group-card-description">{description}</p>
@@ -34,6 +27,11 @@ export default function GroupCard({
                 </div>
             </div>
             <div className="group-card-additional-info">
+                <Shield
+                    fill="currentColor"
+                    className="group-card-is-admin"
+                    aria-details="Admin"
+                />
                 <div className="group-card-additional-info-wrapper">
                     <CircleUserRound
                         size={20}
