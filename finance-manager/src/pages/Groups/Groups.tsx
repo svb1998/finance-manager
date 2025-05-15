@@ -10,7 +10,7 @@ import { Group } from "../../models/group.model";
 import AddGroup from "./components/AddGroup/AddGroup";
 import GroupCard from "./components/GroupCard/GroupCard";
 import "./Groups.css";
-import { getGroups } from "./services/groups.service";
+import { getGroups } from "./services/Groups.service";
 
 export default function Groups() {
     useSetActivePage();
