@@ -36,14 +36,12 @@ export default function Login() {
         try {
             const response = await login(data);
 
-            console.log("RESPUESTA", response);
+            // console.log("RESPUESTA", response);
 
             const profileData: ProfileData = {
                 fm_u: response.profile.profileId,
                 fm_n: response.profile.name,
             };
-
-            console.log("PROFILE DATA", profileData);
 
             dispatch(setProfile(profileData));
 

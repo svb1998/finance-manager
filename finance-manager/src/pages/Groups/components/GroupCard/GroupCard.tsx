@@ -1,16 +1,21 @@
 import { CircleUserRound, DoorOpen, Shield } from "lucide-react";
 import "./GroupCard.css";
+import Tooltip from "../../../../components/Tooltip/Tooltip";
 
 interface GroupCardProps {
     groupId?: string;
     name: string;
     description?: string;
+    memberCount?: number;
+    role?: string;
 }
 
 export default function GroupCard({
     groupId,
     name,
     description,
+    memberCount,
+    role,
 }: GroupCardProps) {
     return (
         <div className="group-card-container">
@@ -27,18 +32,28 @@ export default function GroupCard({
                 </div>
             </div>
             <div className="group-card-additional-info">
-                <Shield
-                    fill="currentColor"
-                    className="group-card-is-admin"
-                    aria-details="Admin"
-                />
+                <div
+                    style={
+                        role === "admin"
+                            ? { visibility: "initial" }
+                            : { visibility: "hidden" }
+                    }
+                >
+                    <Tooltip content="Eres admin de este grupo">
+                        <Shield
+                            fill="currentColor"
+                            className="group-card-is-admin"
+                            aria-details="Admin"
+                        />
+                    </Tooltip>
+                </div>
                 <div className="group-card-additional-info-wrapper">
                     <CircleUserRound
                         size={20}
                         fontWeight={"bold"}
                         color="currentColor"
                     />
-                    <span>6</span>
+                    <span>{memberCount}</span>
                 </div>
             </div>
             <div className="group-card-actions">

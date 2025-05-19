@@ -1,4 +1,5 @@
 import { AddMemberToGroupDto } from "../../application/groups/dto/addMemberToGroup.dto";
+import { RelatedGroupDetailsDto } from "../../application/groups/dto/RelatedGroupDetails.dto";
 import { supabase } from "../../config/supabaseClient";
 import { Groups } from "../../domain/groups/entities/Groups.entity";
 import { IGroupsRepository } from "../../domain/groups/repositories/IGroupsRepository";
@@ -19,24 +20,22 @@ export class SupabaseGroupsRepository implements IGroupsRepository {
         return data;
     }
 
-    async getGroups(memberUUID: string) {
+    async getGroups(memberUUID: string): Promise<RelatedGroupDetailsDto[]> {
         // const { data, error } = await supabase
         //     .from("Group_Members")
-        //     .select("*")
-        //     .eq("profileId", memberUUID)
+        //     .select(`Groups(*, Group_Members(count))`)
+        //     .eq("profileId", memberUUID);
 
-        const { data, error } = await supabase
-            .from("Group_Members")
-            .select("Groups(*)")
-            .eq("profileId", memberUUID);
-
-        const groups = data?.map((group) => group.Groups);
+        const { data, error } = await supabase.rpc(
+            "get_user_groups_with_member_count_and_role_json",
+            { p_memberuuid: memberUUID }
+        );
 
         if (error) {
             throw new Error(error.message);
         }
 
-        return groups;
+        return data;
     }
 
     async addMemberToGroup({

@@ -28,8 +28,8 @@ export const addGroup = async (formData: Group, creatorUUID: string) => {
 
 export const getGroups = async (profileUUID: string) => {
     try {
-        console.log("PROFILE UUID", profileUUID);
         const response = await axiosPrivate.get(`/groups/${profileUUID}`);
+
         return response.data;
     } catch (error) {
         const axiosError = error as AxiosError;
