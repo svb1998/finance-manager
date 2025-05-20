@@ -10,4 +10,7 @@ export default defineConfig({
             utilities: path.resolve(__dirname, "src/utilities"),
         },
     },
+    server: {
+        port: 5183,
+    },
 });

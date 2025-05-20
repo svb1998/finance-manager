@@ -12,6 +12,11 @@ import GroupCard from "./components/GroupCard/GroupCard";
 import "./Groups.css";
 import { getGroups } from "./services/Groups.service";
 
+export interface RelatedGroupWithDetails extends Group {
+    role: string;
+    memberCount: number;
+}
+
 export default function Groups() {
     useSetActivePage();
 
@@ -21,7 +26,7 @@ export default function Groups() {
         isLoading,
         isError,
         data: groups = [],
-    } = useQuery<Group[]>({
+    } = useQuery<RelatedGroupWithDetails[]>({
         queryKey: ["relatedGroups"],
         queryFn: () => getGroupsLocal(currentProfileId),
     });
@@ -44,9 +49,9 @@ export default function Groups() {
     };
 
     const getGroupsLocal = async (currentProfileId: string) => {
-        console.log("CURRENT PROFILE ID", currentProfileId);
+        // console.log("CURRENT PROFILE ID", currentProfileId);
         const result = await getGroups(currentProfileId);
-        console.log(result);
+        //console.log(result);
         return result;
     };
 
@@ -85,12 +90,14 @@ export default function Groups() {
                 )}
                 {groups.length > 0 &&
                     !isLoading &&
-                    groups.map((group: Group) => (
+                    groups.map((group: RelatedGroupWithDetails) => (
                         <GroupCard
                             key={group.groupId}
                             name={group.name}
                             description={group.description}
                             groupId={group.groupId}
+                            memberCount={group.memberCount}
+                            role={group.role}
                         />
                     ))}
             </div>

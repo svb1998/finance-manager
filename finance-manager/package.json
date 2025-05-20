@@ -1,14 +1,14 @@
 {
     "name": "finance-manager",
     "private": true,
-    "version": "0.2.3",
+    "version": "0.2.4",
     "author": {
         "name": "Steven V."
     },
     "type": "module",
     "scripts": {
-        "dev": "vite",
-        "build": "tsc && vite build",
+        "dev": "vite --mode dev",
+        "build": "tsc && vite build --mode prod",
         "lint": "eslint .",
         "preview": "vite preview",
         "test": "vitest"
