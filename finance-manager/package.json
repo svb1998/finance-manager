@@ -7,8 +7,8 @@
     },
     "type": "module",
     "scripts": {
-        "dev": "vite",
-        "build": "tsc && vite build",
+        "dev": "vite --mode dev",
+        "build": "tsc && vite build --mode prod",
         "lint": "eslint .",
         "preview": "vite preview",
         "test": "vitest"
