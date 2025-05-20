@@ -1,11 +1,13 @@
 export interface Transaction {
     transactionId: string;
-    type: "income" | "expense";
+    categoryId?: string;
     senderId?: string;
     receiverId?: string;
-    amount: number;
-    description: string;
-    category: string;
+    type: string;
     txDate: Date;
+    amount: number;
+    description?: string;
     notes?: string;
+    created_at: Date;
+    groupId?: string;
 }

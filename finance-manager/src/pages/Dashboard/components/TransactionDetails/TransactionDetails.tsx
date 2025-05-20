@@ -1,23 +1,21 @@
 import { Temporal } from "@js-temporal/polyfill";
-import "./TransactionDetails.css";
 import {
     createColumnHelper,
     flexRender,
     getCoreRowModel,
     useReactTable,
 } from "@tanstack/react-table";
-import { Category, Transaction } from "../../../../models";
-import { ReactNode, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { capitalizeString } from "../../../../utilities/capitalizeString.utility";
 import { CircleX } from "lucide-react";
-import { removeTransaction } from "../../../../redux/states/transaction";
-import Dialog from "../../../../components/Layout/Dialog/Dialog";
-import Modal from "../../../../Modal";
-import OutlineButton from "../../../../components/Button/OutlineButton/OutlineButton";
-import MainButton from "../../../../components/Button/MainButton/MainButton";
-import EditTransaction from "../../../../components/Layout/Transactions/EditTransaction/EditTransaction";
 import { AnimatePresence } from "motion/react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Dialog from "../../../../components/Layout/Dialog/Dialog";
+import EditTransaction from "../../../../components/Layout/Transactions/EditTransaction/EditTransaction";
+import Modal from "../../../../Modal";
+import { Category, Transaction } from "../../../../models";
+import { removeTransaction } from "../../../../redux/states/transaction";
+import { capitalizeString } from "../../../../utilities/capitalizeString.utility";
+import "./TransactionDetails.css";
 
 const columnHelper = createColumnHelper<Transaction>();
 
@@ -28,9 +26,9 @@ interface Props {
 export default function TransactionDetails({ type }: Props) {
     const dispatch = useDispatch();
 
-    const transactions: Transaction[] = useSelector(
-        (store) => store.transaction
-    );
+    const transactions: Transaction[] = useSelector((store) => {
+        return store.transaction;
+    });
 
     const categories: Category[] = useSelector((state) => state.category);
 
@@ -68,7 +66,7 @@ export default function TransactionDetails({ type }: Props) {
     };
 
     const columns = [
-        columnHelper.accessor("date", {
+        columnHelper.accessor("txDate", {
             header: () => <span>Fecha</span>,
             cell: (info) => {
                 let formattedDate = "";
@@ -93,7 +91,7 @@ export default function TransactionDetails({ type }: Props) {
             header: () => <span>Categoría</span>,
             cell: (info) => {
                 const category = info.cell.row.original.category;
-                const capitalizedCategory = capitalizeString(category);
+                const capitalizedCategory = capitalizeString(category ?? "");
                 return (
                     <span
                         style={{
@@ -103,7 +101,7 @@ export default function TransactionDetails({ type }: Props) {
                         }}
                         className="tx-table-cell category-chip"
                     >
-                        {capitalizedCategory}
+                        {capitalizedCategory ?? "Sin categoría"}
                     </span>
                 );
             },
@@ -155,7 +153,7 @@ export default function TransactionDetails({ type }: Props) {
 
     const getTransactionsByType = (type: string) => {
         const filteredTransactions = transactions.filter(
-            (transaction) => transaction.transactionType === type
+            (transaction) => transaction.type === type
         );
 
         setData(filteredTransactions);

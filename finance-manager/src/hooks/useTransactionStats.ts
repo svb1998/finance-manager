@@ -27,7 +27,7 @@ const useTransactionStats = (type: "income" | "expense") => {
     const getTotalAmount = () => {
         let total = 0;
         transactions
-            .filter((item) => item.transactionType === type)
+            .filter((item) => item.type === type)
             .forEach((item) => {
                 total += item.amount;
             });
@@ -36,7 +36,7 @@ const useTransactionStats = (type: "income" | "expense") => {
 
     const getFilteredTransactions = () => {
         const filteredTransactions: Transaction[] = transactions.filter(
-            (item) => item.transactionType === type
+            (item) => item.type === type
         );
         setFilteredTransactions(filteredTransactions);
         // console.log(filteredTransactions);

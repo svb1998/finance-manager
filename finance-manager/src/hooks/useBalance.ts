@@ -18,7 +18,7 @@ const useBalance = () => {
     //     setBalance(
     //         transactions.reduce(
     //             (prev, curr) =>
-    //                 curr.transactionType === "income"
+    //                 curr.type === "income"
     //                     ? prev + curr.amount
     //                     : prev - curr.amount,
     //             0
@@ -34,7 +34,7 @@ const useBalance = () => {
     const balance = useMemo(() => {
         return transactions.reduce(
             (prev, curr) =>
-                curr.transactionType === "income"
+                curr.type === "income"
                     ? prev + curr.amount
                     : prev - curr.amount,
             0

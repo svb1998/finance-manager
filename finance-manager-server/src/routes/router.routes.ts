@@ -1,12 +1,9 @@
 import { Router } from "express";
-import { AuthController } from "../interfaces/controllers/auth/auth.controller";
-import { authenticateToken } from "../middlewares/authMiddleware";
 import { getUser } from "../controllers/user.controller";
-import { createGroup, getGroups } from "../controllers/groups.controller";
-import { AuthService } from "../application/auth/services/auth.service";
-import { SupabaseAuthRepository } from "../infrastructure/auth/SupabaseAuthRepository";
+import { authenticateToken } from "../middlewares/authMiddleware";
 import authRouter from "./auth/auth.routes";
 import groupsRouter from "./groups/groups.routes";
+import transactionsRouter from "./transactions/transactions.routes";
 
 const router = Router();
 
@@ -32,6 +29,8 @@ router.get("/", (req, res) => {
 router.use("/auth", authRouter);
 
 router.use("/groups", groupsRouter);
+
+router.use("/transactions", transactionsRouter);
 
 /**
  * @openapi

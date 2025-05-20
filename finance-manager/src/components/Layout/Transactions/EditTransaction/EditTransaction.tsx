@@ -48,18 +48,16 @@ export default function EditTransaction({ onCloseModal, transaction }: Props) {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <FieldLayout>
                     <BasicFieldController
-                        name="transactionType"
+                        name="type"
                         control={control}
-                        defaultValue={transaction.transactionType}
+                        defaultValue={transaction.type}
                     >
                         {(field) => (
                             <Select
                                 {...field}
                                 className="select-container"
                                 placeholder="Seleccionar tipo de transacción"
-                                aria-errormessage={
-                                    errors.transactionType?.message
-                                }
+                                aria-errormessage={errors.type?.message}
                             >
                                 <Option value="income">
                                     <div className="option-container">

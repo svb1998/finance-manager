@@ -10,9 +10,32 @@ import useSetActivePage from "../../hooks/useSetActivePage";
 import { ErrorBoundary } from "../../utilities/ErrorBoundaries";
 import useBalance from "../../hooks/useBalance";
 import axiosPrivate from "../../interceptors/PrivateAxios.interceptor";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllTransactions } from "./services/Transactions.service";
+import { useQuery } from "@tanstack/react-query";
+import { setTransactions } from "../../redux/states";
 
 export default function Dashboard() {
     useSetActivePage();
+    const dispatch = useDispatch();
+
+    const activeProfile = useSelector((state) => state.profile.fm_u);
+
+    const {
+        isLoading,
+        isError,
+        data: transactionsData = [],
+    } = useQuery<Transaction[]>({
+        queryKey: ["transactions"],
+        queryFn: () => getAllTransactionsLocal(activeProfile),
+        refetchOnWindowFocus: false,
+    });
+
+    const getAllTransactionsLocal = async (activeProfile: string) => {
+        const result = await getAllTransactions(activeProfile);
+        dispatch(setTransactions(result));
+        return result;
+    };
 
     const balance = useBalance();
 
