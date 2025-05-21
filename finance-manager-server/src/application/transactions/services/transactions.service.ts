@@ -1,3 +1,4 @@
+import { Transaction } from "../../../domain/transactions/entities/Transaction.entity";
 import { ITransactionRepository } from "../../../domain/transactions/repositories/ITransactionRepository";
 
 export class TransactionsService {
@@ -20,7 +21,7 @@ export class TransactionsService {
         return transactions;
     }
 
-    async addTransaction(transaction: any) {
+    async addTransaction(transaction: Transaction) {
         await this.transactionsRepository.addTransaction(transaction);
         return transaction;
     }

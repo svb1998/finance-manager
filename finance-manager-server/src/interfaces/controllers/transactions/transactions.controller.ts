@@ -23,9 +23,57 @@ export class TransactionsController {
 
     getGroupTransactions = async (req: Request, res: Response) => {};
 
-    addTransaction = async (req: Request, res: Response) => {};
+    addTransaction = async (req: Request, res: Response) => {
+        const transaction = req.body;
 
-    removeTransaction = async (req: Request, res: Response) => {};
+        try {
+            const result = await this.transactionsService.addTransaction(
+                transaction
+            );
+            res.status(201).json(result);
+            return;
+        } catch (error) {
+            res.status(400).json({
+                error: (error as Error).message,
+                details: error,
+            });
+            return;
+        }
+    };
 
-    editTransaction = async (req: Request, res: Response) => {};
+    removeTransaction = async (req: Request, res: Response) => {
+        const transactionId = req.params.transactionId;
+
+        try {
+            const result = await this.transactionsService.removeTransaction(
+                transactionId
+            );
+            res.status(200).json(result);
+            return;
+        } catch (error) {
+            res.status(400).json({
+                error: (error as Error).message,
+                details: error,
+            });
+            return;
+        }
+    };
+
+    editTransaction = async (req: Request, res: Response) => {
+        const transaction = req.body;
+
+        try {
+            const result = await this.transactionsService.editTransaction(
+                transaction
+            );
+            res.status(200).json(result);
+            return;
+        } catch (error) {
+            res.status(400).json({
+                error: (error as Error).message,
+                details: error,
+            });
+            return;
+        }
+    };
 }

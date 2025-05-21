@@ -1,3 +1,5 @@
+import { Category } from "./category.model";
+
 export interface Transaction {
     transactionId: string;
     type: "income" | "expense";
@@ -5,7 +7,7 @@ export interface Transaction {
     receiverId?: string;
     amount: number;
     description: string;
-    category: string;
+    category: Category;
     txDate: Date;
     notes?: string;
 }

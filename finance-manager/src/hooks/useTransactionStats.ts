@@ -14,8 +14,6 @@ const useTransactionStats = (type: "income" | "expense") => {
         (store) => store.transaction
     );
 
-    const categories: Category[] = useSelector((state) => state.category);
-
     const [totalAmount, setTotalAmount] = useState(0);
     const [filteredTransactions, setFilteredTransactions] = useState<
         Transaction[]
@@ -44,9 +42,7 @@ const useTransactionStats = (type: "income" | "expense") => {
 
     const classifyTransactions = () => {
         const grouped = filteredTransactions.reduce((acc, transaction) => {
-            const category = categories.find(
-                (cat) => cat.value === transaction.category
-            );
+            const category = transaction.category;
             if (!category) return acc;
 
             const existing = acc.find((item) => item.name === category.value);
@@ -55,7 +51,7 @@ const useTransactionStats = (type: "income" | "expense") => {
                 existing.amount += transaction.amount;
             } else {
                 acc.push({
-                    id: category.id,
+                    id: category.categoryId,
                     name: category.value,
                     label: category.label,
                     amount: transaction.amount,

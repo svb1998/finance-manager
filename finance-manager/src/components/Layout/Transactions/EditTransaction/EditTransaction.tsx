@@ -8,11 +8,12 @@ import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import BasicFieldController from "../../../FieldControllers/BasicFieldController/BasicFieldController";
-import { transactionFormSchema } from "../schemas/TransactionForm.schema";
+import { transactionEditFormSchema } from "../schemas/TransactionForm.schema";
 import { useDispatch, useSelector } from "react-redux";
-import { editTransaction } from "../../../../redux/states/transaction";
+
 import { Transaction } from "../../../../models";
 import { Category } from "../../../../models/category.model";
+import { editTransaction } from "./services/EditTransaction.service";
 
 const { Option } = Select;
 
@@ -33,13 +34,11 @@ export default function EditTransaction({ onCloseModal, transaction }: Props) {
     } = useForm({
         defaultValues: transaction,
         mode: "onChange",
-        resolver: yupResolver(transactionFormSchema),
+        resolver: yupResolver(transactionEditFormSchema),
     });
 
-    const onSubmit = (formData: Transaction) => {
-        formData.date = new Date().toISOString();
-        dispatch(editTransaction(formData));
-
+    const onSubmit = async (formData: Transaction) => {
+        const result = await editTransaction(formData);
         onCloseModal();
     };
 
@@ -113,20 +112,19 @@ export default function EditTransaction({ onCloseModal, transaction }: Props) {
                     <BasicFieldController
                         name="category"
                         control={control}
-                        defaultValue={transaction.category}
+                        defaultValue={transaction.category.categoryId}
                     >
                         {(field) => (
                             <Select
                                 {...field}
                                 className="select-container"
                                 id="transaction-category"
-                                defaultValue={transaction.category}
                                 placeholder="Selecciona una categoría..."
                             >
                                 {categories.map((category) => (
                                     <Option
-                                        key={category.id}
-                                        value={category.value}
+                                        key={category.categoryId}
+                                        value={category.categoryId}
                                     >
                                         <div className="option-container">
                                             <div

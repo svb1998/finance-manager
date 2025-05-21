@@ -13,9 +13,11 @@ import Dialog from "../../../../components/Layout/Dialog/Dialog";
 import EditTransaction from "../../../../components/Layout/Transactions/EditTransaction/EditTransaction";
 import Modal from "../../../../Modal";
 import { Category, Transaction } from "../../../../models";
-import { removeTransaction } from "../../../../redux/states/transaction";
+
 import { capitalizeString } from "../../../../utilities/capitalizeString.utility";
 import "./TransactionDetails.css";
+import { setTextColor } from "../../../../utilities/setTextColor.utility";
+import { removeTransaction } from "../../services/Transactions.service";
 
 const columnHelper = createColumnHelper<Transaction>();
 
@@ -29,8 +31,6 @@ export default function TransactionDetails({ type }: Props) {
     const transactions: Transaction[] = useSelector((store) => {
         return store.transaction;
     });
-
-    const categories: Category[] = useSelector((state) => state.category);
 
     const [data, setData] = useState<Transaction[]>([]);
 
@@ -90,14 +90,17 @@ export default function TransactionDetails({ type }: Props) {
         columnHelper.accessor("category", {
             header: () => <span>Categoría</span>,
             cell: (info) => {
-                const category = info.cell.row.original.category;
-                const capitalizedCategory = capitalizeString(category ?? "");
+                const categoryData = info.cell.row.original.category;
+
+                const label = categoryData.label;
+                const backgroundColor = categoryData.backgroundColor;
+
+                const capitalizedCategory = capitalizeString(label ?? "");
                 return (
                     <span
                         style={{
-                            backgroundColor: categories.find(
-                                (cat) => cat.value === category
-                            )?.backgroundColor,
+                            backgroundColor: backgroundColor,
+                            color: setTextColor(backgroundColor),
                         }}
                         className="tx-table-cell category-chip"
                     >
@@ -174,9 +177,12 @@ export default function TransactionDetails({ type }: Props) {
         // debugColumns: true,
     });
 
-    const deleteTransaction = (row: Transaction) => {
-        if (row.id) {
-            dispatch(removeTransaction(row.id));
+    const deleteTransaction = async (row: Transaction) => {
+        if (row.transactionId) {
+            const transactionId = row.transactionId;
+            console.log("tx", transactionId);
+            // dispatch(removeTransaction(row.transactionId));
+            const result = await removeTransaction(transactionId);
         }
 
         closeDeleteRowDialog();

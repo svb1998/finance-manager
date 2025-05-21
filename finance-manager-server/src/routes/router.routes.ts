@@ -4,6 +4,7 @@ import { authenticateToken } from "../middlewares/authMiddleware";
 import authRouter from "./auth/auth.routes";
 import groupsRouter from "./groups/groups.routes";
 import transactionsRouter from "./transactions/transactions.routes";
+import categoriesRouter from "./categories/categories.routes";
 
 const router = Router();
 
@@ -31,6 +32,8 @@ router.use("/auth", authRouter);
 router.use("/groups", groupsRouter);
 
 router.use("/transactions", transactionsRouter);
+
+router.use("/categories", categoriesRouter);
 
 /**
  * @openapi

@@ -4,4 +4,5 @@ export interface ITransactionRepository {
     addTransaction(transaction: any): Promise<any>;
     removeTransaction(transactionId: string): Promise<any>;
     editTransaction(transaction: any): Promise<any>;
+    addTransaction(transaction: any): Promise<any>;
 }

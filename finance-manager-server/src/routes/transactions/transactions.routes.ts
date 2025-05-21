@@ -46,21 +46,21 @@ transactionsRouter.get(
 );
 
 transactionsRouter.post(
-    "/",
+    "/create",
     authenticateToken,
     transactionsController.addTransaction
 );
 
-transactionsRouter.delete(
-    "/:transactionId",
-    authenticateToken,
-    transactionsController.removeTransaction
-);
-
 transactionsRouter.put(
-    "/",
+    "/update",
     authenticateToken,
     transactionsController.editTransaction
+);
+
+transactionsRouter.delete(
+    "/remove/:transactionId",
+    authenticateToken,
+    transactionsController.removeTransaction
 );
 
 export default transactionsRouter;
