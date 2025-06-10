@@ -15,6 +15,7 @@ import { Category } from "../../../../models/category.model";
 import BasicFieldController from "../../../FieldControllers/BasicFieldController/BasicFieldController";
 import { transactionAddFormSchema } from "../schemas/TransactionForm.schema";
 import { addTransaction } from "./services/AddTransaction.service";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const { Option } = Select;
 
@@ -23,11 +24,29 @@ interface Props {
 }
 
 export default function AddTransaction({ onCloseModal }: Props) {
+    const queryClient = useQueryClient();
+
     const dispatch = useDispatch();
 
     const categories: Category[] = useSelector((state) => state.category);
 
     const activeProfileId = useSelector((state) => state.profile.fm_u);
+
+    const {
+        mutate: handleSubmitMutation,
+        isLoading,
+        isSuccess,
+        isError,
+        error,
+    } = useMutation({
+        mutationFn: (formData: Transaction) => {
+            return onSubmit(formData);
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries(["transactions"]);
+            onCloseModal();
+        },
+    });
 
     const {
         control,
@@ -42,12 +61,12 @@ export default function AddTransaction({ onCloseModal }: Props) {
         formData.senderId = activeProfileId;
         const result = await addTransaction(formData);
 
-        onCloseModal();
+        return result;
     };
 
     return (
         <div className="form-transaction-container">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(handleSubmitMutation)}>
                 <FieldLayout>
                     <BasicFieldController name="type" control={control}>
                         {(field) => (

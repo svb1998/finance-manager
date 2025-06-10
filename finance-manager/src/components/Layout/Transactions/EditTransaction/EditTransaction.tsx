@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Transaction } from "../../../../models";
 import { Category } from "../../../../models/category.model";
 import { editTransaction } from "./services/EditTransaction.service";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const { Option } = Select;
 
@@ -23,6 +24,8 @@ interface Props {
 }
 
 export default function EditTransaction({ onCloseModal, transaction }: Props) {
+    const queryClient = useQueryClient();
+
     const dispatch = useDispatch();
 
     const categories: Category[] = useSelector((state) => state.category);
@@ -37,14 +40,31 @@ export default function EditTransaction({ onCloseModal, transaction }: Props) {
         resolver: yupResolver(transactionEditFormSchema),
     });
 
+    const {
+        mutate: handleSubmitMutation,
+        isLoading,
+        isSuccess,
+        isError,
+        error,
+    } = useMutation({
+        mutationFn: (formData: Transaction) => {
+            return onSubmit(formData);
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries(["transactions"]);
+            onCloseModal();
+        },
+    });
+
     const onSubmit = async (formData: Transaction) => {
         const result = await editTransaction(formData);
-        onCloseModal();
+
+        return result;
     };
 
     return (
         <div className="form-transaction-container">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(handleSubmitMutation)}>
                 <FieldLayout>
                     <BasicFieldController
                         name="type"
@@ -148,7 +168,7 @@ export default function EditTransaction({ onCloseModal, transaction }: Props) {
                     <BasicFieldController
                         name="notes"
                         control={control}
-                        defaultValue={transaction.notes}
+                        defaultValue={transaction.notes ?? ""}
                     >
                         {(field) => (
                             <MainInput

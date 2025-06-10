@@ -30,6 +30,5 @@ export const transactionEditFormSchema = yup.object({
         .positive("La cantidad debe ser positiva.")
         .required("Debes introducir una cantidad"),
     description: yup.string(),
-
-    notes: yup.string(),
+    notes: yup.string().nullable(),
 });

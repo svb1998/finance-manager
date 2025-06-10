@@ -45,14 +45,12 @@ export default function Dashboard() {
 
     const getAllTransactionsLocal = async (activeProfile: string) => {
         const transactions = await getAllTransactions(activeProfile);
-        console.log(transactions);
         dispatch(setTransactions(transactions));
         return transactions;
     };
 
     const getAllCategoriesLocal = async () => {
         const categories = await getAllCategories();
-        console.log(categories);
         dispatch(setCategories(categories));
         return categories;
     };

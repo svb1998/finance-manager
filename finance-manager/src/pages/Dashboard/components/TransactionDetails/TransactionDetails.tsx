@@ -18,6 +18,7 @@ import { capitalizeString } from "../../../../utilities/capitalizeString.utility
 import "./TransactionDetails.css";
 import { setTextColor } from "../../../../utilities/setTextColor.utility";
 import { removeTransaction } from "../../services/Transactions.service";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const columnHelper = createColumnHelper<Transaction>();
 
@@ -26,6 +27,8 @@ interface Props {
 }
 
 export default function TransactionDetails({ type }: Props) {
+    const queryClient = useQueryClient();
+
     const dispatch = useDispatch();
 
     const transactions: Transaction[] = useSelector((store) => {
@@ -33,6 +36,16 @@ export default function TransactionDetails({ type }: Props) {
     });
 
     const [data, setData] = useState<Transaction[]>([]);
+
+    const { mutate: handleRemoveTx } = useMutation({
+        mutationFn: async (row: Transaction) => {
+            return deleteTransaction(row);
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries(["transactions"]);
+            closeDeleteRowDialog();
+        },
+    });
 
     /**DELETE ROW DIALOG */
 
@@ -183,9 +196,8 @@ export default function TransactionDetails({ type }: Props) {
             console.log("tx", transactionId);
             // dispatch(removeTransaction(row.transactionId));
             const result = await removeTransaction(transactionId);
+            return result;
         }
-
-        closeDeleteRowDialog();
     };
 
     return (
@@ -215,7 +227,7 @@ export default function TransactionDetails({ type }: Props) {
                         cancelButton="Cancelar"
                         actionButton="Eliminar"
                         mainAction={() => {
-                            deleteTransaction(rowToDelete);
+                            handleRemoveTx(rowToDelete);
                         }}
                     />
                 )}
