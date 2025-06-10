@@ -4,16 +4,36 @@ import { Category } from "../../models/category.model";
 const sliceName = "category";
 
 const initialState: Category[] = [
-    { id: "0", value: "salud", label: "Salud", backgroundColor: "#ADFF2F" },
-    { id: "1", value: "ocio", label: "Ocio", backgroundColor: "#92D927" },
-    { id: "2", value: "hogar", label: "Hogar", backgroundColor: "#78B320" },
-    {
-        id: "3",
-        value: "transporte",
-        label: "Transporte",
-        backgroundColor: "#5E8C19",
-    },
-    { id: "4", value: "otros", label: "Otros", backgroundColor: "#456612" },
+    // {
+    //     categoryId: "0",
+    //     value: "salud",
+    //     label: "Salud",
+    //     backgroundColor: "#ADFF2F",
+    // },
+    // {
+    //     categoryId: "1",
+    //     value: "ocio",
+    //     label: "Ocio",
+    //     backgroundColor: "#92D927",
+    // },
+    // {
+    //     categoryId: "2",
+    //     value: "hogar",
+    //     label: "Hogar",
+    //     backgroundColor: "#78B320",
+    // },
+    // {
+    //     categoryId: "3",
+    //     value: "transporte",
+    //     label: "Transporte",
+    //     backgroundColor: "#5E8C19",
+    // },
+    // {
+    //     categoryId: "4",
+    //     value: "otros",
+    //     label: "Otros",
+    //     backgroundColor: "#456612",
+    // },
 ];
 
 // if (localStorage.getItem(sliceName)) {
@@ -38,9 +58,14 @@ export const categorySlice = createSlice({
         removeCategory: (state, action) => {
             return state.filter((category) => category.id !== action.payload);
         },
+        setCategories: (state, action) => {
+            localStorage.setItem(sliceName, JSON.stringify(action.payload));
+            return action.payload;
+        },
     },
 });
 
-export const { addCategory, removeCategory } = categorySlice.actions;
+export const { addCategory, removeCategory, setCategories } =
+    categorySlice.actions;
 
 export default categorySlice.reducer;

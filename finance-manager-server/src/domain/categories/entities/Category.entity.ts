@@ -1,6 +1,7 @@
 export interface Category {
     categoryId: string;
-    value: string;
     label: string;
-    backgroundColor?: string;
+    value: string;
+    backgroundColor: boolean;
+    created_at: Date;
 }

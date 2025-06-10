@@ -10,19 +10,52 @@ import useSetActivePage from "../../hooks/useSetActivePage";
 import { ErrorBoundary } from "../../utilities/ErrorBoundaries";
 import useBalance from "../../hooks/useBalance";
 import axiosPrivate from "../../interceptors/PrivateAxios.interceptor";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllTransactions } from "./services/Transactions.service";
+import { useQuery } from "@tanstack/react-query";
+import { setCategories, setTransactions } from "../../redux/states";
+import { Category, Transaction } from "../../models";
+import { getAllCategories } from "./services/Categories.service";
 
 export default function Dashboard() {
     useSetActivePage();
+    const dispatch = useDispatch();
+
+    const activeProfile = useSelector((state) => state.profile.fm_u);
+
+    const {
+        isLoading,
+        isError,
+        data: transactionsData = [],
+    } = useQuery<Transaction[]>({
+        queryKey: ["transactions"],
+        queryFn: () => getAllTransactionsLocal(activeProfile),
+        refetchOnWindowFocus: false,
+    });
+
+    const {
+        isLoading: isLoadingCategories,
+        isError: isErrorCategories,
+        data: categoriesData = [],
+    } = useQuery<Category[]>({
+        queryKey: ["categories"],
+        queryFn: () => getAllCategoriesLocal(),
+        refetchOnWindowFocus: false,
+    });
+
+    const getAllTransactionsLocal = async (activeProfile: string) => {
+        const transactions = await getAllTransactions(activeProfile);
+        dispatch(setTransactions(transactions));
+        return transactions;
+    };
+
+    const getAllCategoriesLocal = async () => {
+        const categories = await getAllCategories();
+        dispatch(setCategories(categories));
+        return categories;
+    };
 
     const balance = useBalance();
-
-    // useEffect(() => {
-    //     try {
-    //         axiosPrivate.get("/profile");
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }, []);
 
     return (
         <div className="dashboard-page">

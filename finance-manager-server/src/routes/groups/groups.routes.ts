@@ -12,7 +12,7 @@ const groupsController = new GroupsController(groupsService);
 
 /**
  * @openapi
- * /groups/{profileId}:
+ * /groups/{profileUUID}:
  *   get:
  *     summary: Obtener todos los grupos asociados a un perfil
  *     tags:
@@ -21,7 +21,7 @@ const groupsController = new GroupsController(groupsService);
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: profileId
+ *         name: profileUUID
  *         required: true
  *         schema:
  *           type: string
@@ -31,7 +31,7 @@ const groupsController = new GroupsController(groupsService);
  *         description: Lista de grupos
  */
 groupsRouter.get(
-    "/{:profileId}",
+    "/:profileUUID",
     authenticateToken,
     groupsController.getGroups
 );

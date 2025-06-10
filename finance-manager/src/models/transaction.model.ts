@@ -1,9 +1,13 @@
+import { Category } from "./category.model";
+
 export interface Transaction {
-    id: string;
-    transactionType: "income" | "expense";
+    transactionId: string;
+    type: "income" | "expense";
+    senderId?: string;
+    receiverId?: string;
     amount: number;
     description: string;
-    category: string;
-    date: string;
+    category: Category;
+    txDate: Date;
     notes?: string;
 }

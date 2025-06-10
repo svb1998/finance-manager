@@ -31,9 +31,9 @@ export class GroupsController {
     };
 
     getGroups = async (req: Request, res: Response) => {
-        const profileId = req.params.profileId;
+        const profileUUID = req.params.profileUUID;
         try {
-            const groups = await this.groupsService.getGroups(profileId);
+            const groups = await this.groupsService.getGroups(profileUUID);
             res.status(200).json(groups);
             return;
         } catch (error) {

@@ -8,11 +8,13 @@ import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import BasicFieldController from "../../../FieldControllers/BasicFieldController/BasicFieldController";
-import { transactionFormSchema } from "../schemas/TransactionForm.schema";
+import { transactionEditFormSchema } from "../schemas/TransactionForm.schema";
 import { useDispatch, useSelector } from "react-redux";
-import { editTransaction } from "../../../../redux/states/transaction";
+
 import { Transaction } from "../../../../models";
 import { Category } from "../../../../models/category.model";
+import { editTransaction } from "./services/EditTransaction.service";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const { Option } = Select;
 
@@ -22,6 +24,8 @@ interface Props {
 }
 
 export default function EditTransaction({ onCloseModal, transaction }: Props) {
+    const queryClient = useQueryClient();
+
     const dispatch = useDispatch();
 
     const categories: Category[] = useSelector((state) => state.category);
@@ -33,33 +37,46 @@ export default function EditTransaction({ onCloseModal, transaction }: Props) {
     } = useForm({
         defaultValues: transaction,
         mode: "onChange",
-        resolver: yupResolver(transactionFormSchema),
+        resolver: yupResolver(transactionEditFormSchema),
     });
 
-    const onSubmit = (formData: Transaction) => {
-        formData.date = new Date().toISOString();
-        dispatch(editTransaction(formData));
+    const {
+        mutate: handleSubmitMutation,
+        isLoading,
+        isSuccess,
+        isError,
+        error,
+    } = useMutation({
+        mutationFn: (formData: Transaction) => {
+            return onSubmit(formData);
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries(["transactions"]);
+            onCloseModal();
+        },
+    });
 
-        onCloseModal();
+    const onSubmit = async (formData: Transaction) => {
+        const result = await editTransaction(formData);
+
+        return result;
     };
 
     return (
         <div className="form-transaction-container">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(handleSubmitMutation)}>
                 <FieldLayout>
                     <BasicFieldController
-                        name="transactionType"
+                        name="type"
                         control={control}
-                        defaultValue={transaction.transactionType}
+                        defaultValue={transaction.type}
                     >
                         {(field) => (
                             <Select
                                 {...field}
                                 className="select-container"
                                 placeholder="Seleccionar tipo de transacción"
-                                aria-errormessage={
-                                    errors.transactionType?.message
-                                }
+                                aria-errormessage={errors.type?.message}
                             >
                                 <Option value="income">
                                     <div className="option-container">
@@ -115,20 +132,19 @@ export default function EditTransaction({ onCloseModal, transaction }: Props) {
                     <BasicFieldController
                         name="category"
                         control={control}
-                        defaultValue={transaction.category}
+                        defaultValue={transaction.category.categoryId}
                     >
                         {(field) => (
                             <Select
                                 {...field}
                                 className="select-container"
                                 id="transaction-category"
-                                defaultValue={transaction.category}
                                 placeholder="Selecciona una categoría..."
                             >
                                 {categories.map((category) => (
                                     <Option
-                                        key={category.id}
-                                        value={category.value}
+                                        key={category.categoryId}
+                                        value={category.categoryId}
                                     >
                                         <div className="option-container">
                                             <div
@@ -152,7 +168,7 @@ export default function EditTransaction({ onCloseModal, transaction }: Props) {
                     <BasicFieldController
                         name="notes"
                         control={control}
-                        defaultValue={transaction.notes}
+                        defaultValue={transaction.notes ?? ""}
                     >
                         {(field) => (
                             <MainInput

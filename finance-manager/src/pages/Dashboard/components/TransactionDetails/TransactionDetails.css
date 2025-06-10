@@ -19,8 +19,8 @@
             transition: all 0.15s ease-in-out;
 
             &:hover {
-                background-color: greenyellow;
-                color: black;
+                background-color: #0063528e;
+                /* color: black; */
                 cursor: pointer;
             }
 
@@ -58,8 +58,8 @@
     background-color: #8fd4ff;
     /* color: hsl(236, 100%, 28%);
     border: 1px solid hsl(236, 100%, 28%); */
-    border: 1px solid black;
-    color: black;
+
+    color: currentColor;
 }
 
 .delete-icon {
@@ -69,7 +69,7 @@
     fill: transparent;
     &:hover {
         cursor: pointer;
-        
+
         color: red;
     }
 }

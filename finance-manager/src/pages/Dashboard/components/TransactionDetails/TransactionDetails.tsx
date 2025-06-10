@@ -1,23 +1,24 @@
 import { Temporal } from "@js-temporal/polyfill";
-import "./TransactionDetails.css";
 import {
     createColumnHelper,
     flexRender,
     getCoreRowModel,
     useReactTable,
 } from "@tanstack/react-table";
-import { Category, Transaction } from "../../../../models";
-import { ReactNode, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { capitalizeString } from "../../../../utilities/capitalizeString.utility";
 import { CircleX } from "lucide-react";
-import { removeTransaction } from "../../../../redux/states/transaction";
-import Dialog from "../../../../components/Layout/Dialog/Dialog";
-import Modal from "../../../../Modal";
-import OutlineButton from "../../../../components/Button/OutlineButton/OutlineButton";
-import MainButton from "../../../../components/Button/MainButton/MainButton";
-import EditTransaction from "../../../../components/Layout/Transactions/EditTransaction/EditTransaction";
 import { AnimatePresence } from "motion/react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Dialog from "../../../../components/Layout/Dialog/Dialog";
+import EditTransaction from "../../../../components/Layout/Transactions/EditTransaction/EditTransaction";
+import Modal from "../../../../Modal";
+import { Category, Transaction } from "../../../../models";
+
+import { capitalizeString } from "../../../../utilities/capitalizeString.utility";
+import "./TransactionDetails.css";
+import { setTextColor } from "../../../../utilities/setTextColor.utility";
+import { removeTransaction } from "../../services/Transactions.service";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const columnHelper = createColumnHelper<Transaction>();
 
@@ -26,15 +27,25 @@ interface Props {
 }
 
 export default function TransactionDetails({ type }: Props) {
+    const queryClient = useQueryClient();
+
     const dispatch = useDispatch();
 
-    const transactions: Transaction[] = useSelector(
-        (store) => store.transaction
-    );
-
-    const categories: Category[] = useSelector((state) => state.category);
+    const transactions: Transaction[] = useSelector((store) => {
+        return store.transaction;
+    });
 
     const [data, setData] = useState<Transaction[]>([]);
+
+    const { mutate: handleRemoveTx } = useMutation({
+        mutationFn: async (row: Transaction) => {
+            return deleteTransaction(row);
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries(["transactions"]);
+            closeDeleteRowDialog();
+        },
+    });
 
     /**DELETE ROW DIALOG */
 
@@ -68,7 +79,7 @@ export default function TransactionDetails({ type }: Props) {
     };
 
     const columns = [
-        columnHelper.accessor("date", {
+        columnHelper.accessor("txDate", {
             header: () => <span>Fecha</span>,
             cell: (info) => {
                 let formattedDate = "";
@@ -92,18 +103,21 @@ export default function TransactionDetails({ type }: Props) {
         columnHelper.accessor("category", {
             header: () => <span>Categoría</span>,
             cell: (info) => {
-                const category = info.cell.row.original.category;
-                const capitalizedCategory = capitalizeString(category);
+                const categoryData = info.cell.row.original.category;
+
+                const label = categoryData.label;
+                const backgroundColor = categoryData.backgroundColor;
+
+                const capitalizedCategory = capitalizeString(label ?? "");
                 return (
                     <span
                         style={{
-                            backgroundColor: categories.find(
-                                (cat) => cat.value === category
-                            )?.backgroundColor,
+                            backgroundColor: backgroundColor,
+                            color: setTextColor(backgroundColor),
                         }}
                         className="tx-table-cell category-chip"
                     >
-                        {capitalizedCategory}
+                        {capitalizedCategory ?? "Sin categoría"}
                     </span>
                 );
             },
@@ -155,7 +169,7 @@ export default function TransactionDetails({ type }: Props) {
 
     const getTransactionsByType = (type: string) => {
         const filteredTransactions = transactions.filter(
-            (transaction) => transaction.transactionType === type
+            (transaction) => transaction.type === type
         );
 
         setData(filteredTransactions);
@@ -176,12 +190,14 @@ export default function TransactionDetails({ type }: Props) {
         // debugColumns: true,
     });
 
-    const deleteTransaction = (row: Transaction) => {
-        if (row.id) {
-            dispatch(removeTransaction(row.id));
+    const deleteTransaction = async (row: Transaction) => {
+        if (row.transactionId) {
+            const transactionId = row.transactionId;
+            console.log("tx", transactionId);
+            // dispatch(removeTransaction(row.transactionId));
+            const result = await removeTransaction(transactionId);
+            return result;
         }
-
-        closeDeleteRowDialog();
     };
 
     return (
@@ -211,7 +227,7 @@ export default function TransactionDetails({ type }: Props) {
                         cancelButton="Cancelar"
                         actionButton="Eliminar"
                         mainAction={() => {
-                            deleteTransaction(rowToDelete);
+                            handleRemoveTx(rowToDelete);
                         }}
                     />
                 )}

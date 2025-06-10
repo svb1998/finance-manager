@@ -11,9 +11,11 @@ import { useDispatch, useSelector } from "react-redux";
 import shortUUID from "short-uuid";
 import { Transaction } from "../../../../models";
 import { Category } from "../../../../models/category.model";
-import { addTransaction } from "../../../../redux/states/transaction";
+
 import BasicFieldController from "../../../FieldControllers/BasicFieldController/BasicFieldController";
-import { transactionFormSchema } from "../schemas/TransactionForm.schema";
+import { transactionAddFormSchema } from "../schemas/TransactionForm.schema";
+import { addTransaction } from "./services/AddTransaction.service";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const { Option } = Select;
 
@@ -22,9 +24,29 @@ interface Props {
 }
 
 export default function AddTransaction({ onCloseModal }: Props) {
+    const queryClient = useQueryClient();
+
     const dispatch = useDispatch();
 
     const categories: Category[] = useSelector((state) => state.category);
+
+    const activeProfileId = useSelector((state) => state.profile.fm_u);
+
+    const {
+        mutate: handleSubmitMutation,
+        isLoading,
+        isSuccess,
+        isError,
+        error,
+    } = useMutation({
+        mutationFn: (formData: Transaction) => {
+            return onSubmit(formData);
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries(["transactions"]);
+            onCloseModal();
+        },
+    });
 
     const {
         control,
@@ -32,35 +54,27 @@ export default function AddTransaction({ onCloseModal }: Props) {
         formState: { errors },
     } = useForm({
         mode: "onChange",
-        resolver: yupResolver(transactionFormSchema),
+        resolver: yupResolver(transactionAddFormSchema),
     });
 
-    const onSubmit = (formData: Transaction) => {
-        // console.log(formData);
+    const onSubmit = async (formData: Transaction) => {
+        formData.senderId = activeProfileId;
+        const result = await addTransaction(formData);
 
-        formData.id = shortUUID.generate();
-        formData.date = new Date().toISOString();
-        dispatch(addTransaction(formData));
-
-        onCloseModal();
+        return result;
     };
 
     return (
         <div className="form-transaction-container">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(handleSubmitMutation)}>
                 <FieldLayout>
-                    <BasicFieldController
-                        name="transactionType"
-                        control={control}
-                    >
+                    <BasicFieldController name="type" control={control}>
                         {(field) => (
                             <Select
                                 {...field}
                                 className="select-container"
                                 placeholder="Seleccionar tipo de transacción"
-                                aria-errormessage={
-                                    errors.transactionType?.message
-                                }
+                                aria-errormessage={errors.type?.message}
                             >
                                 <Option value="income">
                                     <div className="option-container">
@@ -115,8 +129,8 @@ export default function AddTransaction({ onCloseModal }: Props) {
                             >
                                 {categories.map((category) => (
                                     <Option
-                                        key={category.id}
-                                        value={category.value}
+                                        key={category.categoryId}
+                                        value={category.categoryId}
                                     >
                                         <div className="option-container">
                                             <div
