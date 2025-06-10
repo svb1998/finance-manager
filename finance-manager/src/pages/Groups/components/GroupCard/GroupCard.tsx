@@ -1,4 +1,10 @@
-import { CircleUserRound, DoorOpen, Shield } from "lucide-react";
+import {
+    CircleUserRound,
+    DoorOpen,
+    EllipsisVertical,
+    Shield,
+    UserRoundPlus,
+} from "lucide-react";
 import "./GroupCard.css";
 import Tooltip from "../../../../components/Tooltip/Tooltip";
 
@@ -57,8 +63,18 @@ export default function GroupCard({
                 </div>
             </div>
             <div className="group-card-actions">
-                <div className="group-card-action">
-                    <DoorOpen />
+                {role === "admin" && (
+                    <div className="group-card-action group-card-action-normal">
+                        <UserRoundPlus size={20} />
+                    </div>
+                )}
+
+                <div className="group-card-action group-card-action-leave">
+                    <DoorOpen size={20} />
+                </div>
+
+                <div className="group-card-action group-card-action-normal">
+                    <EllipsisVertical color="white" size={20} />
                 </div>
             </div>
         </div>

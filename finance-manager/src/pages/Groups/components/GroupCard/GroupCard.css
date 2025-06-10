@@ -73,6 +73,7 @@
     grid-area: additional-info;
     display: flex;
     align-items: start;
+    justify-content: end;
 
     font-size: 16px;
     color: #9fff6b;
@@ -101,7 +102,8 @@
 
     align-items: end;
     justify-content: end;
-    padding-left: 28px;
+
+    column-gap: 2px;
 }
 
 .group-card-action {
@@ -113,10 +115,16 @@
     border-radius: 35%;
     color: white;
     transition: all 0.15s ease-in-out;
+}
 
-    &:hover {
-        cursor: pointer;
-        background-color: hsla(355, 66%, 17%, 0.548);
-        color: hsl(355, 100%, 59%);
-    }
+.group-card-action-normal:hover {
+    cursor: pointer;
+    background-color: hsla(163, 66%, 17%, 0.548);
+    color: hsl(163, 100%, 59%);
+}
+
+.group-card-action-leave:hover {
+    cursor: pointer;
+    background-color: hsla(355, 66%, 17%, 0.548);
+    color: hsl(355, 100%, 59%);
 }
