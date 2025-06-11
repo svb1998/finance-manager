@@ -1,0 +1,29 @@
+.add-member-list-item {
+    color: #d3ffee;
+    display: flex;
+    align-items: center;
+    padding-block: 12px;
+    padding-inline: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    justify-content: space-between;
+}
+
+.add-member-list-name {
+    display: flex;
+    align-items: center;
+
+    column-gap: 4px;
+}
+
+.add-member-list-item-remove-btn {
+    height: 36px;
+    width: 36px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 12px;
+
+    &:hover {
+        background-color: hsla(355, 66%, 17%, 0.548);
+        color: hsl(355, 100%, 59%);
+    }
+}

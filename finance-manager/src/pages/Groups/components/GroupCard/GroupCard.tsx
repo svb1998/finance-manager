@@ -7,6 +7,9 @@ import {
 } from "lucide-react";
 import "./GroupCard.css";
 import Tooltip from "../../../../components/Tooltip/Tooltip";
+import Modal from "../../../../Modal";
+import AddMember from "./components/AddMember/AddMember";
+import { useState } from "react";
 
 interface GroupCardProps {
     groupId?: string;
@@ -23,6 +26,23 @@ export default function GroupCard({
     memberCount,
     role,
 }: GroupCardProps) {
+    //Modal
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+    /**
+     * Function that opens the modal
+     */
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    /**
+     * Function that closes the modal
+     */
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <div className="group-card-container">
             <div className="group-card-info">
@@ -64,7 +84,10 @@ export default function GroupCard({
             </div>
             <div className="group-card-actions">
                 {role === "admin" && (
-                    <div className="group-card-action group-card-action-normal">
+                    <div
+                        onClick={openModal}
+                        className="group-card-action group-card-action-normal"
+                    >
                         <UserRoundPlus size={20} />
                     </div>
                 )}
@@ -77,6 +100,17 @@ export default function GroupCard({
                     <EllipsisVertical color="white" size={20} />
                 </div>
             </div>
+            {isModalOpen && (
+                <Modal
+                    onClose={closeModal}
+                    onOverlayClose
+                    title="Añadir miembro"
+                    dataTestId="add-member-modal"
+                    className="add-member-modal-container"
+                >
+                    <AddMember />
+                </Modal>
+            )}
         </div>
     );
 }

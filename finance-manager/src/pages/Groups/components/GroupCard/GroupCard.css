@@ -112,7 +112,7 @@
     justify-content: center;
     padding: 8px;
     background-color: transparent;
-    border-radius: 35%;
+    border-radius: 12px;
     color: white;
     transition: all 0.15s ease-in-out;
 }
@@ -127,4 +127,8 @@
     cursor: pointer;
     background-color: hsla(355, 66%, 17%, 0.548);
     color: hsl(355, 100%, 59%);
+}
+
+.add-member-modal-container {
+    width: 40%;
 }

@@ -15,6 +15,8 @@ interface Props {
     minWidth?: string;
     maxHeight?: string;
     minHeight?: string;
+    overlayClassName?: string;
+    className?: string;
 }
 
 export default function Modal({
@@ -23,12 +25,9 @@ export default function Modal({
     dataTestId = "",
     onClose,
     onOverlayClose = false,
-    width = "auto",
-    height = "auto",
-    maxWidth = "90%",
-    minWidth = "350px",
-    maxHeight = "90%",
-    minHeight = "auto",
+
+    overlayClassName,
+    className,
 }: Props) {
     /**
      * Handles the case when the user closes the modal by clicking on the overlay (When onOverlayClose prop is true)
@@ -44,7 +43,7 @@ export default function Modal({
             animate={{ opacity: 1 }}
             transition={{ duration: 0.25 }}
             exit={{ opacity: 0 }}
-            className="modal-overlay"
+            className={`modal-overlay ${overlayClassName}`}
             onClick={onOverlayClose ? handleOnOverlayClose : () => {}}
         >
             <motion.div
@@ -62,16 +61,8 @@ export default function Modal({
 
                     // opacity: 0,
                 }}
-                className="modal-container"
+                className={`${className} modal-container `}
                 data-testid={dataTestId}
-                style={{
-                    width: width,
-                    height: height,
-                    maxWidth: maxWidth,
-                    minWidth: minWidth,
-                    maxHeight: maxHeight,
-                    minHeight: minHeight,
-                }}
             >
                 {/* <button onClick={onClose} className="modal-close-btn">
                     X
