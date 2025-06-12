@@ -1,5 +1,5 @@
 .dialog-container {
-    color: white;
+    color: var(--color-text);
 }
 
 .dialog-content {
@@ -7,12 +7,12 @@
 }
 
 .dialog-title {
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     margin-bottom: 0.1em;
 }
 
 .dialog-subtitle {
-    color: rgb(208, 239, 228);
+    color: var(--color-text-secondary);
     margin-bottom: 0.2em;
 }
 

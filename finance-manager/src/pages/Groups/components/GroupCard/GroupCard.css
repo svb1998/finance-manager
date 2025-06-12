@@ -58,7 +58,7 @@
     padding: var(--v-2);
     font-weight: 500;
     font-size: var(--font-size-xxs);
-
+    color: white;
     border-top-left-radius: var(--v-0-5);
     border-bottom-left-radius: var(--v-0-5);
     border-bottom-right-radius: var(--v-2);

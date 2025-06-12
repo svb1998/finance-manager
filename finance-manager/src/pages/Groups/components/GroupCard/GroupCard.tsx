@@ -74,7 +74,7 @@ export default function GroupCard({
                 </div>
 
                 <div className="group-card-action group-card-action-normal">
-                    <EllipsisVertical color="white" size={20} />
+                    <EllipsisVertical size={20} />
                 </div>
             </div>
         </div>

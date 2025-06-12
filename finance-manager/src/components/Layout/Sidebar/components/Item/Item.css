@@ -2,16 +2,16 @@
     position: relative;
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding-block: 0.75rem;
+    gap: var(--v-5);
+    padding-block: var(--v-3);
     cursor: pointer;
-    color: #c5ded4;
+    color: var(--color-text-tertiary);
     transition: color 0.25s ease-in-out;
-    font-size: 0.9rem;
+    font-size: var(--v-3-5);
     /* width: 100%; */
 
     &:hover {
-        color: #bfe6a4;
+        color: var(--color-text-tertiary-hover);
     }
 }
 
@@ -21,8 +21,8 @@
 }
 
 .sidebar-item-title-active {
-    color: greenyellow;
-    font-weight: 600;
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
     transition: color 0.25s ease-in-out;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .sidebar-icon-active {
-    stroke: greenyellow;
+    stroke: var(--color-primary);
     stroke-width: 2.2;
 }
 

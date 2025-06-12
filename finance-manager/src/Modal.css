@@ -17,8 +17,11 @@
 
 .modal-container {
     position: relative;
-    /* background-color: black; */
-    background: radial-gradient(circle, #000f0c, #000000);
+    background: radial-gradient(
+        circle,
+        var(--color-bg-tertiary),
+        var(--color-bg-secondary)
+    );
     padding: 36px;
     padding-block: 36px;
 
@@ -28,7 +31,7 @@
     max-width: 90%;
     max-height: 90%;
     overflow-y: auto;
-    box-shadow: 0 0px 6px 2px #002017;
+    box-shadow: 0 0px 6px 2px var(--color-border-primary);
 }
 
 .modal-close-btn {
@@ -50,7 +53,7 @@
 }
 
 .modal-title {
-    color: white;
+    color: var(--color-text);
     margin-bottom: 12px;
     font-size: 28px;
 }

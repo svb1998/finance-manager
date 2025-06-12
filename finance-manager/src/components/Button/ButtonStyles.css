@@ -1,7 +1,8 @@
 .button {
-    padding-inline: 12px;
-    padding-block: 8px;
-    border-radius: 8px;
+    font-weight: var(--font-weight-semibold);
+    padding-inline: var(--v-3);
+    padding-block: var(--v-2);
+    border-radius: var(--v-2);
     cursor: pointer;
     border: none;
     transition: all 0.2s ease-in-out;
@@ -13,43 +14,23 @@
 }
 
 .main-button {
-    font-weight: 600;
-    color: black;
-    background-color: hsl(84, 100%, 59%);
+    color: var(--color-button-text);
+    background-color: var(--color-primary);
 
     &:hover {
-        background-color: hsl(84, 100%, 67%);
+        background-color: var(--color-primary-hover);
     }
 
     &:focus {
-        background-color: hsl(84, 100%, 73%);
+        background-color: var(--color-primary-focus);
     }
 
     &:active {
-        background-color: hsl(84, 100%, 53%);
-    }
-}
-
-.secondary-button {
-    font-weight: 600;
-    color: black;
-    background-color: transparent;
-
-    &:hover {
-        background-color: hsl(200, 100%, 52%);
-    }
-
-    &:focus {
-        background-color: hsl(200, 100%, 52%);
-    }
-
-    &:active {
-        background-color: hsl(200, 100%, 52%);
+        background-color: var(--color-primary-active);
     }
 }
 
 .destructive-button {
-    font-weight: 600;
     color: white;
     background-color: hsl(348, 100%, 44%);
 
@@ -63,22 +44,25 @@
 }
 
 .outline-button {
-    font-weight: 600;
-    color: greenyellow;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-button-text-outline);
     background-color: transparent;
-    border: 2px solid greenyellow;
+    border: 2px solid var(--color-primary);
 
     &:hover {
-        background-color: hsl(84, 100%, 67%);
-        border: 2px solid hsl(84, 100%, 67%);
-        color: black;
+        background-color: var(--color-primary-hover);
+        border: 2px solid var(--color-primary-hover);
+        color: var(--color-bg);
     }
 
     &:focus {
-        background-color: hsla(84, 100%, 67%, 0.267);
+        background-color: var(--color-primary-focus);
+        border: 2px solid var(--color-primary-focus);
+        color: var(--color-button-text);
     }
 
     &:active {
-        background-color: hsl(200, 100%, 52%);
+        background-color: var(--primary-active);
+        color: var(--color-button-text);
     }
 }

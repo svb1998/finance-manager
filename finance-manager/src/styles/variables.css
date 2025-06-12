@@ -31,9 +31,6 @@
     --border-radius-2xl: 32px;
 
     /* px scale: Can be used at borders, margins, paddings, radius, etc */
-    /**
-    CERO
-    */
     --v-0: 0px; /* 0px */
     --v-0-5: 0.125rem; /* 2px */
     --v-1: 0.25rem; /* 4px */

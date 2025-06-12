@@ -10,8 +10,11 @@
     --color-text: hsl(0, 0%, 100%);
     --color-text-secondary: hsl(157, 100%, 91%);
     --color-text-tertiary: hsl(156, 27%, 82%);
+    --color-text-tertiary-hover: hsl(95, 57%, 77%);
     --color-primary: hsl(84, 100%, 59%);
     --color-primary-hover: hsl(84, 100%, 67%);
+    --color-primary-focus: hsl(84, 100%, 73%);
+    --color-primary-active: hsl(84, 100%, 79%);
     --color-secondary: hsl(99, 100%, 71%);
     --color-border-primary: hsl(170, 100%, 19%);
     --color-border-secondary: hsl(165, 100%, 59%);
@@ -28,18 +31,45 @@
     --destructive-500: hsl(355, 100%, 59%);
 
     --destructive-bg: hsla(355, 66%, 17%, 0.548);
+
+    --color-button-text: hsl(0, 0%, 0%);
+    --color-button-text-outline: var(--color-primary);
 }
 
 [data-theme="light"] {
-    --color-bg: hsl(0, 0%, 0%);
-    --color-bg-secondary: hsl(169, 100%, 5%);
-    --color-text: hsl(0, 0%, 100%);
-    --color-text-secondary: hsl(157, 100%, 91%);
-    --color-text-tertiary: hsl(156, 27%, 82%);
-    --color-primary: hsl(84, 100%, 59%);
-    --color-primary-hover: hsl(84, 100%, 67%);
-    --color-border-primary: hsl(170, 100%, 19%);
-    --color-border-secondary: hsl(165, 100%, 59%);
+    /* Colors */
+    --color-bg: hsl(167, 26%, 93%);
+    --color-bg-semi-transparent: hsla(167, 26%, 93%, 0.5);
+    --color-bg-secondary: hsl(140, 100%, 99%);
+    --color-bg-tertiary: hsl(140, 100%, 99%);
+
+    --color-bg-hover: hsla(160, 64%, 81%, 0.557);
+
+    --color-text: hsl(161, 100%, 13%);
+    --color-text-secondary: hsl(157, 100%, 19%);
+    --color-text-tertiary: hsl(156, 27%, 42%);
+    --color-text-tertiary-hover: hsl(167, 82%, 20%);
+    --color-primary: hsl(171, 100%, 36%);
+    --color-primary-hover: hsl(156, 50%, 47%);
+    --color-primary-focus: hsl(156, 50%, 53%);
+    --color-primary-active: hsl(156, 50%, 79%);
+    --color-secondary: hsl(156, 44%, 48%);
+    --color-border-primary: hsl(157, 28%, 69%);
+    --color-border-secondary: hsl(165, 50%, 39%);
 
     --loading-color: var(--color-secondary);
+
+    --blue-500: hsl(174, 100%, 32%);
+
+    --red-500: hsl(336, 100%, 32%);
+
+    --add-500: hsl(163, 62%, 35%);
+    --add-bg: hsla(164, 13%, 77%, 0.548);
+
+    --destructive-500: hsl(355, 100%, 59%);
+
+    --destructive-bg: hsla(354, 10%, 81%, 0.548);
+
+    --color-button-text: hsl(0, 0%, 0%);
+    --color-button-text-outline: var(--color-primary);
 }

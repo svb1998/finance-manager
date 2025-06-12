@@ -31,7 +31,7 @@
     width: 100%;
     /* outline: 5px solid#000000c9; */
 
-    box-shadow: 0 15px 20px #000000c9;
+    box-shadow: 0 15px 20px var(--color-bg-semi-transparent);
     backdrop-filter: blur(var(--v-0-5));
 }
 
