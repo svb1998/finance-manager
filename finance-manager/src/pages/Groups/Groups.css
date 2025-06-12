@@ -23,23 +23,27 @@
     padding: 1rem;
     margin-bottom: 24px;
     z-index: 2;
-    background: linear-gradient(180deg, #000000, #000000c9);
+    background: linear-gradient(
+        180deg,
+        var(--color-bg),
+        var(--color-bg-semi-transparent)
+    );
     width: 100%;
     /* outline: 5px solid#000000c9; */
 
     box-shadow: 0 15px 20px #000000c9;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(var(--v-0-5));
 }
 
 .groups-list {
-    padding-inline: 1rem;
+    padding-inline: var(--v-4);
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1.5rem;
-    color: white;
+    color: var(--color-text);
 }
 
 .groups-list-loading-container {

@@ -1,5 +1,9 @@
 .login-container {
-    background: linear-gradient(0deg, #001b16, #000);
+    background: linear-gradient(
+        0deg,
+        var(--color-bg-secondary),
+        var(--color-bg)
+    );
     min-height: 100vh;
     width: 100vw;
     display: flex;
@@ -7,8 +11,8 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    row-gap: 32px;
-    padding: 24px;
+    row-gap: var(--v-8);
+    padding: var(--v-6);
     padding-block: 10%;
     overflow: hidden;
 }
@@ -16,7 +20,7 @@
 .login-form-container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: var(--v--4);
     max-width: 300px;
     min-width: 160px;
     width: 100%;
@@ -30,6 +34,6 @@
     display: flex;
     flex-direction: column;
 
-    color: rgb(255, 52, 52);
-    height: 12px;
+    color: var(--destructive-500);
+    height: var(--v-3);
 }

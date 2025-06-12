@@ -1,0 +1,45 @@
+:root {
+    /* Colors */
+    --color-bg: hsl(0, 0%, 0%);
+    --color-bg-semi-transparent: hsla(0, 0%, 0%, 0.5);
+    --color-bg-secondary: hsl(154, 54%, 3%);
+    --color-bg-tertiary: hsl(169, 100%, 5%);
+
+    --color-bg-hover: hsla(170, 100%, 19%, 0.557);
+
+    --color-text: hsl(0, 0%, 100%);
+    --color-text-secondary: hsl(157, 100%, 91%);
+    --color-text-tertiary: hsl(156, 27%, 82%);
+    --color-primary: hsl(84, 100%, 59%);
+    --color-primary-hover: hsl(84, 100%, 67%);
+    --color-secondary: hsl(99, 100%, 71%);
+    --color-border-primary: hsl(170, 100%, 19%);
+    --color-border-secondary: hsl(165, 100%, 59%);
+
+    --loading-color: var(--color-secondary);
+
+    --blue-500: hsl(174, 100%, 32%);
+
+    --red-500: hsl(336, 100%, 32%);
+
+    --add-500: hsl(163, 100%, 59%);
+    --add-bg: hsla(163, 66%, 17%, 0.548);
+
+    --destructive-500: hsl(355, 100%, 59%);
+
+    --destructive-bg: hsla(355, 66%, 17%, 0.548);
+}
+
+[data-theme="light"] {
+    --color-bg: hsl(0, 0%, 0%);
+    --color-bg-secondary: hsl(169, 100%, 5%);
+    --color-text: hsl(0, 0%, 100%);
+    --color-text-secondary: hsl(157, 100%, 91%);
+    --color-text-tertiary: hsl(156, 27%, 82%);
+    --color-primary: hsl(84, 100%, 59%);
+    --color-primary-hover: hsl(84, 100%, 67%);
+    --color-border-primary: hsl(170, 100%, 19%);
+    --color-border-secondary: hsl(165, 100%, 59%);
+
+    --loading-color: var(--color-secondary);
+}
