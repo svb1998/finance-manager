@@ -70,8 +70,9 @@ Actualmente se encuentra en construcción, siguiendo buenas prácticas y estánd
 
 ## ⭐ Features
 - ✅ Login y sesión respaldada con JWT.
-- 🟨 Registro de transacciones. (En desarrollo. Actualmente se guardan en LocalStorage)
+- ✅ Registro de transacciones.
 - ✅ Dashboard para visualizar el presupuesto personal (Balance, ingresos, gastos y detalles).
+- ✅ Light Mode.
 - ✅ Creación de grupos
 - 🟨 Gestión de grupos
 
