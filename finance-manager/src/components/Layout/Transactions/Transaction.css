@@ -11,6 +11,9 @@
     border: 0.2px solid var(--color-input-border) !important;
     color: var(--color-input-text) !important;
     background-color: var(--color-input-bg) !important;
+    font-family: var(--font-body) !important;
+    font-size: var(--font-size-md) !important;
+
     outline: none !important;
 }
 

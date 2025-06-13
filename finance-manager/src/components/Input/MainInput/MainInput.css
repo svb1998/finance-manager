@@ -9,6 +9,8 @@
 }
 
 .main-input {
+    font-family: var(--font-body);
+    font-size: var(--font-size-md);
     position: relative;
     max-height: var(--v-9) !important;
     height: var(--v-9);
