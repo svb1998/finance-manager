@@ -73,8 +73,8 @@ Actualmente se encuentra en construcción, siguiendo buenas prácticas y estánd
 - ✅ Registro de transacciones.
 - ✅ Dashboard para visualizar el presupuesto personal (Balance, ingresos, gastos y detalles).
 - ✅ Light Mode.
-- ✅ Creación de grupos
-- 🟨 Gestión de grupos
+- ✅ Creación de grupos.
+- 🟨 Gestión de grupos.
 
 </br>
 
