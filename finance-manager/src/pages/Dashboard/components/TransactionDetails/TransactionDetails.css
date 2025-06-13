@@ -15,12 +15,11 @@
 
     tbody {
         tr {
-            color: #f2fff5;
+            color: var(--color-text-secondary);
             transition: all 0.15s ease-in-out;
 
             &:hover {
-                background-color: #0063528e;
-                /* color: black; */
+                background-color: var(--color-bg-hover);
                 cursor: pointer;
             }
 
@@ -47,30 +46,29 @@
 
 .category-chip {
     font-size: 10px;
-    font-weight: 600;
-    border-radius: 16px;
+    font-weight: var(--font-weight-semibold);
+    border-radius: var(--v-4);
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     max-width: fit-content;
     padding-inline: 0.75em;
-    background-color: #8fd4ff;
-    /* color: hsl(236, 100%, 28%);
-    border: 1px solid hsl(236, 100%, 28%); */
-
     color: currentColor;
 }
 
 .delete-icon {
     position: relative;
     z-index: 2;
+    padding: var(--v-2);
+    width: fit-content;
+    border-radius: var(--v-2-5);
 
     fill: transparent;
     &:hover {
         cursor: pointer;
-
-        color: red;
+        background-color: var(--destructive-bg);
+        color: var(--destructive-500);
     }
 }
 
@@ -80,14 +78,13 @@
     top: 0;
     height: 100%;
     width: 5px;
-    background: rgba(0, 0, 0, 0.5);
+
     cursor: col-resize;
     user-select: none;
     touch-action: none;
 }
 
 .resizer.isResizing {
-    background: blue;
     opacity: 1;
 }
 

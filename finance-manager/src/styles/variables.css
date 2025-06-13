@@ -1,0 +1,73 @@
+:root {
+    --font-body: "DM Sans", system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+    --font-size-xxs: 10px;
+    --font-size-xs: 11.5px;
+    --font-size-sm: 12px;
+    --font-size-md: 14px;
+    --font-size-base: 16px;
+    --font-size-lg: 20px;
+    --font-size-xl: 24px;
+
+    --font-size-h1: 56px;
+    --font-size-h2: 48px;
+    --font-size-h3: 40px;
+    --font-size-h4: 32px;
+    --font-size-h5: 24px;
+    --font-size-h6: 20px;
+
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /*Borders */
+    --border-radius-xs: 4px;
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --border-radius: 16px;
+    --border-radius-lg: 20px;
+    --border-radius-xl: 24px;
+    --border-radius-2xl: 32px;
+
+    /* px scale: Can be used at borders, margins, paddings, radius, etc */
+    --v-0: 0px; /* 0px */
+    --v-0-5: 0.125rem; /* 2px */
+    --v-1: 0.25rem; /* 4px */
+    --v-1-5: 0.375rem; /* 6px */
+    --v-2: 0.5rem; /* 8px */
+    --v-2-5: 0.625rem; /* 10px */
+    --v-3: 0.75rem; /* 12px */
+    --v-3-5: 0.875rem; /* 14px */
+    --v-4: 1rem; /* 16px */
+    --v-5: 1.25rem; /* 20px */
+    --v-6: 1.5rem; /* 24px */
+    --v-7: 1.75rem; /* 28px */
+    --v-8: 2rem; /* 32px */
+    --v-9: 2.25rem; /* 36px */
+    --v-10: 2.5rem; /* 40px */
+    --v-11: 2.75rem; /* 44px */
+    --v-12: 3rem; /* 48px */
+    --v-14: 3.5rem; /* 56px */
+    --v-16: 4rem; /* 64px */
+    --v-20: 5rem; /* 80px */
+    --v-24: 6rem; /* 96px */
+    --v-28: 7rem; /* 112px */
+    --v-32: 8rem; /* 128px */
+    --v-36: 9rem; /* 144px */
+    --v-40: 10rem; /* 160px */
+    --v-44: 11rem; /* 176px */
+    --v-48: 12rem; /* 192px */
+    --v-52: 13rem; /* 208px */
+    --v-56: 14rem; /* 224px */
+    --v-60: 15rem; /* 240px */
+    --v-64: 16rem; /* 256px */
+    --v-68: 17rem; /* 272px */
+    --v-72: 18rem; /* 288px */
+    --v-76: 19rem; /* 304px */
+    --v-80: 20rem; /* 320px */
+    --v-84: 21rem; /* 336px */
+    --v-88: 22rem; /* 352px */
+    --v-92: 23rem; /* 368px */
+    --v-96: 24rem; /* 384px */
+}

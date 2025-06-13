@@ -1,11 +1,15 @@
 .group-card-container {
     position: relative;
-    background: radial-gradient(circle, #001b16, #030a07);
+    background: radial-gradient(
+        circle,
+        var(--color-bg-tertiary),
+        var(--color-bg-secondary)
+    );
 
-    box-shadow: 0 0 4px #006352;
-    border-radius: 14px;
-    padding: 16px;
-    padding-inline: 24px;
+    box-shadow: 0 0 4px var(--color-border-primary);
+    border-radius: var(--v-3-5);
+    padding: var(--v-4);
+    padding-inline: var(--v-6);
 
     display: grid;
     width: 100%;
@@ -20,23 +24,23 @@
     transition: all 0.12s ease-in-out;
 
     &:hover {
-        box-shadow: 0 0 6px rgb(47, 255, 203);
+        box-shadow: 0 0 6px var(--color-border-secondary);
         cursor: pointer;
     }
 }
 
 .group-card-info {
     grid-area: info;
-    margin-bottom: 8px;
+    margin-bottom: var(--v-2);
 }
 
 .group-card-title {
-    font-size: 20px;
+    font-size: var(--font-size-lg);
 }
 
 .group-card-description {
-    font-size: 14px;
-    color: #d3ffee;
+    font-size: var(--font-size-md);
+    color: var(--color-text-secondary);
 }
 
 .group-card-bars {
@@ -46,27 +50,27 @@
 .group-card-bar {
     display: flex;
     align-items: center;
-    height: 8px;
+    height: var(--v-2);
     width: 250px;
-    background-color: rgb(53, 53, 53);
-    margin-block: 8px;
 
-    padding: 8px;
+    margin-block: var(--v-2);
+
+    padding: var(--v-2);
     font-weight: 500;
-    font-size: 10px;
-
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 8px;
-    border-top-right-radius: 8px;
+    font-size: var(--font-size-xxs);
+    color: white;
+    border-top-left-radius: var(--v-0-5);
+    border-bottom-left-radius: var(--v-0-5);
+    border-bottom-right-radius: var(--v-2);
+    border-top-right-radius: var(--v-2);
 }
 
 .group-card-incomes-bar {
-    background-color: #00a393;
+    background-color: var(--blue-500);
 }
 
 .group-card-expenses-bar {
-    background-color: #a50042;
+    background-color: var(--red-500);
 }
 
 .group-card-additional-info {
@@ -75,10 +79,10 @@
     align-items: start;
     justify-content: end;
 
-    font-size: 16px;
-    color: #9fff6b;
-    margin-left: 12px;
-    column-gap: 12px;
+    font-size: var(--font-size-base);
+    color: var(--color-secondary);
+    margin-left: var(--v-3);
+    column-gap: var(--v-3);
 }
 
 .group-card-is-admin {
@@ -92,7 +96,7 @@
     align-items: center;
     justify-content: center;
 
-    gap: 4px;
+    gap: var(--v-1);
 }
 
 .group-card-actions {
@@ -103,7 +107,7 @@
     align-items: end;
     justify-content: end;
 
-    column-gap: 2px;
+    column-gap: var(--v-0-5);
 }
 
 .group-card-action {
@@ -113,18 +117,18 @@
     padding: 8px;
     background-color: transparent;
     border-radius: 35%;
-    color: white;
+    color: var(--color-text-primary);
     transition: all 0.15s ease-in-out;
 }
 
 .group-card-action-normal:hover {
     cursor: pointer;
-    background-color: hsla(163, 66%, 17%, 0.548);
-    color: hsl(163, 100%, 59%);
+    background-color: var(--add-bg);
+    color: var(--add-500);
 }
 
 .group-card-action-leave:hover {
     cursor: pointer;
-    background-color: hsla(355, 66%, 17%, 0.548);
-    color: hsl(355, 100%, 59%);
+    background-color: var(--destructive-bg);
+    color: var(--destructive-500);
 }

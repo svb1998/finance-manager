@@ -1,16 +1,21 @@
 .navbar-container {
-    height: 64px;
+    height: var(--v-16);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
 }
 
-.sidebar-controller{
+.sidebar-controller {
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 64px;
-    
+    height: var(--v-16);
+}
+
+.navbar-section {
+    display: flex;
+    align-items: center;
+    gap: var(--v-4);
 }

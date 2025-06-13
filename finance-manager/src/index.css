@@ -1,18 +1,13 @@
 :root {
-    font-family: Poppins, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    font-family: var(--font-body);
     line-height: 1.5;
-    font-weight: 400;
-
-    color: rgba(0, 0, 0, 0.87);
-    background-color: #fdfdfd;
+    font-weight: var(--font-weight-regular);
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    /* Variables */
-    --loading-color: #9fff6b;
 }
 
 body {
@@ -27,8 +22,6 @@ body {
 
     margin: 0;
     padding: 0;
-
-    font-family: "DM Sans", system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -37,18 +30,18 @@ body {
 
 ::-webkit-scrollbar-track {
     background: transparent;
-    border: 2px solid greenyellow;
-    border-radius: 5px;
+    border: 2px solid var(--color-primary);
+    border-radius: var(--v-1);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgb(139, 195, 74);
-    border-radius: 5px;
-    border: 2px solid greenyellow;
+    background: var(--color-scrollbar);
+    border-radius: var(--v-1);
+    border: 2px solid var(--color-primary);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: greenyellow;
+    background: var(--color-primary);
 }
 
 * {
@@ -57,5 +50,5 @@ body {
 }
 
 *::-moz-scrollbar-thumb:hover {
-    background: greenyellow;
+    background: var(--color-primary);
 }

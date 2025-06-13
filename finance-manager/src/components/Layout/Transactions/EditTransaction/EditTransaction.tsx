@@ -75,6 +75,7 @@ export default function EditTransaction({ onCloseModal, transaction }: Props) {
                             <Select
                                 {...field}
                                 className="select-container"
+                                popupClassName="select-popup-container"
                                 placeholder="Seleccionar tipo de transacción"
                                 aria-errormessage={errors.type?.message}
                             >
@@ -138,6 +139,7 @@ export default function EditTransaction({ onCloseModal, transaction }: Props) {
                             <Select
                                 {...field}
                                 className="select-container"
+                                popupClassName="select-popup-container"
                                 id="transaction-category"
                                 placeholder="Selecciona una categoría..."
                             >

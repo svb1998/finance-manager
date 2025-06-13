@@ -10,6 +10,7 @@
 }
 
 .textarea {
+    font-family: var(--font-body);
     position: relative;
     resize: none;
     height: 180px;
@@ -17,17 +18,22 @@
 
     width: 100%;
     max-width: 100%;
-    border-radius: 8px;
-    border-width: 0px;
-    padding: 6px 8px;
-    outline: currentColor;
-    color: rgb(0, 26, 11);
 
-    &:focus {
-        outline: 1.5px solid greenyellow;
+    padding: var(--v-1-5) var(--v-2);
+    outline: currentColor;
+    border-radius: var(--v-2);
+    border: 1px solid var(--color-input-border);
+    color: var(--color-input-text);
+    background-color: var(--color-input-bg);
+    transition: outline 0.1s ease-in-out;
+
+    &::placeholder {
+        color: var(--color-input-placeholder);
     }
 
-    transition: outline 0.1s ease-in-out;
+    &:focus {
+        outline: 1.2px solid var(--color-input-focus-outline);
+    }
 }
 
 .textarea-error {

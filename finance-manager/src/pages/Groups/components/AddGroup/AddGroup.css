@@ -1,7 +1,7 @@
 .form-group-container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: var(--v-4);
     justify-content: center;
     align-items: center;
     height: 300px;
@@ -11,5 +11,5 @@
 .form-group-buttons-container {
     display: flex;
     justify-content: end;
-    gap: 8px;
+    gap: var(--v-2);
 }

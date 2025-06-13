@@ -1,45 +1,53 @@
 .main-input-container {
     display: flex;
 
-    gap: 4px;
-    color: hsl(0, 0%, 45%);
+    gap: var(--v-1);
 
     &:focus-within {
-        color: hsl(133, 12%, 31%);
+        color: var(--color-input-focus-outline);
     }
 }
 
 .main-input {
     position: relative;
-    height: 36px;
+    max-height: var(--v-9) !important;
+    height: var(--v-9);
+
     width: 100%;
 
-    border-radius: 8px;
-    border-width: 0px;
-    padding: 6px 8px;
-    outline: currentColor;
-    color: rgb(0, 26, 11);
+    border-radius: var(--v-2);
+    border: 1px solid var(--color-input-border);
 
-    &:focus {
-        outline: 1.5px solid greenyellow;
+    padding-inline: var(--v-2);
+
+    color: var(--color-input-text);
+
+    background-color: var(--color-input-bg);
+    transition: outline 0.1s ease-in-out;
+
+    &::placeholder {
+        color: var(--color-input-placeholder);
     }
 
-    transition: outline 0.1s ease-in-out;
+    &:focus {
+        outline: 1.2px solid var(--color-input-focus-outline);
+    }
 }
 
 .main-input-error {
-    color: red;
-    outline: 2px solid red;
+    color: var(--destructive-500);
+    outline: 1.5px solid var(--destructive-500);
 }
 
 .main-input-error-message {
-    color: red;
+    font-size: var(--font-size-sm);
+    color: var(--destructive-500);
 }
 
 .main-input-end-icon {
     position: absolute;
-    right: 6px;
-    top: 6px;
+    right: var(--v-1-5);
+    top: var(--v-1-5);
     z-index: 1;
     color: currentColor;
     fill: currentColor;
