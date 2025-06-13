@@ -20,7 +20,7 @@
 .login-form-container {
     display: flex;
     flex-direction: column;
-    gap: var(--v--4);
+    gap: var(--v-4);
     max-width: 300px;
     min-width: 160px;
     width: 100%;

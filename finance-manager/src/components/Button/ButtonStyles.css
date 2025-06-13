@@ -1,4 +1,5 @@
 .button {
+    font-family: var(--font-body);
     font-weight: var(--font-weight-semibold);
     padding-inline: var(--v-3);
     padding-block: var(--v-2);
