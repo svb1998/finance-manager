@@ -1,16 +1,20 @@
 .little-card-container {
     /* background-color: rgb(76, 157, 126); */
-    background: radial-gradient(circle, #001b16, #030a07);
+    background: radial-gradient(
+        circle,
+        var(--color-bg-tertiary),
+        var(--color-bg-secondary)
+    );
     /* border: 1px solid #325400; */
     /* box-shadow: 0 0 4px #0e2701; */
-    box-shadow: 0 0 4px #006352;
-    border-radius: 14px;
-    padding: 16px;
+    box-shadow: 0 0 4px var(--color-border-primary);
+    border-radius: var(--v-3-5);
+    padding: var(--v-4);
     display: flex;
     flex-direction: column;
 }
 
 .little-card-title {
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: var(--v-5);
 }

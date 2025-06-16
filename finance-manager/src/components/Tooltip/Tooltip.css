@@ -5,14 +5,14 @@
     text-decoration: underline;
     text-underline-offset: 2px;
     text-decoration-thickness: 1px;
-    text-decoration-color: greenyellow;
+    text-decoration-color: var(--color-primary);
 }
 
 .tooltip-content {
     visibility: hidden;
     width: max-content;
-    background-color: black;
-    color: #f1f1f1;
+    background-color: var(--color-bg);
+    color: var(--color-text-secondary);
     text-align: center;
     padding: 4px 12px;
     border-top-left-radius: 12px;

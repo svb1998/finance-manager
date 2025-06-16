@@ -5,7 +5,7 @@
     max-height: calc(100vh - 64px);
 
     display: grid;
-    gap: 16px;
+    gap: var(--v-4);
     grid-template-columns: repeat(6, 1fr);
 
     grid-template-rows: 200px 10fr auto;
@@ -14,17 +14,21 @@
         "incomes-details incomes-details incomes-details expenses-details expenses-details expenses-details"
         "footer footer footer footer footer footer";
 
-    padding-right: 24px;
-    padding-left: 16px;
-    padding-block: 8px;
+    padding-right: var(--v-6);
+    padding-left: var(--v-4);
+    padding-block: var(--v-2);
 }
 
 div > section:not(.footer-container) {
-    background: radial-gradient(circle, #001b16, #030a07);
+    background: radial-gradient(
+        circle,
+        var(--color-bg-tertiary),
+        var(--color-bg-secondary)
+    );
 
-    border-radius: 16px;
-    padding: 16px;
-    box-shadow: 0 0 4px #006352;
+    border-radius: var(--v-4);
+    padding: var(--v-4);
+    box-shadow: 0 0 4px var(--color-border-primary);
 }
 
 .user-container {
@@ -37,8 +41,8 @@ div > section:not(.footer-container) {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    font-size: 3em;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--v-12);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -58,8 +62,8 @@ div > section:not(.footer-container) {
 
     max-height: 100%;
     min-height: 0;
-    background: #000;
-    padding: 1.2em;
+    background: var(--color-bg);
+    padding: var(--v-5);
 }
 
 /* .user-incomes-graph-container,
@@ -75,24 +79,32 @@ div > section:not(.footer-container) {
 .incomes-details-container {
     grid-area: incomes-details;
     /* background: linear-gradient(45deg, #000, #0e1700, #000); */
-    background: radial-gradient(circle, #001b16, #030a07);
+    background: radial-gradient(
+        circle,
+        var(--color-bg-tertiary),
+        var(--color-bg-secondary)
+    );
     /* border: 1px solid #253d00; */
-    box-shadow: 0 0 6px #0e2701;
+    box-shadow: 0 0 4px var(--color-border-primary);
 }
 
 .expenses-details-container {
     grid-area: expenses-details;
     /* background: linear-gradient(45deg, #000, #0e1700, #000); */
-    background: radial-gradient(circle, #001b16, #030a07);
+    background: radial-gradient(
+        circle,
+        var(--color-bg-tertiary),
+        var(--color-bg-secondary)
+    );
     /* border: 1px solid #253d00; */
-    box-shadow: 0 0 6px #0e2701;
+    box-shadow: 0 0 4px var(--color-border-primary);
 }
 
 .incomes-details-title,
 .expenses-details-title {
-    font-size: 1.15em;
-    font-weight: 700;
-    margin-bottom: 0.75em;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--v-3);
     position: sticky;
     top: 0;
     left: 0;
@@ -102,22 +114,15 @@ div > section:not(.footer-container) {
     display: flex;
     width: 98%;
     height: 0.15em;
-    background-color: rgb(210, 210, 210);
     margin-top: 0.1em;
 }
 
 .details-line-income {
-    background-color: #00a393;
+    background-color: var(--blue-500);
 }
 
 .details-line-expense {
-    background-color: #a50042;
-}
-
-.incomes-details-title {
-}
-
-.expenses-details-title {
+    background-color: var(--red-500);
 }
 
 .footer-container {
@@ -126,8 +131,8 @@ div > section:not(.footer-container) {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 8px;
-    padding-bottom: 16px;
+    padding-top: var(--v-2);
+    padding-bottom: var(--v-4);
 }
 
 @media (max-width: 1024px) {
@@ -144,9 +149,9 @@ div > section:not(.footer-container) {
             "incomes-details incomes-details"
             "expenses-details expenses-details"
             "footer footer";
-        padding-inline: 16px;
+        padding-inline: var(--v-4);
 
-        padding-bottom: 16px;
+        padding-bottom: var(--v-4);
     }
 
     .balance-container {
@@ -169,7 +174,11 @@ div > section:not(.footer-container) {
 
     .footer-container {
         backdrop-filter: blur(1px);
-        background: linear-gradient(to top, #000000 0%, transparent 100%);
+        background: linear-gradient(
+            to top,
+            var(--color-bg) 0%,
+            transparent 100%
+        );
 
         position: sticky;
         bottom: 0;
@@ -178,7 +187,7 @@ div > section:not(.footer-container) {
         right: 0;
         z-index: 5;
 
-        padding-top: 16px;
+        padding-top: var(--v-4);
     }
 }
 

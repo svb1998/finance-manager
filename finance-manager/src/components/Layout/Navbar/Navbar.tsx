@@ -3,6 +3,7 @@ import "./Navbar.css";
 import profileIcon from "../../../assets/logo.svg";
 import { useDispatch } from "react-redux";
 import { toggleSidebar } from "../../../redux/states";
+import ThemeToggle from "../../ThemeToggle/ThemeToggle";
 
 interface Props {
     className?: string;
@@ -24,7 +25,8 @@ export default function Navbar(props: Props) {
                 <Menu />
             </div>
 
-            <div>
+            <div className="navbar-section">
+                <ThemeToggle />
                 <img src={profileIcon} alt="" width={36} height={36} />
             </div>
         </nav>

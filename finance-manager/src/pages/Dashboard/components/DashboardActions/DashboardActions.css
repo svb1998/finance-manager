@@ -1,6 +1,5 @@
 .dashboard-actions-container {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: var(--v-2-5);
 }
-

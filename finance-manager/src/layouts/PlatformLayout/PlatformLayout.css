@@ -8,8 +8,8 @@
         "sidebar content";
 
     overflow: hidden;
-    background-color: black;
-    color: white;
+    background-color: var(--color-bg);
+    color: var(--color-text);
 }
 
 #navbar-layout {

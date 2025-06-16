@@ -10,35 +10,35 @@
 .chart-text-container {
     display: flex;
     width: 100%;
-    background-color: pink;
     justify-content: center;
 }
 
 .custom-tooltip {
     border-radius: 0.5em;
-    background-color: black;
-    color: white;
-    padding: 0.25em 0.5em 0.25em 0.75em;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+
+    padding: var(--v-1) var(--v-2) var(--v-1) var(--v-3);
     z-index: 2;
     position: relative;
     overflow: hidden;
 }
 
 .custom-tooltip-label {
-    color: greenyellow;
-    font-weight: 700;
-    font-size: 0.9em;
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--v-3-5);
 }
 
 .custom-tooltip-amount {
-    font-size: 0.8em;
+    font-size: var(--v-3);
 }
 
 .vertical-line-ui {
-    background-color: greenyellow;
+    background-color: var(--color-primary);
     position: absolute;
     height: 100%;
-    width: 4px;
+    width: var(--v-1);
     left: 0;
     top: 0;
 }

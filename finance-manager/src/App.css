@@ -1,16 +1,12 @@
-#root {
-    min-height: 100vh;
-}
-
 .fallback-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: black;
-    color: white;
-    font-weight: 700;
-    font-size: 1.2em;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-md);
 }
 
 .fallback-logo {

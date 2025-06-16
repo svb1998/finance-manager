@@ -1,0 +1,103 @@
+:root {
+    /* Colors */
+    --color-bg: hsl(0, 0%, 0%);
+    --color-bg-semi-transparent: hsla(0, 0%, 0%, 0.5);
+    --color-bg-secondary: hsl(154, 54%, 3%);
+    --color-bg-tertiary: hsl(169, 100%, 5%);
+
+    --color-bg-hover: hsla(170, 100%, 19%, 0.557);
+
+    --color-text: hsl(0, 0%, 100%);
+    --color-text-secondary: hsl(157, 100%, 91%);
+    --color-text-tertiary: hsl(156, 27%, 82%);
+    --color-text-tertiary-hover: hsl(95, 57%, 77%);
+
+    --color-primary: hsl(84, 100%, 59%);
+    --color-primary-hover: hsl(84, 100%, 67%);
+    --color-primary-focus: hsl(84, 100%, 73%);
+    --color-primary-active: hsl(84, 100%, 79%);
+    --color-secondary: hsl(99, 100%, 71%);
+    --color-border-primary: hsl(170, 100%, 19%);
+    --color-border-secondary: hsl(165, 100%, 59%);
+
+    --loading-color: var(--color-secondary);
+
+    --blue-500: hsl(174, 100%, 32%);
+
+    --red-500: hsl(336, 100%, 32%);
+
+    --add-500: hsl(163, 100%, 59%);
+    --add-bg: hsla(163, 66%, 17%, 0.548);
+
+    --destructive-500: hsl(355, 100%, 59%);
+
+    --destructive-bg: hsla(355, 66%, 17%, 0.548);
+
+    --color-button-text: hsl(0, 0%, 0%);
+    --color-button-text-outline: var(--color-primary);
+
+    --color-sidebar-shadow: hsla(0, 0%, 0%, 0.5);
+
+    --color-scrollbar: hsl(88, 50%, 53%);
+
+    --color-modal-overlay: hsla(166, 96%, 9%, 0.45);
+
+    --color-input-bg: hsl(169, 18%, 12%);
+    --color-input-text: hsl(0, 0%, 100%);
+    --color-input-placeholder: hsl(166, 7%, 48%);
+    --color-input-border: hsla(165, 5%, 33%, 0.724);
+    --color-input-focus-outline: rgb(150, 150, 149);
+}
+
+[data-theme="light"] {
+    /* Colors */
+    --color-bg: hsl(163, 18%, 92%);
+    --color-bg-semi-transparent: hsla(163, 18%, 92%, 0.5);
+    --color-bg-secondary: hsl(168, 20%, 98%);
+    --color-bg-tertiary: hsl(168, 20%, 98%);
+
+    --color-bg-hover: hsla(161, 54%, 89%, 0.557);
+
+    --color-text: hsl(161, 100%, 13%);
+    --color-text-secondary: hsl(161, 49%, 25%);
+    --color-text-tertiary: hsl(156, 26%, 39%);
+    --color-text-tertiary-hover: hsl(161, 50%, 42%);
+
+    --color-primary: hsl(162, 70%, 18%);
+    --color-primary-hover: hsl(162, 60%, 32%);
+    --color-primary-focus: hsl(162, 50%, 53%);
+    --color-primary-active: hsl(162, 50%, 79%);
+
+    --color-secondary: hsl(162, 51%, 36%);
+
+    --color-border-primary: hsl(157, 24%, 78%);
+    --color-border-secondary: hsl(164, 26%, 60%);
+
+    --loading-color: var(--color-secondary);
+
+    --blue-500: hsl(174, 100%, 32%);
+
+    --red-500: hsl(336, 100%, 32%);
+
+    --add-500: hsl(163, 62%, 35%);
+    --add-bg: hsla(164, 13%, 77%, 0.548);
+
+    --destructive-500: hsl(355, 100%, 59%);
+
+    --destructive-bg: hsla(354, 10%, 81%, 0.548);
+
+    --color-button-text: hsl(0, 0%, 100%);
+    --color-button-text-outline: var(--color-primary);
+
+    --color-sidebar-shadow: hsla(0, 0%, 0%, 0.155);
+
+    --color-scrollbar: hsl(161, 58%, 38%);
+
+    --color-modal-overlay: hsla(167, 16%, 35%, 0.45);
+
+    --color-input-bg: hsl(0, 0%, 100%);
+    --color-input-text: hsl(145, 100%, 5%);
+    --color-input-placeholder: hsl(165, 3%, 69%);
+    --color-input-border: hsla(165, 5%, 33%, 0.527);
+    --color-input-focus-outline: rgb(47, 113, 86);
+}
