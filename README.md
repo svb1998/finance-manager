@@ -122,8 +122,7 @@ A continuación se detallan las librerías, tecnologías, estructuras y patrones
 
 ## 🚧 Estado actual del desarrollo
 
- ### **15/05/25**: 
- - Actualmente las transacciones se guardan en el LocalStorage (se está migrando la funcionalidad para interactuar con la base de datos)
+ ### **16/06/25**: 
  - La creación de grupos está parcialmente desarrollada (Se permiten añadir grupos y visualizar aquellos creados por uno mismo, a falta de implementar acciones complementarias)
 
 </br>
