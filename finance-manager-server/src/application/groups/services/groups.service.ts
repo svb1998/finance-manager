@@ -19,4 +19,9 @@ export class GroupsService {
         const response = await this.groupsRepository.addMemberToGroup(dto);
         return response;
     }
+
+    async findMemberByQuery(query: string) {
+        const response = await this.groupsRepository.findMemberByQuery(query);
+        return response;
+    }
 }
