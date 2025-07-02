@@ -8,11 +8,13 @@ import MainButton from "../../components/Button/MainButton/MainButton";
 import MainInput from "../../components/Input/MainInput/MainInput";
 import { login } from "./Login.service";
 
-import { Eye, EyeOff } from "lucide-react";
+import { Copy, Eye, EyeOff } from "lucide-react";
 import { motion } from "motion/react";
 import { useDispatch } from "react-redux";
 import { ProfileData } from "../../models/platform/profileData.model";
 import { setProfile } from "../../redux/states/profile";
+import { useMutation } from "@tanstack/react-query";
+import { PulseLoader } from "react-spinners";
 
 export default function Login() {
     const dispatch = useDispatch();
@@ -31,13 +33,13 @@ export default function Login() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const onSubmit = async (e: React.FormEvent, data: any) => {
-        e.preventDefault();
-        try {
-            const response = await login(data);
-
-            // console.log("RESPUESTA", response);
-
+    const {
+        mutateAsync: handleOnSubmit,
+        isPending,
+        error,
+    } = useMutation({
+        mutationFn: async (data: any) => await login(data),
+        onSuccess: (response) => {
             const profileData: ProfileData = {
                 fm_u: response.profile.profileId,
                 fm_n: response.profile.name,
@@ -48,11 +50,26 @@ export default function Login() {
             localStorage.setItem("fm_tk", response.token);
 
             navigate("/dashboard");
-        } catch (error) {
-            const err = error as Error;
-            setErrorMessage(err.message);
+        },
+        onError: (error) => {
+            setErrorMessage((error as Error).message);
             setAnimationKey((prev) => prev + 1);
-        }
+        },
+    });
+
+    const onSubmit = async (e: React.FormEvent, data: any) => {
+        e.preventDefault();
+        handleOnSubmit(data);
+    };
+
+    const handleCopy = (text: string, field: string) => {
+        navigator.clipboard.writeText(text).then(() => {
+            if (field === "username") {
+                setFormData({ ...formData, email: text });
+            } else if (field === "password") {
+                setFormData({ ...formData, password: text });
+            }
+        });
     };
 
     return (
@@ -89,6 +106,7 @@ export default function Login() {
                         type="email"
                         placeholder="Email"
                         name="email"
+                        defaultValue={formData.email ? formData.email : ""}
                         required
                         onChange={(e) => handleFormField(e)}
                     />
@@ -97,6 +115,9 @@ export default function Login() {
                         type={showPassword ? "text" : "password"}
                         placeholder="Contraseña"
                         name="password"
+                        defaultValue={
+                            formData.password ? formData.password : ""
+                        }
                         required
                         onChange={(e) => handleFormField(e)}
                         endIcon={
@@ -127,7 +148,18 @@ export default function Login() {
                         }
                     />
 
-                    <MainButton type="submit">Iniciar sesión</MainButton>
+                    <MainButton type="submit">
+                        {isPending ? (
+                            <div>
+                                <PulseLoader
+                                    size={6}
+                                    color="var(--color-button-text)"
+                                />
+                            </div>
+                        ) : (
+                            "Iniciar sesión"
+                        )}
+                    </MainButton>
                 </motion.form>
 
                 <div className="login-error-wrapper">
@@ -145,6 +177,33 @@ export default function Login() {
                             <span>{errorMessage}</span>
                         </motion.div>
                     )}
+                </div>
+                <div>
+                    <span className="login-footer">
+                        <strong> Credenciales de la demo</strong>
+                        <div className="login-footer-credentials">
+                            <span className="login-footer-credentials-text">
+                                Email: demo@test.com
+                                <Copy
+                                    onClick={() =>
+                                        handleCopy("demo@test.com", "username")
+                                    }
+                                    className="login-copy-button"
+                                    size={12}
+                                />
+                            </span>
+                            <span className="login-footer-credentials-text">
+                                Contraseña: Demo1!
+                                <Copy
+                                    onClick={() =>
+                                        handleCopy("Demo1!", "password")
+                                    }
+                                    className="login-copy-button"
+                                    size={12}
+                                />
+                            </span>
+                        </div>
+                    </span>
                 </div>
             </div>
         </>

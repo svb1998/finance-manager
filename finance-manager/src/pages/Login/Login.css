@@ -37,3 +37,41 @@
     color: var(--destructive-500);
     height: var(--v-3);
 }
+
+.login-footer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-block: auto;
+    bottom: var(--v-4);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    text-align: center;
+}
+.login-footer-credentials {
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    column-gap: var(--v-5);
+}
+
+.login-footer-credentials-text {
+    display: flex;
+    align-items: center;
+    column-gap: var(--v-2);
+}
+
+.login-copy-button {
+    cursor: pointer;
+    color: currentColor;
+    transition: all 0.1s ease-in-out;
+
+    &:hover {
+        color: var(--color-primary);
+        transform: scale(1.25);
+    }
+}
