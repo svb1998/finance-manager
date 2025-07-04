@@ -106,4 +106,4 @@ jobs:
 
       # Deploy Project Artifacts to Vercel
       - name: Deploy to Vercel
-        run: npx vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: npx vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }} --cwd .
