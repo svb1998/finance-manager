@@ -10,6 +10,7 @@
         "dev": "vite --mode dev",
         "build": "tsc && vite build --mode prod",
         "lint": "eslint .",
+        "type-check": "tsc --noEmit",
         "preview": "vite preview",
         "test": "vitest"
     },
