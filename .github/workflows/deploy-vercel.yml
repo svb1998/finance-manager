@@ -14,6 +14,9 @@ env:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./finance-manager
 
     steps:
       # Downloads the repo to the runner
