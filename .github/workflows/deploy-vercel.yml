@@ -15,9 +15,9 @@ env:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./finance-manager
+    # defaults:
+    #   run:
+    #     working-directory: ./finance-manager
 
     steps:
       # Downloads the repo to the runner
@@ -106,6 +106,4 @@ jobs:
 
       # Deploy Project Artifacts to Vercel
       - name: Deploy to Vercel
-        run: |
-          cd ./finance-manager
-          npx vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: npx vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
