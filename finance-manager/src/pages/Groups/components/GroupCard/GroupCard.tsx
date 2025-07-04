@@ -17,7 +17,6 @@ interface GroupCardProps {
 }
 
 export default function GroupCard({
-    groupId,
     name,
     description,
     memberCount,

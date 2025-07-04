@@ -1,5 +1,5 @@
-import { ReactElement, ReactNode } from "react";
-import { Control, Controller, FieldValues } from "react-hook-form";
+import { ReactElement } from "react";
+import { Controller } from "react-hook-form";
 import "./BasicFieldController.css";
 
 interface Props {
@@ -20,7 +20,7 @@ export default function BasicFieldController({
             name={name}
             control={control}
             defaultValue={defaultValue}
-            render={({ field, fieldState }) => children(field)}
+            render={({ field }) => children(field)}
         />
     );
 }

@@ -24,6 +24,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
     //We indicate that ther has been an error in a subcomponent.
     //we receive the error as a parameter in case we want to do something with it.
     static getDerivedStateFromError(error: Error) {
+        console.log("Error", error);
         return { hasError: true };
     }
 

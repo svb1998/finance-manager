@@ -1,21 +1,19 @@
-import LittleCard from "./components/LittleCard/LittleCard";
-import "./Dashboard.css";
 import { Textfit } from "react-textfit";
-import HalfPieChart from "./components/Charts/HalfPieChart/HalfPieChart";
-import { useEffect } from "react";
-import TransactionDetails from "./components/TransactionDetails/TransactionDetails";
-import DashboardActions from "./components/DashboardActions/DashboardActions";
 import useSetActivePage from "../../hooks/useSetActivePage";
+import HalfPieChart from "./components/Charts/HalfPieChart/HalfPieChart";
+import DashboardActions from "./components/DashboardActions/DashboardActions";
+import LittleCard from "./components/LittleCard/LittleCard";
+import TransactionDetails from "./components/TransactionDetails/TransactionDetails";
+import "./Dashboard.css";
 
-import { ErrorBoundary } from "../../utilities/ErrorBoundaries";
-import useBalance from "../../hooks/useBalance";
-import axiosPrivate from "../../interceptors/PrivateAxios.interceptor";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllTransactions } from "./services/Transactions.service";
 import { useQuery } from "@tanstack/react-query";
-import { setCategories, setTransactions } from "../../redux/states";
+import { useDispatch, useSelector } from "react-redux";
+import useBalance from "../../hooks/useBalance";
 import { Category, Transaction } from "../../models";
+import { setCategories, setTransactions } from "../../redux/states";
+import { ErrorBoundary } from "../../utilities/ErrorBoundaries";
 import { getAllCategories } from "./services/Categories.service";
+import { getAllTransactions } from "./services/Transactions.service";
 
 export default function Dashboard() {
     useSetActivePage();
@@ -24,8 +22,7 @@ export default function Dashboard() {
     const activeProfile = useSelector((state) => state.profile.fm_u);
 
     const {
-        isLoading,
-        isError,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         data: transactionsData = [],
     } = useQuery<Transaction[]>({
         queryKey: ["transactions"],
@@ -34,8 +31,7 @@ export default function Dashboard() {
     });
 
     const {
-        isLoading: isLoadingCategories,
-        isError: isErrorCategories,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         data: categoriesData = [],
     } = useQuery<Category[]>({
         queryKey: ["categories"],

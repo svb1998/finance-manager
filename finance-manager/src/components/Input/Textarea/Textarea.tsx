@@ -1,4 +1,4 @@
-import React, { ForwardedRef, ReactNode } from "react";
+import React, { ForwardedRef } from "react";
 import "./Textarea.css";
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {

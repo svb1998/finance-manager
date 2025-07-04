@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import "./Modal.css";
 import { createPortal } from "react-dom";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 
 interface Props {
     children: ReactNode;

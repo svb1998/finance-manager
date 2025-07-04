@@ -1,15 +1,11 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import Modal from "../../../../Modal";
-import AddTransaction from "../../../../components/Layout/Transactions/AddTransaction/AddTransaction";
-import MainButton from "../../../../components/Button/MainButton/MainButton";
-import "./DashboardActions.css";
 import { AnimatePresence } from "motion/react";
+import { useState } from "react";
+import Modal from "../../../../Modal";
+import MainButton from "../../../../components/Button/MainButton/MainButton";
+import AddTransaction from "../../../../components/Layout/Transactions/AddTransaction/AddTransaction";
+import "./DashboardActions.css";
 
 export default function DashboardActions() {
-    //Redux dispatch
-    const dispatch = useDispatch();
-
     //Modal
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 

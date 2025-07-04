@@ -8,17 +8,17 @@ import {
 import { CircleX } from "lucide-react";
 import { AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Dialog from "../../../../components/Layout/Dialog/Dialog";
 import EditTransaction from "../../../../components/Layout/Transactions/EditTransaction/EditTransaction";
 import Modal from "../../../../Modal";
-import { Category, Transaction } from "../../../../models";
+import { Transaction } from "../../../../models";
 
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { capitalizeString } from "../../../../utilities/capitalizeString.utility";
-import "./TransactionDetails.css";
 import { setTextColor } from "../../../../utilities/setTextColor.utility";
 import { removeTransaction } from "../../services/Transactions.service";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import "./TransactionDetails.css";
 
 const columnHelper = createColumnHelper<Transaction>();
 
@@ -28,8 +28,6 @@ interface Props {
 
 export default function TransactionDetails({ type }: Props) {
     const queryClient = useQueryClient();
-
-    const dispatch = useDispatch();
 
     const transactions: Transaction[] = useSelector((store) => {
         return store.transaction;

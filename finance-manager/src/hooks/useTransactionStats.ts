@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Category, Transaction } from "../models";
+import { Transaction } from "../models";
 
 interface GroupedTransaction {
     id: string;

@@ -1,8 +1,5 @@
 import { AxiosError } from "axios";
 import axiosPublic from "../../interceptors/PublicAxios.interceptor";
-import { useDispatch } from "react-redux";
-import { setProfile } from "../../redux/states/profile";
-import { ProfileData } from "../../models/platform/profileData.model";
 
 interface LoginData {
     email: string;

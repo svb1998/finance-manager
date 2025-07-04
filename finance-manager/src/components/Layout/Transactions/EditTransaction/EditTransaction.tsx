@@ -1,20 +1,20 @@
-import "../Transaction.css";
-import MainInput from "../../../Input/MainInput/MainInput";
 import { Select } from "antd";
-import FieldLayout from "../../FieldLayout/FieldLayout";
+import { useForm } from "react-hook-form";
 import MainButton from "../../../Button/MainButton/MainButton";
 import OutlineButton from "../../../Button/OutlineButton/OutlineButton";
-import { useForm } from "react-hook-form";
+import MainInput from "../../../Input/MainInput/MainInput";
+import FieldLayout from "../../FieldLayout/FieldLayout";
+import "../Transaction.css";
 
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useSelector } from "react-redux";
 import BasicFieldController from "../../../FieldControllers/BasicFieldController/BasicFieldController";
 import { transactionEditFormSchema } from "../schemas/TransactionForm.schema";
-import { useDispatch, useSelector } from "react-redux";
 
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Transaction } from "../../../../models";
 import { Category } from "../../../../models/category.model";
 import { editTransaction } from "./services/EditTransaction.service";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const { Option } = Select;
 
@@ -25,8 +25,6 @@ interface Props {
 
 export default function EditTransaction({ onCloseModal, transaction }: Props) {
     const queryClient = useQueryClient();
-
-    const dispatch = useDispatch();
 
     const categories: Category[] = useSelector((state) => state.category);
 
@@ -40,13 +38,7 @@ export default function EditTransaction({ onCloseModal, transaction }: Props) {
         resolver: yupResolver(transactionEditFormSchema),
     });
 
-    const {
-        mutate: handleSubmitMutation,
-        isLoading,
-        isSuccess,
-        isError,
-        error,
-    } = useMutation({
+    const { mutate: handleSubmitMutation } = useMutation({
         mutationFn: (formData: Transaction) => {
             return onSubmit(formData);
         },
