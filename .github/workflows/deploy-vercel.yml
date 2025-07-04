@@ -88,17 +88,18 @@ jobs:
         run: pnpm test -- --coverage
         continue-on-error: false
 
-      # We build the app using pnpm
-      - name: Build the App
-        run: pnpm run build
+      # Install Vercel CLI globally
+      - name: Install Vercel CLI
+        run: pnpm add -g vercel@latest
 
-      #We deploy de app to Vercel
-      # We use de v1 version of the Vercel Action
-      # We pass the Vercel token as a Github secret
-      # We set the prod flag to true only if the branch is main
-      # (If our default branch would be called different, f.e 'master', we should change the line 'refs/heads/main' to 'refs/heads/master')
+      # Pull vercel env info
+      - name: Pull Vercel Env Information
+        run: vercel pull --yes --environment=production --token=${{secrets.VERCEL_TOKEN}}
+
+      # Build the project artifacts
+      - name: Build Project Artifacts with Vercel CLI
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      # Deploy Project Artifacts to Vercel
       - name: Deploy to Vercel
-        uses: vercel/actions/deploy@v1
-        with:
-          token: ${{ secrets.VERCEL_TOKEN}}
-          prod: ${{ github.ref == 'refs/heads/main'}}
+        run: vercel deploy --prebuilt --prod  --token=${{ secrets.VERCEL_TOKEN }}
