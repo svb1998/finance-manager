@@ -70,31 +70,42 @@ jobs:
       #If the lockfile is not up to date, the action will fail
       #It's a standard practice to ensure that the dependencies are consistent across different environments
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          cd finance-manager
+          pnpm install --frozen-lockfile
 
       # We analyze the code with ESLint to ensure that the code is clean and follows best practices
       # This step runs ESLint to check for code quality issues (variables, unused imports, etc.)
       # It's an important step to ensure that the code is clean.
       # With continue-on-error, we indicate if the workflow should continue or stop if there are ESlint errors.
       - name: Run ESLint (Static Analysis)
-        run: pnpm lint
+        run: |
+          cd finance-manager
+          pnpm lint
         continue-on-error: false
 
       # We check that the types are correct using Typescript.
       #If there are any type errors, the action will fail.
       - name: Run TS Check
-        run: pnpm run type-check
+        run: |
+          cd finance-manager
+          pnpm run type-check
         continue-on-error: false
 
       # We run the unit tests
       # If there are any test failures, the action will fail
       - name: Run tests
-        run: pnpm test -- --coverage
+
+        run: |
+          cd finance-manager
+          pnpm test -- --coverage
         continue-on-error: false
 
       # Install Vercel CLI globally
       - name: Install Vercel CLI
-        run: pnpm add -g vercel@latest
+        run: |
+          cd finance-manager
+          pnpm add -g vercel@latest
 
       # Pull vercel env info
       # - name: Pull Vercel Env Information
