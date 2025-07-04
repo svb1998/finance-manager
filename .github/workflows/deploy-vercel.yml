@@ -98,12 +98,12 @@ jobs:
 
       # Pull vercel env info
       - name: Pull Vercel Env Information
-        run: vercel pull --yes --environment=production --token=${{secrets.VERCEL_TOKEN}}
+        run: vercel pull --yes --environment=production --token=${{secrets.VERCEL_TOKEN}} --cwd=.
 
       # Build the project artifacts
       - name: Build Project Artifacts with Vercel CLI
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}  --cwd=.
 
       # Deploy Project Artifacts to Vercel
       - name: Deploy to Vercel
-        run: vercel deploy --prebuilt --prod  --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel deploy --prebuilt --prod  --token=${{ secrets.VERCEL_TOKEN }} --cwd=.
