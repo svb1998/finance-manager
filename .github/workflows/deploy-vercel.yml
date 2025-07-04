@@ -98,7 +98,7 @@ jobs:
       # We set the prod flag to true only if the branch is main
       # (If our default branch would be called different, f.e 'master', we should change the line 'refs/heads/main' to 'refs/heads/master')
       - name: Deploy to Vercel
-        run: vercel/actions/deploy@v1
+        uses: vercel/actions/deploy@v1
         with:
           token: ${{ secrets.VERCEL_TOKEN}}
           prod: ${{ github.ref == 'refs/heads/main'}}
