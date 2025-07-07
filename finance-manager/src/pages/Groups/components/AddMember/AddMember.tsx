@@ -2,7 +2,6 @@
 import MainButton from "../../../../components/Button/MainButton/MainButton";
 import OutlineButton from "../../../../components/Button/OutlineButton/OutlineButton";
 import MainInput from "../../../../components/Input/MainInput/MainInput";
-import "./addMember.css";
 
 import { useEffect } from "react";
 import "./AddMember.css";
