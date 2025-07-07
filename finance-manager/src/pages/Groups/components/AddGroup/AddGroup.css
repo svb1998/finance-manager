@@ -10,6 +10,6 @@
 
 .form-group-buttons-container {
     display: flex;
-    justify-content: end;
+    justify-content: center;
     gap: var(--v-2);
 }

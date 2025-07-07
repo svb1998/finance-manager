@@ -7,6 +7,10 @@ import {
 } from "lucide-react";
 import "./GroupCard.css";
 import Tooltip from "../../../../components/Tooltip/Tooltip";
+import { useState } from "react";
+import Modal from "../../../../Modal";
+import { AnimatePresence } from "motion/react";
+import AddMember from "../AddMember/AddMember";
 
 interface GroupCardProps {
     groupId?: string;
@@ -22,6 +26,17 @@ export default function GroupCard({
     memberCount,
     role,
 }: GroupCardProps) {
+    const [isAddMemberModalOpen, setIsAddMemberModalOpen] =
+        useState<boolean>(false);
+
+    const openAddMemberModal = () => {
+        setIsAddMemberModalOpen(true);
+    };
+
+    const closeAddMemberModal = () => {
+        setIsAddMemberModalOpen(false);
+    };
+
     return (
         <div className="group-card-container">
             <div className="group-card-info">
@@ -64,7 +79,22 @@ export default function GroupCard({
             <div className="group-card-actions">
                 {role === "admin" && (
                     <div className="group-card-action group-card-action-normal">
-                        <UserRoundPlus size={20} />
+                        <UserRoundPlus size={20} onClick={openAddMemberModal} />
+                        <AnimatePresence>
+                            {isAddMemberModalOpen && (
+                                <Modal
+                                    className="add-member-modal"
+                                    onClose={closeAddMemberModal}
+                                    onOverlayClose
+                                    title="Nuevo miembro"
+                                    dataTestId="add-member-modal"
+                                >
+                                    <AddMember
+                                        onCloseModal={closeAddMemberModal}
+                                    />
+                                </Modal>
+                            )}
+                        </AnimatePresence>
                     </div>
                 )}
 

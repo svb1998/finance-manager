@@ -31,21 +31,22 @@ export default function Groups() {
         queryFn: () => getGroupsLocal(currentProfileId),
     });
 
-    //Modal
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    //Modals
+    const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] =
+        useState<boolean>(false);
 
     /**
      * Function that opens the modal
      */
-    const openModal = () => {
-        setIsModalOpen(true);
+    const openCreateGroupModal = () => {
+        setIsCreateGroupModalOpen(true);
     };
 
     /**
      * Function that closes the modal
      */
-    const closeModal = () => {
-        setIsModalOpen(false);
+    const closeCreateGroupModal = () => {
+        setIsCreateGroupModalOpen(false);
     };
 
     const getGroupsLocal = async (currentProfileId: string) => {
@@ -58,20 +59,21 @@ export default function Groups() {
     return (
         <div className="groups-container">
             <div className="groups-header">
-                <MainButton onClick={openModal}>Crear grupo</MainButton>
+                <MainButton onClick={openCreateGroupModal}>
+                    Crear grupo
+                </MainButton>
                 <AnimatePresence>
-                    {isModalOpen && (
+                    {isCreateGroupModalOpen && (
                         <Modal
-                            onClose={closeModal}
+                            onClose={closeCreateGroupModal}
                             onOverlayClose
                             title="Nuevo grupo"
                             dataTestId="create-group-modal"
                         >
-                            <AddGroup onCloseModal={closeModal} />
+                            <AddGroup onCloseModal={closeCreateGroupModal} />
                         </Modal>
                     )}
                 </AnimatePresence>
-                {/* <div>Buscador</div> */}
             </div>
             <div className="groups-list">
                 {isLoading && (
