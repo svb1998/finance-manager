@@ -54,4 +54,17 @@ export class SupabaseGroupsRepository implements IGroupsRepository {
 
         return data;
     }
+
+    async findMemberByQuery(query: string): Promise<any> {
+        const { data, error } = await supabase
+            .from("Profiles")
+            .select("profileId, name")
+            .ilike("name", `%${query}%`);
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return data;
+    }
 }

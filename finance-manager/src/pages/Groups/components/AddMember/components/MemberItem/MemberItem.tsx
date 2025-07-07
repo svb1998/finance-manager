@@ -1,5 +1,4 @@
 import { UserX } from "lucide-react";
-import OutlineButton from "../../../../../../components/Button/OutlineButton/OutlineButton";
 import "./MemberItem.css";
 
 interface MemberItemProps {

@@ -36,6 +36,7 @@
         "react-textfit": "^1.1.1",
         "recharts": "^2.15.1",
         "short-uuid": "^5.2.0",
+        "use-debounce": "^10.0.5",
         "yup": "^1.6.1"
     },
     "devDependencies": {

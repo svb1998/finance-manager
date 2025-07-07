@@ -12,6 +12,71 @@ const groupsController = new GroupsController(groupsService);
 
 /**
  * @openapi
+ * /groups/find-members:
+ *   get:
+ *     summary: Buscar miembros por query
+ *     tags:
+ *       - Groups
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Miembros encontrados
+ *       400:
+ *         description: Error al buscar los miembros
+ *       500:
+ *         description: Error interno del servidor
+ */
+groupsRouter.get(
+    "/find-members",
+    authenticateToken,
+    groupsController.findMemberByQuery
+);
+
+/**
+ * @openapi
+ * /groups/add-member:
+ *   post:
+ *     summary: Agregar un nuevo miembro al grupo
+ *     tags:
+ *       - Groups
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 groupId:
+ *                   type: string
+ *                 profileId:
+ *                   type: string
+ *                 role:
+ *                   type: string
+ *     responses:
+ *       201:
+ *         description: Miembro agregado correctamente
+ *       400:
+ *         description: Error al agregar el miembro
+ *       500:
+ *         description: Error interno del servidor
+ */
+groupsRouter.post(
+    "/add-member",
+    authenticateToken,
+    groupsController.addMemberToGroup
+);
+
+/**
+ * @openapi
  * /groups/{profileUUID}:
  *   get:
  *     summary: Obtener todos los grupos asociados a un perfil
@@ -67,41 +132,5 @@ groupsRouter.get(
  *         description: Error interno del servidor
  */
 groupsRouter.post("/create", authenticateToken, groupsController.createGroup);
-
-/**
- * @openapi
- * /groups/add-member:
- *   post:
- *     summary: Agregar un nuevo miembro al grupo
- *     tags:
- *       - Groups
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 groupId:
- *                   type: string
- *                 profileId:
- *                   type: string
- *                 role:
- *                   type: string
- *     responses:
- *       201:
- *         description: Miembro agregado correctamente
- *       400:
- *         description: Error al agregar el miembro
- *       500:
- *         description: Error interno del servidor
- */
-groupsRouter.post(
-    "/add-member",
-    authenticateToken,
-    groupsController.addMemberToGroup
-);
 
 export default groupsRouter;

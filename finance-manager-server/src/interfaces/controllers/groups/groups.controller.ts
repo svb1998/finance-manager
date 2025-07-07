@@ -59,4 +59,21 @@ export class GroupsController {
             return;
         }
     };
+
+    findMemberByQuery = async (req: Request, res: Response) => {
+        const query = req.query.query as string;
+
+        console.log("query: ", query);
+        try {
+            const result = await this.groupsService.findMemberByQuery(query);
+            res.status(200).json(result);
+            return;
+        } catch (error) {
+            res.status(400).json({
+                error: (error as Error).message,
+                details: error,
+            });
+            return;
+        }
+    };
 }

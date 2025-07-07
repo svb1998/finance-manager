@@ -33,24 +33,9 @@ export default function Dialog({
     children,
     cancelButton = "Cancelar",
     actionButton = "Aceptar",
-    width = "80%",
-    minWidth = "270px",
-    maxWidth = "550px",
-    height = "auto",
-    minHeight = "auto",
-    maxHeight = "auto",
 }: Props) {
     return (
-        <Modal
-            width={width}
-            minWidth={minWidth}
-            maxWidth={maxWidth}
-            height={height}
-            minHeight={minHeight}
-            maxHeight={maxHeight}
-            onClose={onClose}
-            onOverlayClose={onOverlayClose}
-        >
+        <Modal onClose={onClose} onOverlayClose={onOverlayClose}>
             <div className="dialog-container">
                 <div className="dialog-content">
                     <h2 className="dialog-title">{title}</h2>

@@ -9,8 +9,8 @@ interface Props {
     dataTestId: string;
     onClose: () => void;
     onOverlayClose?: boolean;
-
     className?: string;
+    overlayClassName?: string;
 }
 
 export default function Modal({
@@ -20,6 +20,7 @@ export default function Modal({
     dataTestId = "",
     onClose,
     onOverlayClose = false,
+    overlayClassName,
 }: Props) {
     /**
      * Handles the case when the user closes the modal by clicking on the overlay (When onOverlayClose prop is true)
@@ -35,7 +36,7 @@ export default function Modal({
             animate={{ opacity: 1 }}
             transition={{ duration: 0.25 }}
             exit={{ opacity: 0 }}
-            className="modal-overlay"
+            className={`modal-overlay ${overlayClassName}`}
             onClick={onOverlayClose ? handleOnOverlayClose : () => {}}
         >
             <motion.div
