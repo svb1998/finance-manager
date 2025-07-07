@@ -7,9 +7,10 @@ import {
 } from "lucide-react";
 import "./GroupCard.css";
 import Tooltip from "../../../../components/Tooltip/Tooltip";
-import Modal from "../../../../Modal";
-import AddMember from "./components/AddMember/AddMember";
 import { useState } from "react";
+import Modal from "../../../../Modal";
+import { AnimatePresence } from "motion/react";
+import AddMember from "../AddMember/AddMember";
 
 interface GroupCardProps {
     groupId?: string;
@@ -20,27 +21,20 @@ interface GroupCardProps {
 }
 
 export default function GroupCard({
-    groupId,
     name,
     description,
     memberCount,
     role,
 }: GroupCardProps) {
-    //Modal
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [isAddMemberModalOpen, setIsAddMemberModalOpen] =
+        useState<boolean>(false);
 
-    /**
-     * Function that opens the modal
-     */
-    const openModal = () => {
-        setIsModalOpen(true);
+    const openAddMemberModal = () => {
+        setIsAddMemberModalOpen(true);
     };
 
-    /**
-     * Function that closes the modal
-     */
-    const closeModal = () => {
-        setIsModalOpen(false);
+    const closeAddMemberModal = () => {
+        setIsAddMemberModalOpen(false);
     };
 
     return (
@@ -84,11 +78,23 @@ export default function GroupCard({
             </div>
             <div className="group-card-actions">
                 {role === "admin" && (
-                    <div
-                        onClick={openModal}
-                        className="group-card-action group-card-action-normal"
-                    >
-                        <UserRoundPlus size={20} />
+                    <div className="group-card-action group-card-action-normal">
+                        <UserRoundPlus size={20} onClick={openAddMemberModal} />
+                        <AnimatePresence>
+                            {isAddMemberModalOpen && (
+                                <Modal
+                                    className="add-member-modal"
+                                    onClose={closeAddMemberModal}
+                                    onOverlayClose
+                                    title="Nuevo miembro"
+                                    dataTestId="add-member-modal"
+                                >
+                                    <AddMember
+                                        onCloseModal={closeAddMemberModal}
+                                    />
+                                </Modal>
+                            )}
+                        </AnimatePresence>
                     </div>
                 )}
 
@@ -100,17 +106,6 @@ export default function GroupCard({
                     <EllipsisVertical size={20} />
                 </div>
             </div>
-            {isModalOpen && (
-                <Modal
-                    onClose={closeModal}
-                    onOverlayClose
-                    title="Añadir miembro"
-                    dataTestId="add-member-modal"
-                    className="add-member-modal-container"
-                >
-                    <AddMember />
-                </Modal>
-            )}
         </div>
     );
 }

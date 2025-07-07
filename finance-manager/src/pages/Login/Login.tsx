@@ -33,11 +33,7 @@ export default function Login() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const {
-        mutateAsync: handleOnSubmit,
-        isPending,
-        error,
-    } = useMutation({
+    const { mutateAsync: handleOnSubmit, isPending } = useMutation({
         mutationFn: async (data: any) => await login(data),
         onSuccess: (response) => {
             const profileData: ProfileData = {

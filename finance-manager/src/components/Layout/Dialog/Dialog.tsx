@@ -1,6 +1,6 @@
+import { ReactNode } from "react";
 import Modal from "../../../Modal";
 import "./Dialog.css";
-import { ReactNode, useState } from "react";
 
 import MainButton from "../../Button/MainButton/MainButton";
 import OutlineButton from "../../Button/OutlineButton/OutlineButton";

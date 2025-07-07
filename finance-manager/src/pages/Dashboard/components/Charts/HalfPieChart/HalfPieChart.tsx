@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react";
-import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
-import { Transaction, Category } from "models";
-import { useSelector } from "react-redux";
-import "./HalfPieChart.css";
 import { Textfit } from "react-textfit";
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import useTransactionStats from "../../../../../hooks/useTransactionStats";
+import "./HalfPieChart.css";
 
 interface Props {
     type: "income" | "expense";
@@ -16,13 +13,13 @@ interface CustomTooltipProps {
     payload?: any[];
 }
 
-interface GroupedTransaction {
-    id: string;
-    name: string;
-    label: string;
-    amount: number;
-    color: string | undefined;
-}
+// interface GroupedTransaction {
+//     id: string;
+//     name: string;
+//     label: string;
+//     amount: number;
+//     color: string | undefined;
+// }
 
 const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {
     if (active && payload && payload.length) {
@@ -67,7 +64,7 @@ export default function HalfPieChart({ type = "income" }: Props) {
                             style={{ outline: "none" }}
                             stroke="none"
                         >
-                            {groupedTransactions.map((tx, index) => {
+                            {groupedTransactions.map((tx) => {
                                 return (
                                     <Cell
                                         name={tx.label}

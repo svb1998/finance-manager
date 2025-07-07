@@ -1,0 +1,124 @@
+name: Deploy React App to Vercel
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_ORG_ID: ${{secrets.VERCEL_ORG_ID}}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    # defaults:
+    #   run:
+    #     working-directory: ./finance-manager
+
+    steps:
+      # Downloads the repo to the runner
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      # Install node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      # Install pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+          run_install: false
+
+      # Get pnpm store path. We get the global store path where the pnpm cache is stored and we
+      - name: Get pnpm store path
+        # We reference the pnpm action to get the store path in future steps
+        id: pnpm-cache
+        # The | is for multi-line commands.
+        # | is commonly used inside run: commands in GitHub Actions
+        # Is not necessary but helps readability
+        # pnpm store path is the command that returns the path to the pnpm store.
+        #We save it inside STORE_PATH variable
+        #With >> we save the output of the command into the $GITHUB_OUTPUT variable
+        #After this step, we can use the STORE_PATH variable in the next steps
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Cache pnpm dependencies
+        uses: actions/cache@v4
+        with:
+          # We use the pnpm store path to cache the dependencies
+          # We create a key to that cache
+          # The key is based on the operating system and the hash of the pnpm-lock.yaml file
+          # We use a fallback restore key command to restore the cache looking for an existing cache file if an exact match is not found
+          # (Analogy: restore-keys works similar to the fallback route of react-router)
+          path: ${{steps.pnpm-cache.outputs.STORE_PATH}}
+          key: ${{ runner.os }}-pnpm-${{hashFiles('**/pnpm-lock.yaml')}}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      # We install the dependencies using pnpm
+      # The --frozen-lockfile flag ensures that the lockfile is not modified
+      #This is important to ensure that the dependencies are installed exactly as specified in the lockfile
+      #If the lockfile is not up to date, the action will fail
+      #It's a standard practice to ensure that the dependencies are consistent across different environments
+      - name: Install dependencies
+        run: |
+          cd finance-manager
+          pnpm install --frozen-lockfile
+
+      # We analyze the code with ESLint to ensure that the code is clean and follows best practices
+      # This step runs ESLint to check for code quality issues (variables, unused imports, etc.)
+      # It's an important step to ensure that the code is clean.
+      # With continue-on-error, we indicate if the workflow should continue or stop if there are ESlint errors.
+      - name: Run ESLint (Static Analysis)
+        run: |
+          cd finance-manager
+          pnpm lint
+        continue-on-error: false
+
+      # We check that the types are correct using Typescript.
+      #If there are any type errors, the action will fail.
+      - name: Run TS Check
+        run: |
+          cd finance-manager
+          pnpm run type-check
+        continue-on-error: false
+
+      # We run the unit tests
+      # If there are any test failures, the action will fail
+      - name: Run tests
+
+        run: |
+          cd finance-manager
+          pnpm test -- --coverage
+        continue-on-error: false
+
+      # Install Vercel CLI globally
+      - name: Install Vercel CLI
+        run: |
+          cd finance-manager
+          pnpm add -g vercel@latest
+
+      # Pull vercel env info
+      - name: Pull Vercel Env Information
+        run: vercel pull --yes --environment=production --token=${{secrets.VERCEL_TOKEN}}
+
+      # Build the project artifacts
+      - name: Build Project Artifacts with Vercel CLI
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      # Deploy the project artifacts to Vercel
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      # # Deploy Project Artifacts to Vercel (Build in their servers)
+      # - name: Deploy to Vercel
+      #   run: npx vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}

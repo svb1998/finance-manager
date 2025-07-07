@@ -1,9 +1,9 @@
-import { render, screen } from "@testing-library/react";
-import Dashboard from "./Dashboard";
+import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router";
 import store from "../../redux/store";
-import userEvent from "@testing-library/user-event";
+import { render, screen } from "../../utilities/setupTests";
+import Dashboard from "./Dashboard";
 
 //We mock the ResizeObserver to avoid errors in the tests
 global.ResizeObserver = class {

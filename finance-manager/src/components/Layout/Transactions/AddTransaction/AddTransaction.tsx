@@ -7,15 +7,14 @@ import FieldLayout from "../../FieldLayout/FieldLayout";
 import "../Transaction.css";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch, useSelector } from "react-redux";
-import shortUUID from "short-uuid";
+import { useSelector } from "react-redux";
 import { Transaction } from "../../../../models";
 import { Category } from "../../../../models/category.model";
 
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import BasicFieldController from "../../../FieldControllers/BasicFieldController/BasicFieldController";
 import { transactionAddFormSchema } from "../schemas/TransactionForm.schema";
 import { addTransaction } from "./services/AddTransaction.service";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const { Option } = Select;
 
@@ -26,19 +25,11 @@ interface Props {
 export default function AddTransaction({ onCloseModal }: Props) {
     const queryClient = useQueryClient();
 
-    const dispatch = useDispatch();
-
     const categories: Category[] = useSelector((state) => state.category);
 
     const activeProfileId = useSelector((state) => state.profile.fm_u);
 
-    const {
-        mutate: handleSubmitMutation,
-        isLoading,
-        isSuccess,
-        isError,
-        error,
-    } = useMutation({
+    const { mutate: handleSubmitMutation } = useMutation({
         mutationFn: (formData: Transaction) => {
             return onSubmit(formData);
         },

@@ -1,14 +1,13 @@
 import { Bolt, LayoutDashboard, LogOut, Users } from "lucide-react";
+import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { setActivePage, toggleSidebar } from "../../../redux/states";
-import { removeLocalStorage } from "../../../utilities/localStorage.utility";
+import useLogout from "../../../hooks/useLogout";
+import { toggleSidebar } from "../../../redux/states";
 import Dialog from "../Dialog/Dialog";
 import Item from "./components/Item/Item";
 import "./Sidebar.css";
-import { motion } from "motion/react";
-import useLogout from "../../../hooks/useLogout";
 
 interface Props {
     className?: string;

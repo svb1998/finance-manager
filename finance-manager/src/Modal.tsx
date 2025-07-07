@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import "./Modal.css";
 import { createPortal } from "react-dom";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 
 interface Props {
     children: ReactNode;
@@ -9,25 +9,18 @@ interface Props {
     dataTestId: string;
     onClose: () => void;
     onOverlayClose?: boolean;
-    width?: string;
-    height?: string;
-    maxWidth?: string;
-    minWidth?: string;
-    maxHeight?: string;
-    minHeight?: string;
-    overlayClassName?: string;
     className?: string;
+    overlayClassName?: string;
 }
 
 export default function Modal({
+    className = "",
     children,
     title,
     dataTestId = "",
     onClose,
     onOverlayClose = false,
-
     overlayClassName,
-    className,
 }: Props) {
     /**
      * Handles the case when the user closes the modal by clicking on the overlay (When onOverlayClose prop is true)
@@ -61,7 +54,7 @@ export default function Modal({
 
                     // opacity: 0,
                 }}
-                className={`${className} modal-container `}
+                className={`modal-container ${className}`}
                 data-testid={dataTestId}
             >
                 {/* <button onClick={onClose} className="modal-close-btn">

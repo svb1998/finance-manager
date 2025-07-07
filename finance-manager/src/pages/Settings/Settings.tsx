@@ -1,6 +1,5 @@
-import "./Settings.css";
-import { useLocation } from "react-router";
 import useSetActivePage from "../../hooks/useSetActivePage";
+import "./Settings.css";
 
 export default function Settings() {
     useSetActivePage();
