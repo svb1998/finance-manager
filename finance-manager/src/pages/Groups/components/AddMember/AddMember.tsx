@@ -45,6 +45,7 @@ export default function AddMember({ onCloseModal }: Props) {
     const handleFindMembersByQuery = async (query: string) => {
         const response = await findMembersByQuery(query);
         console.log("Respuesta", response);
+
         return response;
     };
 
@@ -76,8 +77,11 @@ export default function AddMember({ onCloseModal }: Props) {
                 <h2 className="add-member-members-title">Miembros añadidos</h2>
                 <ul className="add-member-members-list">
                     {members.length > 0 ? (
-                        members.map((member, index) => (
-                            <MemberItem name={member.name} key={member.id} />
+                        members.map((member) => (
+                            <MemberItem
+                                name={member.name}
+                                key={member.profileId}
+                            />
                         ))
                     ) : (
                         <div className="add-member-members-list-description">
