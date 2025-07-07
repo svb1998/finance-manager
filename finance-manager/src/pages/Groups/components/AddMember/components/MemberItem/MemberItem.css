@@ -1,0 +1,25 @@
+.member-item-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-size: var(--font-size-md);
+    padding-inline: var(--v-2);
+    padding-block: var(--v-1);
+    color: var(--color-text-secondary);
+
+    &:hover {
+        background-color: var(--color-bg-hover);
+    }
+}
+
+.member-item-delete {
+    cursor: pointer;
+    padding: var(--v-1);
+    border-radius: var(--border-radius-sm);
+
+    &:hover {
+        color: var(--destructive-500);
+        background-color: var(--destructive-bg);
+    }
+}

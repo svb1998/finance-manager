@@ -132,3 +132,8 @@
     background-color: var(--destructive-bg);
     color: var(--destructive-500);
 }
+
+.add-member-modal {
+    max-width: 600px;
+    width: 100%;
+}
