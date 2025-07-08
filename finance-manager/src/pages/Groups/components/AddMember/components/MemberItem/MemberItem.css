@@ -7,19 +7,23 @@
     padding-inline: var(--v-2);
     padding-block: var(--v-1);
     color: var(--color-text-secondary);
+    cursor: pointer;
 
     &:hover {
         background-color: var(--color-bg-hover);
     }
 }
 
-.member-item-delete {
-    cursor: pointer;
+.member-item-icon {
     padding: var(--v-1);
     border-radius: var(--border-radius-sm);
+}
 
-    &:hover {
-        color: var(--destructive-500);
-        background-color: var(--destructive-bg);
-    }
+.member-item-container:hover .member-item-add {
+    color: var(--add-500);
+    background-color: var(--add-bg);
+}
+
+.member-item-container:hover .member-item-delete {
+    color: var(--destructive-500);
 }
