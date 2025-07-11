@@ -20,8 +20,11 @@ export class GroupsService {
         return response;
     }
 
-    async findMemberByQuery(query: string) {
-        const response = await this.groupsRepository.findMemberByQuery(query);
+    async findMemberByQuery(query: string, excludedMembers: string[] = []) {
+        const response = await this.groupsRepository.findMemberByQuery(
+            query,
+            excludedMembers
+        );
         return response;
     }
 }

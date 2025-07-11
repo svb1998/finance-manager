@@ -62,10 +62,14 @@ export class GroupsController {
 
     findMemberByQuery = async (req: Request, res: Response) => {
         const query = req.query.query as string;
+        const excludedMembers = req.query.excludedMembers as string[];
 
         console.log("query: ", query);
         try {
-            const result = await this.groupsService.findMemberByQuery(query);
+            const result = await this.groupsService.findMemberByQuery(
+                query,
+                excludedMembers
+            );
             res.status(200).json(result);
             return;
         } catch (error) {

@@ -6,5 +6,5 @@ export interface IGroupsRepository {
     createGroup(group: AddGroupDto): Promise<any>;
     getGroups(memberUUID: string): Promise<RelatedGroupDetailsDto[]>;
     addMemberToGroup(dto: AddMemberToGroupDto): Promise<any>;
-    findMemberByQuery(query: string): Promise<any>;
+    findMemberByQuery(query: string, excludedMembers: string[]): Promise<any>;
 }

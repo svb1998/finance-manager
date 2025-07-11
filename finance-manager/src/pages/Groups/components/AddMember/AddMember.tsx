@@ -41,7 +41,11 @@ export default function AddMember({ onCloseModal }: Props) {
 
     const { mutate: findMembers, isPending } = useMutation({
         mutationKey: ["findMembers"],
-        mutationFn: (query: string) => handleFindMembersByQuery(query),
+        mutationFn: (query: string) =>
+            handleFindMembersByQuery(
+                query,
+                members.map((m) => m.profileId)
+            ),
     });
 
     const addMember = (member) => {
@@ -49,8 +53,16 @@ export default function AddMember({ onCloseModal }: Props) {
         setMembersResults([]);
     };
 
-    const handleFindMembersByQuery = async (query: string) => {
-        const response = await findMembersByQuery(query);
+    const handleRemoveMember = (member) => {
+        setMembers(members.filter((m) => m.profileId !== member.profileId));
+    };
+
+    const handleFindMembersByQuery = async (
+        query: string,
+        excludedMemberIds: string[] = []
+    ) => {
+        console.log("Ids de miembros excluidos", excludedMemberIds);
+        const response = await findMembersByQuery(query, excludedMemberIds);
         setMembersResults(response);
         console.log("Respuesta", response);
 
@@ -121,7 +133,7 @@ export default function AddMember({ onCloseModal }: Props) {
                     {members.length > 0 ? (
                         members.map((member) => (
                             <MemberItem
-                                onClick={() => {}}
+                                onClick={() => handleRemoveMember(member)}
                                 type="delete"
                                 name={member.name}
                                 key={member.profileId}

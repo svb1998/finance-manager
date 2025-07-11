@@ -55,11 +55,17 @@ export class SupabaseGroupsRepository implements IGroupsRepository {
         return data;
     }
 
-    async findMemberByQuery(query: string): Promise<any> {
+    async findMemberByQuery(
+        query: string,
+        excludedMembers: string[]
+    ): Promise<any> {
+        console.log("excludedMembers: ", excludedMembers);
+
         const { data, error } = await supabase
             .from("Profiles")
             .select("profileId, name")
-            .ilike("name", `%${query}%`);
+            .ilike("name", `%${query}%`)
+            .not("profileId", "in", `(${excludedMembers})`);
 
         if (error) {
             throw new Error(error.message);

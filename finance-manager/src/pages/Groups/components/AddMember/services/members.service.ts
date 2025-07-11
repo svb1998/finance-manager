@@ -1,13 +1,20 @@
 import { AxiosError } from "axios";
 import axiosPrivate from "../../../../../interceptors/PrivateAxios.interceptor";
 
-export const findMembersByQuery = async (query: string) => {
+export const findMembersByQuery = async (
+    query: string,
+    excludedMemberIds: string[]
+) => {
     if (!query) return [];
 
+    let endpoint = `/groups/find-members?query=${query}`;
+
+    if (excludedMemberIds.length > 0) {
+        endpoint += `&excludedMembers=${excludedMemberIds.join(",")}`;
+    }
+
     try {
-        const response = await axiosPrivate.get(
-            `/groups/find-members?query=${query}`
-        );
+        const response = await axiosPrivate.get(endpoint);
         return response.data;
     } catch (error) {
         const axiosError = error as AxiosError;
