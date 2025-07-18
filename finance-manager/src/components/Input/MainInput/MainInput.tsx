@@ -11,6 +11,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
     placeholder?: string;
     error?: boolean;
     errorMessage?: string;
+    dataTestId?: string;
 }
 
 const MainInput = React.forwardRef<HTMLInputElement, Props>(
@@ -25,6 +26,7 @@ const MainInput = React.forwardRef<HTMLInputElement, Props>(
             placeholder = "",
             error = false,
             errorMessage = "",
+            dataTestId = "",
             ...props
         }: Props,
         ref: ForwardedRef<HTMLInputElement>
@@ -43,6 +45,7 @@ const MainInput = React.forwardRef<HTMLInputElement, Props>(
                 >
                     {startIcon}
                     <input
+                        data-testid={dataTestId}
                         {...props}
                         ref={ref} // Ahora el ref se pasa correctamente
                         className={`main-input  ${

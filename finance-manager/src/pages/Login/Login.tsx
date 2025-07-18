@@ -99,6 +99,7 @@ export default function Login() {
                     onSubmit={(e) => onSubmit(e, formData)}
                 >
                     <MainInput
+                        dataTestId="input-username"
                         type="email"
                         placeholder="Email"
                         name="email"
@@ -108,6 +109,7 @@ export default function Login() {
                     />
 
                     <MainInput
+                        dataTestId="input-password"
                         type={showPassword ? "text" : "password"}
                         placeholder="Contraseña"
                         name="password"
@@ -144,7 +146,7 @@ export default function Login() {
                         }
                     />
 
-                    <MainButton type="submit">
+                    <MainButton type="submit" dataTestId="login-button">
                         {isPending ? (
                             <div>
                                 <PulseLoader
@@ -170,7 +172,9 @@ export default function Login() {
                             }}
                             className="login-error-container"
                         >
-                            <span>{errorMessage}</span>
+                            <span data-testid="login-error-text">
+                                {errorMessage}
+                            </span>
                         </motion.div>
                     )}
                 </div>

@@ -54,7 +54,7 @@ export default function Dashboard() {
     const balance = useBalance();
 
     return (
-        <div className="dashboard-page">
+        <div data-testId="dashboard-page" className="dashboard-page">
             <ErrorBoundary
                 fallback={
                     <div style={{ color: "red" }}>Something went wrong</div>
